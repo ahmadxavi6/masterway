@@ -6,11 +6,16 @@ import IncomeAndOutcome from './pages/IncomeAndOutcome'
 import Vechiles from './pages/Vechiles'
 import Workers from './pages/Workers'
 import Schedule from './pages/Schedule'
-
+import React   from 'react';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
+
   return (
     <>
+    
+    <ToastContainer />
     <Router>
    <SideBar/>
       <Switch>
