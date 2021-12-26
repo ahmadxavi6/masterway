@@ -37,10 +37,11 @@ export const loadWorkers = () => {
   };
 };
 
-export const addWroker = (worker) => {
+
+export const addWorker = (worker) => {
   return function (dispatch) {
     axios
-      .post(`${API}/wrokers`, worker)
+      .post(`${API}/workers`, worker)
       .then((resp) => {
         dispatch(workerAdded(resp.data.msg));
         dispatch(loadWorkers());
@@ -48,6 +49,7 @@ export const addWroker = (worker) => {
       .catch((err) => console.log(err));
   };
 };
+
 
 export const deleteWorker = (id) => {
   return function (dispatch) {

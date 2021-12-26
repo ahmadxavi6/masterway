@@ -11,7 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
-  addWroker,
+  addWorker,
   deleteWorker,
   loadSingleWorker,
   loadWorkers,
@@ -19,7 +19,7 @@ import {
 } from "../redux/actions";
 
 const initialState = {
-  name: "",
+  fName: "",
   email: "",
   phoneNumber: "",
   age: "",
@@ -32,7 +32,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const { workers, msg, worker } = useSelector((state) => state.data);
 
-  const { name, email, phoneNumber, age } = state;
+  const { fName, email, phoneNumber, age } = state;
 
   useEffect(() => {
     dispatch(loadWorkers());
@@ -57,15 +57,15 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !email || !phoneNumber || !age) {
+    if (!fName || !email || !phoneNumber || !age) {
       toast.error("Please fill all input field");
     } else {
       if (!editMode) {
-        dispatch(addWroker(state));
-        setState({ name: "", email: "", phoneNumber: "", age: "" });
+        dispatch(addWorker(state));
+        setState({ fName: "", email: "", phoneNumber: "", age: "" });
       } else {
         dispatch(updateWorker(state, workerId));
-        setState({ name: "", email: "", phoneNumber: "", age: "" });
+        setState({ fName: "", email: "", phoneNumber: "", age: "" });
         setEditMode(false);
         setWorkerId(null);
       }
@@ -95,8 +95,8 @@ const Home = () => {
                 <Form.Control
                   type="text"
                   placeholder="Name"
-                  name="name"
-                  value={name || ""}
+                  name="fName"
+                  value={fName || ""}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -154,7 +154,7 @@ const Home = () => {
                   <tbody key={index}>
                     <tr>
                       <td>{index + 1}</td>
-                      <td>{item.name}</td>
+                      <td>{item.fName}</td>
                       <td>{item.email}</td>
                       <td>{item.phoneNumber}</td>
                       <td>{item.age}</td>

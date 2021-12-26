@@ -1,4 +1,4 @@
-from flask import Flask, json, request, jsonify
+from flask import Flask, json, request, jsonify , Response
 from flask_pymongo import PyMongo, ObjectId
 from flask_cors import CORS
 
@@ -10,15 +10,17 @@ CORS(app)
 
 db = mongo.db.workers
 
+
 @app.route('/workers', methods=['POST'])
-def createWorker():
-    id = db.insert({
-        'name': request.json['name'],
+def createUser():
+    id = db.insert_one({
+        'fName': request.json['fName'],
         'email': request.json['email'],
         'phoneNumber': request.json['phoneNumber'],
         'age': request.json['age']
     })
-    return jsonify({'id': str(ObjectId(id)), 'msg': "User Added Successfully"})
+    return jsonify({'id': f"{id.inserted_id}", 'msg': "User Added Successfully"})
+
 
 @app.route('/workers', methods=['GET'])
 def getWorkers():
@@ -26,7 +28,7 @@ def getWorkers():
     for doc in db.find():
         workers.append({
             '_id': str(ObjectId(doc['_id'])),
-            # 'name': doc['name'],
+             'fName': doc['fName'],
             'email': doc['email'],
             'phoneNumber': doc['phoneNumber'],
             'age': doc['age'],
@@ -39,7 +41,7 @@ def getWorker(id):
     worker = db.find_one({'_id': ObjectId(id)})
     return jsonify({
             '_id': str(ObjectId(worker['_id'])),
-            'name': worker['name'],
+            'fName': worker['fName'],
             'email': worker['email'],
             'phoneNumber': worker['phoneNumber'],
             'age': worker['age'],
@@ -54,7 +56,7 @@ def deleteWorker(id):
 @app.route('/workers/<id>', methods=['PUT'])
 def updateWorker(id):
     db.update_one({'_id': ObjectId(id)}, {'$set': {
-         'name': request.json['name'],
+         'fName': request.json['fName'],
          'email': request.json['email'],
          'phoneNumber': request.json['phoneNumber'],
          'age': request.json['age']
