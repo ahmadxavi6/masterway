@@ -16,7 +16,7 @@ import {
   loadSingleWorker,
   loadWorkers,
   updateWorker,
-} from "../redux/actions";
+} from "../redux/workers/actions";
 
 const initialState = {
   fName: "",
@@ -30,7 +30,7 @@ const Home = () => {
   const [editMode, setEditMode] = useState(false);
   const [workerId, setWorkerId] = useState(null);
   const dispatch = useDispatch();
-  const { workers, msg, worker } = useSelector((state) => state.data);
+  const { workers, msg, worker } = useSelector((state) => state.dataw);
 
   const { fName, email, phoneNumber, age } = state;
 
