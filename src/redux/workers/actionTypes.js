@@ -3,3 +3,4 @@ export const ADD_WORKER = "ADD_WORKER";
 export const DELETE_WORKER = "DELETE_WORKER";
 export const UPDATE_WORKER = "UPDATE_WORKER";
 export const GET_SINGLE_WORKER = "GET_SINGLE_WORKER";
+export const LOAD_PROFILE = "LOAD_PROFILE";

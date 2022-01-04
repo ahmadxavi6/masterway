@@ -7,8 +7,11 @@ const getWorkers = (workers) => ({
   type: types.GET_WORKERS,
   payload: workers,
 });
-
-const getWorker = (workers) => ({
+const getProfile = (worker) =>({
+  type : types.LOAD_PROFILE,
+  payload : worker
+})
+export const getWorker = (workers) => ({
   type: types.GET_SINGLE_WORKER,
   payload: workers,
 });
@@ -33,6 +36,15 @@ export const loadWorkers = () => {
     axios
       .get(`${API}/workers`)
       .then((resp) => dispatch(getWorkers(resp.data)))
+      .catch((err) => console.log(err));
+  };
+};
+
+export const loadProfile = (id) => {
+  return function (dispatch) {
+    axios
+      .get(`${API}/workers/profile/${id}`)
+      .then((resp) => dispatch(getProfile(resp.data)))
       .catch((err) => console.log(err));
   };
 };
