@@ -25,6 +25,13 @@ const userReducer = (state = initialState, action) => {
         ...state,
         worker: action.payload,
       };
+
+    case types.LOAD_PROFILE:
+      return{
+        ...state, 
+        worker:action.payload
+
+      }
     default:
       return state;
   }
