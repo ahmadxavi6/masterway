@@ -49,6 +49,17 @@ def getWorker(id):
             'age': worker['age'],
     })
 ##########################
+@app.route('/workers/profile/<id>', methods=['GET'])
+def getWorkerProfile(id):
+    worker = dbW.find_one({'_id': ObjectId(id)})
+    return jsonify({
+            '_id': str(ObjectId(worker['_id'])),
+            'fName': worker['fName'],
+            'email': worker['email'],
+            'phoneNumber': worker['phoneNumber'],
+            'age': worker['age'],
+    })
+##########################
 
 @app.route('/workers/<id>', methods=['DELETE'])
 def deleteWorker(id):
