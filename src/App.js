@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import IncomeAndOutcome from './pages/IncomeAndOutcome'
 import Vechiles from './pages/Vechiles'
 import Workers from './pages/Workers'
+import Worker from './pages/Worker'
 import Schedule from './pages/Schedule'
 import React   from 'react';
 import { ToastContainer } from "react-toastify";
@@ -23,7 +24,9 @@ function App() {
           </Route>
         <Route path="/vechiles"component ={Vechiles} >
         </Route>
-        <Route path="/workers"component ={Workers} >
+        <Route exact path="/workers"component ={Workers} >
+        </Route>
+        <Route path="/workers/profile/"component ={Worker} >
         </Route>
         <Route path="/incomeAndOutcome"component ={IncomeAndOutcome} >
         </Route>
