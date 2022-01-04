@@ -1,0 +1,19 @@
+.infoo {
+  width: 500px;
+  margin-left: 750px;
+  padding-left: 10px;
+  border: 3px solid rgb(226, 226, 226);
+  float: center;
+  margin-top: 0px;
+  border-radius: 25px;
+  box-shadow: 10cm;
+}
+.container-picture {
+  border: 3px solid rgb(221, 217, 217);
+  width: 300px;
+  margin-left: 300px;
+  margin-top: 30px;
+  padding-left: 20px;
+  size: 24px;
+  border-radius: 25px;
+}
