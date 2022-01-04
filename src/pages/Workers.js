@@ -1,4 +1,4 @@
-import React, { useEffect, useState ,  } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   Container,
@@ -16,7 +16,9 @@ import {
   loadSingleWorker,
   loadWorkers,
   updateWorker,
+  loadProfile,
 } from "../redux/workers/actions";
+import { Link } from "react-router-dom";
 
 const initialState = {
   fName: "",
@@ -24,8 +26,7 @@ const initialState = {
   phoneNumber: "",
   age: "",
 };
-
-const Home = () => {
+const Workers = () => {
   const [state, setState] = useState(initialState);
   const [editMode, setEditMode] = useState(false);
   const [workerId, setWorkerId] = useState(null);
@@ -36,7 +37,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(loadWorkers());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (msg) {
@@ -58,7 +59,10 @@ const Home = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!fName || !email || !phoneNumber || !age) {
-      toast.error("Please fill all input field");
+      toast.error("Please Fill All Input Fields");
+    }
+    if (phoneNumber.length !== 10) {
+      toast.error("Please Enter Valid Number");
     } else {
       if (!editMode) {
         dispatch(addWorker(state));
@@ -73,7 +77,9 @@ const Home = () => {
   };
 
   const handleDelete = (id) => {
-    if (window.confirm("Are you sure that you wanted to delete that worker ?")) {
+    if (
+      window.confirm("Are you sure that you wanted to delete that worker ?")
+    ) {
       dispatch(deleteWorker(id));
     }
   };
@@ -83,9 +89,11 @@ const Home = () => {
     setWorkerId(id);
     setEditMode(true);
   };
+  const handleClick = (id) => {
+    dispatch(loadProfile(id));
+  };
   return (
     <>
-      
       <Container style={{ marginTop: "70px" }}>
         <Row>
           <Col md={4}>
@@ -173,6 +181,20 @@ const Home = () => {
                           >
                             Update
                           </Button>
+                          <Link
+                            to={{
+                              pathname: `/workers/profile/${item._id}/`,
+                              state: item._id,
+                            }}
+                          >
+                            <Button
+                              variant="info"
+                              onClick={() => handleClick(item._id)}
+                              style={{ marginLeft: "5px" }}
+                            >
+                              More
+                            </Button>
+                          </Link>
                         </ButtonGroup>
                       </td>
                     </tr>
@@ -186,4 +208,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Workers;
