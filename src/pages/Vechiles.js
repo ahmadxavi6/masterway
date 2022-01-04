@@ -24,7 +24,7 @@ const initialStateV = {
   year: ""
 };
 
-const Home = () => {
+const Vehicles = () => {
   const [state, setState] = useState(initialStateV);
   const [editMode, setEditMode] = useState(false);
   const [vehicleId, setVehicalId] = useState(null);
@@ -35,7 +35,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(loadVehicles());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (msg) {
@@ -173,4 +173,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Vehicles;
