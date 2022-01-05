@@ -4,7 +4,16 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, to run the project u have to:
+
+### `1)``open cmd`
+### `2)``cd C:\-YOURDIRECTORY-\masterway\backend\Scripts `
+### `3)``wrtie this command on cmd : activate`
+### `4)``cd C:\-YOURDIRECTORY-\masterway\src`
+### `5)``wrtie this command on cmd :py server.py`
+### `6)``open the project on you framework of react`
+### `7)``write this command on the terminal :npm install`
+### `8)``write this command on the terminal :npm start`
 
 ### `npm start`
 
