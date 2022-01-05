@@ -11,9 +11,12 @@ To run the project u have to:
 ### `3)wrtie this command on cmd : activate`
 ### `4)cd C:\-YOURDIRECTORY-\masterway\src`
 ### `5)wrtie this command on cmd :py server.py`
-### `6)open the project on you framework of react`
+### `6)open the project on your framework of react for example (visual studio code)`
 ### `7)write this command on the terminal :npm install`
 ### `8)write this command on the terminal :npm start`
+
+
+   <hr>
 
 ### `npm start`
 
