@@ -12,9 +12,14 @@ const Worker = () => {
       <div className="container-picture">
         <img src={profile} className="rounded" alt="Pic"></img>
       </div>
-      <Button style={{ marginLeft: "360px", marginTop: "25px" }} variant="info">
-        Change Profile Pitcure
-      </Button>
+      <div className="change-bu">
+        <Button
+          style={{ marginLeft: "360px", marginTop: "25px" }}
+          variant="info"
+        >
+          Change Profile Pitcure
+        </Button>
+      </div>
 
       <div className="infoo" style={{ marginTop: "35px" }} elevation={2}>
         <h4>Basic information</h4>

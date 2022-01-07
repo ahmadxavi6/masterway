@@ -16,4 +16,9 @@
   padding-left: 20px;
   size: 24px;
   border-radius: 25px;
+  float: left;
+}
+.change-bu {
+  position: fixed;
+  margin-top: 300px;
 }
