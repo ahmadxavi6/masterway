@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Button, Container } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import profile from "../components/profile.png";
 import Spacer from "react-add-space";
