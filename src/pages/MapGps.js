@@ -3,7 +3,6 @@ import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 const mapStyles = {
   width: "100%",
   height: "100%",
-  marginLeft: "250px",
 };
 class MapGps extends Component {
   constructor(props) {
@@ -39,14 +38,16 @@ class MapGps extends Component {
 
   render() {
     return (
-      <Map
-        google={this.props.google}
-        zoom={8}
-        style={mapStyles}
-        initialCenter={{ lat: 31.444, lng: 35.456 }}
-      >
-        {this.displayMarkers()}
-      </Map>
+      <div className="map">
+        <Map
+          google={this.props.google}
+          zoom={8}
+          style={mapStyles}
+          initialCenter={{ lat: 31.444, lng: 35.456 }}
+        >
+          {this.displayMarkers()}
+        </Map>
+      </div>
     );
   }
 }
