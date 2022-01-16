@@ -1,22 +1,26 @@
+from apis.database import mongo
 from flask import Flask, json, request, jsonify , Response,session
 from flask_pymongo import PyMongo, ObjectId
 from flask_cors import CORS
 from passlib.hash import pbkdf2_sha256
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import create_access_token
-from flask_jwt_extended import get_jwt_identity
-from flask_jwt_extended import jwt_required
+from apis.admins import api_admin
+
+
 
 app = Flask(__name__)
+app.register_blueprint(api_admin)
 app.secret_key="oS\xf8\xf4\xe2\xc8\xda\xe3\x7f\xc75*\x83\xb1\x06\x8c\x85\xa4\xa7piE\xd6I"
 app.config['MONGO_URI']='mongodb://localhost/masterway'
-mongo = PyMongo(app)
+mongo.init_app(app)
 app.config["JWT_SECRET_KEY"] = "dfg54dfg4564gd56g4er8cdv2cb8f5/456cd5=-54xcvrt7"  # Change this!
 jwt = JWTManager(app)
+
 CORS(app)
 dbW = mongo.db.workers
 dbV = mongo.db.vehicles
-dbA = mongo.db.admins
+
 
 ##########################
 @app.route('/workers', methods=['POST'])
@@ -132,42 +136,7 @@ def updateVehicle(id):
          'year': request.json['year']
     }})
     return jsonify({'msg': "Vehicle Update Successfully"})
-##########################
-@app.route('/', methods=['POST'])
-def addAdmin():
-    admin ={
-        'fName': request.json['fName'],
-        'email': request.json['email'],
-        'password':pbkdf2_sha256.hash(request.json['password']),
 
-    }
-    if dbA.find_one({"email":request.json['email']}):
-        return jsonify({"Msg":"Email address already in use"})
-    dbA.insert_one(admin)
-    return jsonify({'msg': "Admin Added Successfully"})
-
-##########################
-@app.route('/admins', methods=['POST'])
-def login():
-    admin = {
-        "email":request.json['email'],
-        "password":request.json['password']
-    }
- 
-    user =  dbA.find_one({"email":admin['email']}) 
-    if user and pbkdf2_sha256.verify(admin["password"], user['password']):
-        access_token = create_access_token(identity=user['email'])
-        access = {
-        "email":user['email'],
-        "token":access_token,
-        "fName":user['fName']
-        }
-        return jsonify(access),200
-        
-    return jsonify("wrong email or wrong password"),401
-
-########################## 
-    
     
     
 if __name__ == '__main__':
