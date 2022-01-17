@@ -16,8 +16,8 @@ app.secret_key="oS\xf8\xf4\xe2\xc8\xda\xe3\x7f\xc75*\x83\xb1\x06\x8c\x85\xa4\xa7
 app.config['MONGO_URI']='mongodb://localhost/masterway'
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'ahmadxavi61@gmail.com'
-app.config['MAIL_PASSWORD'] = '1241567'
+app.config['MAIL_USERNAME'] = 'masterway.eliaatours@gmail.com'
+app.config['MAIL_PASSWORD'] = '123456789-aA'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mongo.init_app(app)
