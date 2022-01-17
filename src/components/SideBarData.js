@@ -36,9 +36,13 @@ export const SideBarData = [
     cName: "nav-text",
   },
   {
+    title: "Add Admin",
+    path: "/addadmin",
+    cName: "nav-text",
+  },
+  {
     title: "Map",
     path: "/map",
-    icon: <FaICons.FaMapMarked />,
     cName: "nav-text",
   },
 ];
