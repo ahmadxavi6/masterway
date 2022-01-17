@@ -23,7 +23,7 @@ def index():
     email = user['email']
     name = user['fName']
     id = str(ObjectId(user['_id']))
-    msg = Message('Master Way Password Reset Request', sender =   'ahmadxavi61@gmail.com', recipients = [email] )
+    msg = Message('Master Way Password Reset Request', sender =   'masterway.eliaatours@gmail.com', recipients = [email] )
     msg.body = "Hey" + " " + name  +",to reset your password, visit the following link"+"\r\n"+"localhost:3000/resetpassword/"+id
     mail.send(msg)
     return "Message sent!"
