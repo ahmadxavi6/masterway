@@ -27,7 +27,7 @@ function App() {
         <SideBar />
         <Switch>
           <Route path="/addadmin" exact component={addadmin}></Route>
-          <Route path="/" exact component={Home}></Route>
+          <Route path="/" component={Home}></Route>
           <Route path="/vechiles" component={Vechiles}></Route>
           <Route exact path="/workers" component={Workers}></Route>
           <Route path="/workers/profile/" component={Worker}></Route>
