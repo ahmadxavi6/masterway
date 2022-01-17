@@ -7,18 +7,26 @@ import Vechiles from "./pages/Vechiles";
 import Workers from "./pages/Workers";
 import Worker from "./pages/Worker";
 import Schedule from "./pages/Schedule";
+import { useState } from "react";
+import Login from "./pages/Login";
 import React from "react";
 import MapGps from "./pages/MapGps";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import addadmin from "./pages/addadmin";
 
 function App() {
+  const [token, setToken] = useState();
+  if (!token) {
+    return <Login setToken={setToken} />;
+  }
   return (
     <>
       <ToastContainer />
       <Router>
         <SideBar />
         <Switch>
+          <Route path="/addadmin" exact component={addadmin}></Route>
           <Route path="/" exact component={Home}></Route>
           <Route path="/vechiles" component={Vechiles}></Route>
           <Route exact path="/workers" component={Workers}></Route>

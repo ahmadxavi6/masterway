@@ -1,13 +1,21 @@
 
-from flask import  request, jsonify
+from flask import  request, jsonify,Blueprint
 from passlib.hash import pbkdf2_sha256
 from apis.database import mongo
 from flask_jwt_extended import create_access_token
-from flask import Blueprint
+from apis.mails import mail
+from flask_mail import Message
+
 
 api_admin = Blueprint('api_admin',__name__)
 ##########################
-
+@api_admin.route("/",methods=["PATCH"])
+def index():
+  msg = Message('Hello from the other side!', sender =   'ahmadxavi61@gmail.com', recipients = ['sezor2018@gmail.com'])
+  msg.body = "Hey ghassan, sending you this email from my Flask app, lmk if it works"
+  mail.send(msg)
+  return "Message sent!"
+##########################
 @api_admin.route('/', methods=['POST'])
 def addAdmin():
     dbA = mongo.db.admins
