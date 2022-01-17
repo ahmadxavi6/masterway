@@ -16,3 +16,12 @@
   justify-content: center;
   font-size: 3rem;
 }
+.map {
+  display: flex;
+  height: 90vh;
+  padding-left: 500px;
+  padding-top: 77px;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
