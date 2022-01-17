@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
 import axios from "axios";
 import PropTypes from "prop-types";
 import logo from "../components/logo 2.png";
 import "./login.css";
+import Forgetmypass from "./Forgetmypass";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Passwordreset from "./Passwordreset";
 const API = "http://localhost:5000";
 
 export default function Login({ setToken }) {
@@ -11,9 +13,6 @@ export default function Login({ setToken }) {
   const [password, setPassword] = useState("");
   const [fName, setfName] = useState("");
   const [user, setUser] = useState();
-  const handleclick = () => {
-    console.log("gi");
-  };
   useEffect(() => {
     const loggedInUser = sessionStorage.getItem("user");
     if (loggedInUser) {
@@ -54,6 +53,14 @@ export default function Login({ setToken }) {
 
   return (
     <>
+      <div>
+        <Router>
+          <Switch>
+            <Route path="/forgetmypass" component={Forgetmypass}></Route>
+            <Route path="/resetpassword" component={Passwordreset}></Route>
+          </Switch>
+        </Router>
+      </div>
       <div className="container">
         <div className="row">
           <div className="col-md-6 offset-md-3">
@@ -97,18 +104,11 @@ export default function Login({ setToken }) {
                     Login
                   </button>
                 </div>
-                <div
-                  id="emailHelp"
-                  className="form-text text-center mb-5 text-dark"
-                ></div>
 
-                <Button
-                  onClick={handleclick}
-                  variant="info"
-                  style={{ marginLeft: "5px", position: "center" }}
-                >
-                  Forget My Password
-                </Button>
+                <a href="/forgetmypass" className="text-dark fw-bold">
+                  {" "}
+                  Forget Password?
+                </a>
               </form>
             </div>
           </div>
