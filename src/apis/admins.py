@@ -29,19 +29,26 @@ def index():
     return "Message sent!"
   return "No Such email in the data base" 
 ##########################
-@api_admin.route('/', methods=['POST'])
+@api_admin.route('/addadmin', methods=['POST'])
 def addAdmin():
     dbA = mongo.db.admins
 
     admin ={
         'fName': request.json['fName'],
         'email': request.json['email'],
-        'password':pbkdf2_sha256.hash(request.json['password']),
+        'password':pbkdf2_sha256.hash(request.json['ID']),
+        'ID':request.json['ID']
 
     }
     if dbA.find_one({"email":request.json['email']}):
-        return jsonify({"Msg":"Email address already in use"})
+        return jsonify({"Msg":"Email address already in use"}),401
     dbA.insert_one(admin)
+    email = admin['email']
+    name = admin['fName']
+    id = str(ObjectId(admin['_id']))
+    msg = Message('Master Way Welcome', sender =   'masterway.eliaatours@gmail.com', recipients = [email] )
+    msg.body = "Hey" + " " + name  +"\r\n"+"Welcome to Master Way"+"\r\n"+"To acsses your account on master way use your email and the password is your ID number, in order to change your password, visit the following link"+"\r\n"+"localhost:3000/resetpassword/"+id
+    mail.send(msg)
     return jsonify({'msg': "Admin Added Successfully"})
 
 ##########################
@@ -75,4 +82,18 @@ def reset(id):
         'password': pbkdf2_sha256.hash(request.json['password']),
     }})
     return jsonify({'msg': "Password Updated Successfully"})
+ 
+########################## 
+@api_admin.route('/removeadmin', methods=['POST'])
+def deleteAdmin():
+    dbA = mongo.db.admins
+    admin = {
+      "ID" : request.json['ID']
+    }
+    user =  dbA.find_one({"ID":admin['ID']})
+    if user:
+      dbA.delete_one({'_id': ObjectId(user['_id'])})
+      return jsonify({'msg':"Admin has been removed"}),200
+    
+    return jsonify({'msg': "ID not found in the database"}),401
  
