@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 const API = "http://localhost:5000";
 
-function Forgetmypass() {
+function Passwordreset() {
   const handleSubmit = async (e) => {
     const id = window.location.pathname;
     e.preventDefault();
@@ -50,4 +50,4 @@ function Forgetmypass() {
   );
 }
 
-export default Forgetmypass;
+export default Passwordreset;

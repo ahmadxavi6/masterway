@@ -13,7 +13,7 @@ import React from "react";
 import MapGps from "./pages/MapGps";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import addadmin from "./pages/addadmin";
+import Addadmin from "./pages/Addadmin";
 
 function App() {
   const [token, setToken] = useState();
@@ -26,8 +26,8 @@ function App() {
       <Router>
         <SideBar />
         <Switch>
-          <Route path="/addadmin" exact component={addadmin}></Route>
-          <Route path="/" component={Home}></Route>
+          <Route path="/addadmin" exact component={Addadmin}></Route>
+          <Route path="/" exact component={Home}></Route>
           <Route path="/vechiles" component={Vechiles}></Route>
           <Route exact path="/workers" component={Workers}></Route>
           <Route path="/workers/profile/" component={Worker}></Route>
