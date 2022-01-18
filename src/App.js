@@ -13,7 +13,7 @@ import React from "react";
 import MapGps from "./pages/MapGps";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Addadmin from "./pages/Addadmin";
+import Addadmin from "./pages/addadmin";
 
 function App() {
   const [token, setToken] = useState();
