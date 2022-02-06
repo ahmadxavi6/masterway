@@ -26,8 +26,8 @@ def index():
     msg = Message('Master Way Password Reset Request', sender =   'masterway.eliaatours@gmail.com', recipients = [email] )
     msg.body = "Hey" + " " + name  +",to reset your password, visit the following link"+"\r\n"+"localhost:3000/resetpassword/"+id
     mail.send(msg)
-    return "Message sent!"
-  return "No Such email in the data base" 
+    return "Message sent!",200
+  return "No Such email in the data base" ,401
 ##########################
 @api_admin.route('/addadmin', methods=['POST'])
 def addAdmin():

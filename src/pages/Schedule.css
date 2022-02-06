@@ -1,0 +1,12 @@
+#schedule-build {
+  background-color: #edf5e1;
+  color: #05386b;
+  padding: 0px 20px 10px 20px;
+}
+.fullName {
+  font-size: 16px;
+}
+
+.browser-default {
+  border-radius: 5px;
+}
