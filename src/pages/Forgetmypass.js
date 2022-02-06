@@ -7,14 +7,13 @@ function Forgetmypass() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = { email };
-    // send the username and password to the server
     await axios
       .patch(`${API}/forgetmypass`, user)
       .then((resp) => {
         alert("Reset Password Email sent");
         document.getElementById("email1").value = "";
       })
-      .catch((err) => console.log("Email not Found in Database"));
+      .catch((err) => alert("Email not Found in Database"));
   };
 
   const [email, setEmail] = useState("");
