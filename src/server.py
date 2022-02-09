@@ -49,7 +49,7 @@ def addWorker():
     return jsonify({'id': f"{id.inserted_id}", 'msg': "User Added Successfully"})
     
 ##########################
-@app.route('/traps/<id>', methods=['PUT'])
+@app.route('/trips/<id>', methods=['PUT'])
 def addShifts(id):
     dbW.update_one({'_id': ObjectId(id)}, {'$set': {
         "weekShifts":{'Sun':{'hours':request.json['Sunday'],'info':request.json['Sun']},
@@ -63,7 +63,7 @@ def addShifts(id):
     return jsonify({'msg': "Shifts Added Successfully"})
    
 ##########################
-@app.route('/traps/<id>', methods=['PATCH'])
+@app.route('/trips/<id>', methods=['PATCH'])
 def removeShift(id):
     dbW.update_one({'_id': ObjectId(id)}, {'$set': {
        "weekShifts":{'Sun':{'hours':"",'info':""},
