@@ -16,6 +16,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Addadmin from "./pages/Addadmin";
 import Traps from "./pages/Traps";
 
+
+
 function App() {
   const [token, setToken] = useState();
   if (!token) {
