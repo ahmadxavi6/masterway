@@ -184,7 +184,6 @@ const Workers = () => {
                           <Link
                             to={{
                               pathname: `/workers/profile/${item._id}/`,
-                              state: item._id,
                             }}
                           >
                             <Button

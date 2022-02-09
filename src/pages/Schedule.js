@@ -4,6 +4,10 @@ import "./Schedule.css";
 import { useSelector, useDispatch } from "react-redux";
 import { loadWorkers } from "../redux/workers/actions";
 import { Table, ButtonGroup, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { loadProfile } from "../redux/workers/actions";
+import axios from "axios";
+const API = "http://localhost:5000";
 
 const Schedule = () => {
   const { workers } = useSelector((state) => state.dataw);
@@ -11,6 +15,20 @@ const Schedule = () => {
   useEffect(() => {
     dispatch(loadWorkers());
   }, [dispatch]);
+
+  const handlesClick = (id) => {
+    dispatch(loadProfile(id));
+  };
+  const handleCClick = async (id) => {
+    dispatch(loadProfile(id));
+    await axios
+      .patch(`${API}/trips/${id}`)
+      .then((resp) => {
+        alert("Shifts has been removed");
+        window.location.assign("http://localhost:3000/schedule");
+      })
+      .catch((err) => alert("There is a proplem"));
+  };
 
   return (
     <Table bordered hover>
@@ -24,6 +42,7 @@ const Schedule = () => {
           <th>Thur</th>
           <th>Fri</th>
           <th>Sat</th>
+          <th>Action</th>
         </tr>
       </thead>
       {workers &&
@@ -32,116 +51,54 @@ const Schedule = () => {
             <tr>
               <td>{item.fName}</td>
               <td>
-                {" "}
-                <select className="browser-default " name="saturday">
-                  <option value=""></option>
-                  <option value="OFF">OFF</option>
-                  <option value="8am-5pm">8am-5pm</option>
-                  <option value="9am-6pm">9am-6pm</option>
-                  <option value="10am-7pm">10am-7pm</option>
-                  <option value="11am-8pm">11am-8pm</option>
-                  <option value="12pm-9pm">12pm-9pm</option>
-                  <option value="1pm-10pm">1pm-10pm</option>
-                  <option value="2pm-11pm">2pm-11pm</option>
-                  <option value="3pm-12am">3pm-12am</option>{" "}
-                </select>
+                {item.weekShifts.Sun.hours}
+                <p>{item.weekShifts.Sun.info}</p>
               </td>
               <td>
-                {" "}
-                <select className="browser-default " name="saturday">
-                  <option value=""></option>
-                  <option value="OFF">OFF</option>
-                  <option value="8am-5pm">8am-5pm</option>
-                  <option value="9am-6pm">9am-6pm</option>
-                  <option value="10am-7pm">10am-7pm</option>
-                  <option value="11am-8pm">11am-8pm</option>
-                  <option value="12pm-9pm">12pm-9pm</option>
-                  <option value="1pm-10pm">1pm-10pm</option>
-                  <option value="2pm-11pm">2pm-11pm</option>
-                  <option value="3pm-12am">3pm-12am</option>{" "}
-                </select>
+                {item.weekShifts.Mon.hours}
+                <p>{item.weekShifts.Mon.info}</p>
               </td>
               <td>
-                {" "}
-                <select className="browser-default " name="saturday">
-                  <option value=""></option>
-                  <option value="OFF">OFF</option>
-                  <option value="8am-5pm">8am-5pm</option>
-                  <option value="9am-6pm">9am-6pm</option>
-                  <option value="10am-7pm">10am-7pm</option>
-                  <option value="11am-8pm">11am-8pm</option>
-                  <option value="12pm-9pm">12pm-9pm</option>
-                  <option value="1pm-10pm">1pm-10pm</option>
-                  <option value="2pm-11pm">2pm-11pm</option>
-                  <option value="3pm-12am">3pm-12am</option>{" "}
-                </select>
+                {item.weekShifts.Tue.hours}
+                <p>{item.weekShifts.Tue.info}</p>
               </td>
               <td>
-                {" "}
-                <select className="browser-default " name="saturday">
-                  <option value=""></option>
-                  <option value="OFF">OFF</option>
-                  <option value="8am-5pm">8am-5pm</option>
-                  <option value="9am-6pm">9am-6pm</option>
-                  <option value="10am-7pm">10am-7pm</option>
-                  <option value="11am-8pm">11am-8pm</option>
-                  <option value="12pm-9pm">12pm-9pm</option>
-                  <option value="1pm-10pm">1pm-10pm</option>
-                  <option value="2pm-11pm">2pm-11pm</option>
-                  <option value="3pm-12am">3pm-12am</option>{" "}
-                </select>
+                {item.weekShifts.Wed.hours}
+                <p>{item.weekShifts.Wed.info}</p>
               </td>
               <td>
-                {" "}
-                <select className="browser-default " name="saturday">
-                  <option value=""></option>
-                  <option value="OFF">OFF</option>
-                  <option value="8am-5pm">8am-5pm</option>
-                  <option value="9am-6pm">9am-6pm</option>
-                  <option value="10am-7pm">10am-7pm</option>
-                  <option value="11am-8pm">11am-8pm</option>
-                  <option value="12pm-9pm">12pm-9pm</option>
-                  <option value="1pm-10pm">1pm-10pm</option>
-                  <option value="2pm-11pm">2pm-11pm</option>
-                  <option value="3pm-12am">3pm-12am</option>{" "}
-                </select>
+                {item.weekShifts.Thur.hours}
+                <p>{item.weekShifts.Thur.info}</p>
               </td>
               <td>
-                {" "}
-                <select className="browser-default " name="saturday">
-                  <option value=""></option>
-                  <option value="OFF">OFF</option>
-                  <option value="8am-5pm">8am-5pm</option>
-                  <option value="9am-6pm">9am-6pm</option>
-                  <option value="10am-7pm">10am-7pm</option>
-                  <option value="11am-8pm">11am-8pm</option>
-                  <option value="12pm-9pm">12pm-9pm</option>
-                  <option value="1pm-10pm">1pm-10pm</option>
-                  <option value="2pm-11pm">2pm-11pm</option>
-                  <option value="3pm-12am">3pm-12am</option>{" "}
-                </select>
+                {item.weekShifts.Fri.hours}
+                <p>{item.weekShifts.Fri.info}</p>
               </td>
               <td>
-                {" "}
-                <select className="browser-default " name="saturday">
-                  <option value=""></option>
-                  <option value="OFF">OFF</option>
-                  <option value="8am-5pm">8am-5pm</option>
-                  <option value="9am-6pm">9am-6pm</option>
-                  <option value="10am-7pm">10am-7pm</option>
-                  <option value="11am-8pm">11am-8pm</option>
-                  <option value="12pm-9pm">12pm-9pm</option>
-                  <option value="1pm-10pm">1pm-10pm</option>
-                  <option value="2pm-11pm">2pm-11pm</option>
-                  <option value="3pm-12am">3pm-12am</option>{" "}
-                </select>
+                {item.weekShifts.Sat.hours}
+                <p>{item.weekShifts.Sat.info}</p>
               </td>
               <td>
                 <ButtonGroup>
-                  <Button style={{ marginRight: "5px" }} variant="success">
-                    Add
+                  <Link
+                    to={{
+                      pathname: `/trips`,
+                    }}
+                  >
+                    <Button
+                      variant="success"
+                      onClick={() => handlesClick(item._id)}
+                      style={{ marginLeft: "5px" }}
+                    >
+                      Add Shifts
+                    </Button>
+                  </Link>
+                  <Button
+                    variant="danger"
+                    onClick={() => handleCClick(item._id)}
+                  >
+                    Clear Shifts
                   </Button>
-                  <Button variant="danger">Clear</Button>
                 </ButtonGroup>
               </td>
             </tr>
