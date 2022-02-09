@@ -36,9 +36,45 @@ def addWorker():
         'fName': request.json['fName'],
         'email': request.json['email'],
         'phoneNumber': request.json['phoneNumber'],
-        'age': request.json['age']
+        'age': request.json['age'],
+        'requestShift':{'Sun':"", 'Mon':"", 'Tue':"",'Wed':"",'Thur':"",'Fri':""},
+        "weekShifts":{'Sun':{'hours':"",'info':""},
+        'Mon':{'hours':"",'info':""},
+        'Tue':{'hours':"",'info':""},
+        'Wed':{'hours':"",'info':""},
+        'Thur':{'hours':"",'info':""},
+        'Fri':{'hours':"",'info':""},
+        'Sat':{'hours':"",'info':""}}
     })
     return jsonify({'id': f"{id.inserted_id}", 'msg': "User Added Successfully"})
+    
+##########################
+@app.route('/traps/<id>', methods=['PUT'])
+def addShifts(id):
+    dbW.update_one({'_id': ObjectId(id)}, {'$set': {
+        "weekShifts":{'Sun':{'hours':request.json['Sunday'],'info':request.json['Sun']},
+        'Mon':{'hours':request.json['Monday'],'info':request.json['Mon']},
+        'Tue':{'hours':request.json['Tuesday'],'info':request.json['Tue']},
+        'Wed':{'hours':request.json['Wednesday'],'info':request.json['Wed']},
+        'Thur':{'hours':request.json['Thursday'],'info':request.json['Thur']},
+        'Fri':{'hours':request.json['Friday'],'info':request.json['Fri']},
+        'Sat':{'hours':request.json['Saturday'],'info':request.json['Sat']}}
+    }})
+    return jsonify({'msg': "Shifts Added Successfully"})
+   
+##########################
+@app.route('/traps/<id>', methods=['PATCH'])
+def removeShift(id):
+    dbW.update_one({'_id': ObjectId(id)}, {'$set': {
+       "weekShifts":{'Sun':{'hours':"",'info':""},
+        'Mon':{'hours':"",'info':""},
+        'Tue':{'hours':"",'info':""},
+        'Wed':{'hours':"",'info':""},
+        'Thur':{'hours':"",'info':""},
+        'Fri':{'hours':"",'info':""},
+        'Sat':{'hours':"",'info':""}}
+    }})
+    return jsonify({'msg': "Shifts Added Successfully"})
 
 ##########################
 
@@ -52,6 +88,8 @@ def getWorkers():
             'email': doc['email'],
             'phoneNumber': doc['phoneNumber'],
             'age': doc['age'],
+            'requesteShift':doc['requestShift'],
+            'weekShifts':doc['weekShifts']
         })
     return jsonify(workers)
 
@@ -66,6 +104,8 @@ def getWorker(id):
             'email': worker['email'],
             'phoneNumber': worker['phoneNumber'],
             'age': worker['age'],
+            'requesteShift':worker['requestShift'],
+            'weekShifts':worker['weekShifts']
     })
 ##########################
 @app.route('/workers/profile/<id>', methods=['GET'])
