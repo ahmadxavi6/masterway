@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-To run the project u have to:
+To run the website u have to:
 
 ### `1)open cmd`
 ### `2)cd C:\-YOURDIRECTORY-\masterway\backend\Scripts `
@@ -17,6 +17,14 @@ To run the project u have to:
 
 
    <hr>
+To run the Mobile App u have to:
+
+### `1)open cmd`
+### `2)cd C:\-YOURDIRECTORY-\masterway\MobApp `
+### `3)write this command on the terminal :npm install`
+### `4)write this command on the terminal :npm start`
+   
+      <hr>
 
 ### `npm start`
 
