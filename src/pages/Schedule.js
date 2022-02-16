@@ -7,6 +7,7 @@ import { Table, ButtonGroup, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { loadProfile } from "../redux/workers/actions";
 import axios from "axios";
+import { toast } from "react-toastify";
 const API = "http://localhost:5000";
 
 const Schedule = () => {
@@ -24,10 +25,12 @@ const Schedule = () => {
     await axios
       .patch(`${API}/trips/${id}`)
       .then((resp) => {
-        alert("Shifts has been removed");
-        window.location.assign("http://localhost:3000/schedule");
+        toast.success("Shifts has been removed");
+        setTimeout(() => {
+          window.location.assign("http://localhost:3000/schedule");
+        }, 1500);
       })
-      .catch((err) => alert("There is a proplem"));
+      .catch((err) => toast.error("There is a proplem"));
   };
 
   return (

@@ -24,21 +24,22 @@ def index():
     name = user['fName']
     id = str(ObjectId(user['_id']))
     msg = Message('Master Way Password Reset Request', sender =   'masterway.eliaatours@gmail.com', recipients = [email] )
-    msg.body = "Hey" + " " + name  +",to reset your password, visit the following link"+"\r\n"+"localhost:3000/resetpassword/"+id
+    msg.body = "Hey" + " " + name  +",to reset your password, visit the following link"+"\r\n"+"http://localhost:3000/resetpassword/"+id
     mail.send(msg)
     return "Message sent!",200
   return "No Such email in the data base" ,401
 ##########################
-@api_admin.route('/addadmin', methods=['POST'])
+
+@api_admin.route('/admins', methods=['POST'])
 def addAdmin():
     dbA = mongo.db.admins
-
     admin ={
         'fName': request.json['fName'],
         'email': request.json['email'],
         'password':pbkdf2_sha256.hash(request.json['ID']),
-        'ID':request.json['ID']
-
+        'ID':request.json['ID'],
+        'phoneNumber': request.json['phoneNumber'],
+        'age': request.json['age'],
     }
     if dbA.find_one({"email":request.json['email']}):
         return jsonify({"Msg":"Email address already in use"}),401
@@ -47,12 +48,74 @@ def addAdmin():
     name = admin['fName']
     id = str(ObjectId(admin['_id']))
     msg = Message('Master Way Welcome', sender =   'masterway.eliaatours@gmail.com', recipients = [email] )
-    msg.body = "Hey" + " " + name  +"\r\n"+"Welcome to Master Way"+"\r\n"+"To acsses your account on master way use your email and the password is your ID number, in order to change your password, visit the following link"+"\r\n"+"localhost:3000/resetpassword/"+id
+    msg.body = "Hey" + " " + name  +"\r\n"+"Welcome to Master Way"+"\r\n"+"To acsses your account on master way use your email and the password is your ID number, in order to change your password, visit the following link"+"\r\n"+"http://localhost:3000/resetpassword/"+id
     mail.send(msg)
-    return jsonify({'msg': "Admin Added Successfully"})
+    return jsonify({ 'msg': "Admin Added Successfully"}) 
 
 ##########################
-@api_admin.route('/admins', methods=['POST'])
+@api_admin.route('/admins', methods=['GET'])
+def getAdmins():
+    dbA = mongo.db.admins
+    admins = []
+    for doc in dbA.find():
+        admins.append({
+            '_id': str(ObjectId(doc['_id'])),
+            'fName': doc['fName'],
+            'email': doc['email'],
+            'ID': doc['ID'],
+            'phoneNumber': doc['phoneNumber'],
+            'age':doc['age'],
+            
+        })
+    return jsonify(admins)
+##########################
+
+
+@api_admin.route('/admins/<id>', methods=['GET'])
+def getAdmin(id):
+    dbA = mongo.db.admins
+    admin = dbA.find_one({'_id': ObjectId(id)})
+    return jsonify({
+            '_id': str(ObjectId(admin['_id'])),
+            'fName': admin['fName'],
+            'email': admin['email'],
+            'ID': admin['ID'],
+            'phoneNumber': admin['phoneNumber'],
+             'age': admin['age'],
+    })
+##########################
+@api_admin.route('/admins/profile/<id>', methods=['GET'])
+def getAdminProfile(id):
+    dbA = mongo.db.admins
+    admin = dbA.find_one({'_id': ObjectId(id)})
+    return jsonify({
+            '_id': str(ObjectId(admin['_id'])),
+           'fName': admin['fName'],
+            'email': admin['email'],
+            'ID': admin['ID'],
+            'phoneNumber': admin['phoneNumber'],
+            'age': admin['age'],
+    })
+#####################
+@api_admin.route('/admins/<id>', methods=['DELETE'])
+def deleteAdmin(id):
+    dbA = mongo.db.admins
+    dbA.delete_one({'_id': ObjectId(id)})
+    return jsonify({'msg': "Admin Deleted Successfully"})
+#################################
+@api_admin.route('/admins/<id>', methods=['PUT'])
+def updateAdmin(id):
+    dbA = mongo.db.admins
+    dbA.update_one({'_id': ObjectId(id)}, {'$set': {
+        'fName': request.json['fName'],
+        'email': request.json['email'],
+        'ID':request.json['ID'],
+        'phoneNumber': request.json['phoneNumber'],
+        'age': request.json['age'],
+    }})
+    return jsonify({'msg': "Admin Update Successfully"})
+########################
+@api_admin.route('/login', methods=['POST'])
 def login():
     
     dbA = mongo.db.admins
@@ -84,16 +147,5 @@ def reset(id):
     return jsonify({'msg': "Password Updated Successfully"})
  
 ########################## 
-@api_admin.route('/removeadmin', methods=['POST'])
-def deleteAdmin():
-    dbA = mongo.db.admins
-    admin = {
-      "ID" : request.json['ID']
-    }
-    user =  dbA.find_one({"ID":admin['ID']})
-    if user:
-      dbA.delete_one({'_id': ObjectId(user['_id'])})
-      return jsonify({'msg':"Admin has been removed"}),200
-    
-    return jsonify({'msg': "ID not found in the database"}),401
+
  

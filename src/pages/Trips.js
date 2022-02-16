@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Container, Row, Col, Button } from "react-bootstrap";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -25,7 +26,6 @@ const initialState = {
 const Trips = () => {
   const worker = useSelector((state) => state.dataw.worker);
   const [state, setState] = useState(initialState);
-
   const {
     Sun,
     Mon,
@@ -63,19 +63,21 @@ const Trips = () => {
     await axios
       .put(`${API}/trips/${worker._id}`, user)
       .then((resp) => {
-        alert("Shifts has been added");
-        window.location.assign("http://localhost:3000/schedule");
+        toast.success("Shifts added successfully");
+        setTimeout(() => {
+          window.location.assign("http://localhost:3000/schedule");
+        }, 1500);
       })
-      .catch((err) => alert("There is a proplem"));
+      .catch((err) => toast.error("There is a proplem"));
   };
 
   const handlesChange = (e) => {
     let { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
+
   return (
     <>
-      {" "}
       <Container style={{ marginTop: "70px" }}>
         <Row>
           <Col md={4}>
@@ -90,13 +92,12 @@ const Trips = () => {
                   value={Sun || ""}
                   onChange={handlesChange}
                 />
-                <select
+                <Form.Select
                   className="browser-default "
                   name="Sunday"
                   style={{ position: "stick" }}
                   onChange={handlesChange}
                 >
-                  <option value=""></option>
                   <option value="OFF">OFF</option>
                   <option value="8am-5pm">8am-5pm</option>
                   <option value="9am-6pm">9am-6pm</option>
@@ -106,7 +107,7 @@ const Trips = () => {
                   <option value="1pm-10pm">1pm-10pm</option>
                   <option value="2pm-11pm">2pm-11pm</option>
                   <option value="3pm-12am">3pm-12am</option>{" "}
-                </select>
+                </Form.Select>
               </Form.Group>
               <Form.Group>
                 <Form.Label>Monday</Form.Label>
@@ -117,13 +118,12 @@ const Trips = () => {
                   value={Mon || ""}
                   onChange={handlesChange}
                 />
-                <select
+                <Form.Select
                   className="browser-default "
                   name="Monday"
                   style={{ position: "stick" }}
                   onChange={handlesChange}
                 >
-                  <option value=""></option>
                   <option value="OFF">OFF</option>
                   <option value="8am-5pm">8am-5pm</option>
                   <option value="9am-6pm">9am-6pm</option>
@@ -133,7 +133,7 @@ const Trips = () => {
                   <option value="1pm-10pm">1pm-10pm</option>
                   <option value="2pm-11pm">2pm-11pm</option>
                   <option value="3pm-12am">3pm-12am</option>{" "}
-                </select>
+                </Form.Select>
               </Form.Group>
               <Form.Group>
                 <Form.Label>Tuesday</Form.Label>
@@ -144,13 +144,12 @@ const Trips = () => {
                   value={Tue || ""}
                   onChange={handlesChange}
                 />
-                <select
+                <Form.Select
                   className="browser-default "
                   name="Tuesday"
                   style={{ position: "stick" }}
                   onChange={handlesChange}
                 >
-                  <option value=""></option>
                   <option value="OFF">OFF</option>
                   <option value="8am-5pm">8am-5pm</option>
                   <option value="9am-6pm">9am-6pm</option>
@@ -160,7 +159,7 @@ const Trips = () => {
                   <option value="1pm-10pm">1pm-10pm</option>
                   <option value="2pm-11pm">2pm-11pm</option>
                   <option value="3pm-12am">3pm-12am</option>{" "}
-                </select>
+                </Form.Select>
               </Form.Group>
               <Form.Group>
                 <Form.Label>Wednesday</Form.Label>
@@ -171,13 +170,12 @@ const Trips = () => {
                   value={Wed || ""}
                   onChange={handlesChange}
                 />
-                <select
+                <Form.Select
                   className="browser-default "
                   name="Wednesday"
                   style={{ position: "stick" }}
                   onChange={handlesChange}
                 >
-                  <option value=""></option>
                   <option value="OFF">OFF</option>
                   <option value="8am-5pm">8am-5pm</option>
                   <option value="9am-6pm">9am-6pm</option>
@@ -187,7 +185,7 @@ const Trips = () => {
                   <option value="1pm-10pm">1pm-10pm</option>
                   <option value="2pm-11pm">2pm-11pm</option>
                   <option value="3pm-12am">3pm-12am</option>{" "}
-                </select>
+                </Form.Select>
               </Form.Group>
               <Form.Group>
                 <Form.Label>Thursday</Form.Label>
@@ -198,13 +196,12 @@ const Trips = () => {
                   value={Thur || ""}
                   onChange={handlesChange}
                 />
-                <select
+                <Form.Select
                   className="browser-default "
                   name="Thursday"
                   style={{ position: "stick" }}
                   onChange={handlesChange}
                 >
-                  <option value=""></option>
                   <option value="OFF">OFF</option>
                   <option value="8am-5pm">8am-5pm</option>
                   <option value="9am-6pm">9am-6pm</option>
@@ -214,7 +211,7 @@ const Trips = () => {
                   <option value="1pm-10pm">1pm-10pm</option>
                   <option value="2pm-11pm">2pm-11pm</option>
                   <option value="3pm-12am">3pm-12am</option>{" "}
-                </select>
+                </Form.Select>
               </Form.Group>
               <Form.Group>
                 <Form.Label>Friday</Form.Label>
@@ -225,13 +222,12 @@ const Trips = () => {
                   value={Fri || ""}
                   onChange={handlesChange}
                 />
-                <select
+                <Form.Select
                   className="browser-default "
                   name="Friday"
                   style={{ position: "stick" }}
                   onChange={handlesChange}
                 >
-                  <option value=""></option>
                   <option value="OFF">OFF</option>
                   <option value="8am-5pm">8am-5pm</option>
                   <option value="9am-6pm">9am-6pm</option>
@@ -241,7 +237,7 @@ const Trips = () => {
                   <option value="1pm-10pm">1pm-10pm</option>
                   <option value="2pm-11pm">2pm-11pm</option>
                   <option value="3pm-12am">3pm-12am</option>{" "}
-                </select>
+                </Form.Select>
               </Form.Group>
               <Form.Group>
                 <Form.Label>Saturday</Form.Label>
@@ -252,13 +248,12 @@ const Trips = () => {
                   value={Sat || ""}
                   onChange={handlesChange}
                 />
-                <select
+                <Form.Select
                   className="browser-default "
                   name="Saturday"
                   style={{ position: "stick" }}
                   onChange={handlesChange}
                 >
-                  <option value=""></option>
                   <option value="OFF">OFF</option>
                   <option value="8am-5pm">8am-5pm</option>
                   <option value="9am-6pm">9am-6pm</option>
@@ -268,7 +263,7 @@ const Trips = () => {
                   <option value="1pm-10pm">1pm-10pm</option>
                   <option value="2pm-11pm">2pm-11pm</option>
                   <option value="3pm-12am">3pm-12am</option>{" "}
-                </select>
+                </Form.Select>
               </Form.Group>
               <Form.Group>
                 <Link
