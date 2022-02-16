@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
+import { toast } from "react-toastify";
 const API = "http://localhost:5000";
 
 function Passwordreset() {
@@ -12,7 +13,7 @@ function Passwordreset() {
     await axios
       .post(`${API}${id}`, user)
       .then((resp) => {
-        alert("Password has changed");
+        toast.success("Password has changed");
         document.getElementById("password1").value = "";
       })
       .catch((err) => console.log("Email not Found in Database"));

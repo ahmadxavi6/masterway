@@ -11,33 +11,32 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
-  addWorker,
-  deleteWorker,
-  loadSingleWorker,
-  loadWorkers,
-  updateWorker,
+  addAdmin,
+  deleteAdmin,
+  loadAdmins,
+  updateAdmin,
   loadProfile,
-} from "../redux/workers/actions";
+} from "../redux/admins/actionsA";
 import { Link } from "react-router-dom";
 
 const initialState = {
   fName: "",
   email: "",
+  ID: "",
   phoneNumber: "",
   age: "",
-  ID: "",
 };
-const Workers = () => {
+const Admins = () => {
   const [state, setState] = useState(initialState);
   const [editMode, setEditMode] = useState(false);
-  const [workerId, setWorkerId] = useState(null);
+  const [adminId, setAdminId] = useState(null);
   const dispatch = useDispatch();
-  const { workers, msg, worker } = useSelector((state) => state.dataw);
+  const { admins, msg, admin } = useSelector((state) => state.dataa);
 
-  const { fName, email, phoneNumber, age, ID } = state;
+  const { fName, email, ID, phoneNumber, age } = state;
 
   useEffect(() => {
-    dispatch(loadWorkers());
+    dispatch(loadAdmins());
   }, [dispatch]);
 
   useEffect(() => {
@@ -47,10 +46,10 @@ const Workers = () => {
   }, [msg]);
 
   useEffect(() => {
-    if (worker) {
-      setState({ ...worker });
+    if (admin) {
+      setState({ ...admin });
     }
-  }, [worker]);
+  }, [admin]);
 
   const handleChange = (e) => {
     let { name, value } = e.target;
@@ -59,34 +58,30 @@ const Workers = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!fName || !email || !phoneNumber || !age || !ID) {
+    if (!fName || !email || !ID || !phoneNumber || !age) {
       toast.error("Please Fill All Input Fields");
-    } else if (!phoneNumber || phoneNumber.length !== 10) {
-      toast.error("Please Enter Valid Number");
     } else {
       if (!editMode) {
-        dispatch(addWorker(state));
-        setState({ fName: "", email: "", phoneNumber: "", age: "", ID: "" });
+        dispatch(addAdmin(state));
+        setState({ fName: "", email: "", ID: "", phoneNumber: "", age: "" });
       } else {
-        dispatch(updateWorker(state, workerId));
-        setState({ fName: "", email: "", phoneNumber: "", age: "", ID: "" });
+        dispatch(updateAdmin(state, adminId));
+        setState({ fName: "", email: "", ID: "", phoneNumber: "", age: "" });
         setEditMode(false);
-        setWorkerId(null);
+        setAdminId(null);
       }
     }
   };
 
   const handleDelete = (id) => {
-    if (
-      window.confirm("Are you sure that you wanted to delete that worker ?")
-    ) {
-      dispatch(deleteWorker(id));
+    if (window.confirm("Are you sure that you wanted to delete that admin ?")) {
+      dispatch(deleteAdmin(id));
     }
   };
 
   const handleUpdate = (id) => {
-    dispatch(loadSingleWorker(id));
-    setWorkerId(id);
+    dispatch(loadProfile(id));
+    setAdminId(id);
     setEditMode(true);
   };
   const handleClick = (id) => {
@@ -139,15 +134,16 @@ const Workers = () => {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Age</Form.Label>
+                <Form.Label>age</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="number"
                   placeholder="Age"
                   name="age"
                   value={age || ""}
                   onChange={handleChange}
                 />
               </Form.Group>
+
               <div className="d-grid gap-2 mt-2">
                 <Button type="submit" variant="primary" size="lg">
                   {editMode ? "Update" : "Submit"}
@@ -168,8 +164,8 @@ const Workers = () => {
                   <th>Action</th>
                 </tr>
               </thead>
-              {workers &&
-                workers.map((item, index) => (
+              {admins &&
+                admins.map((item, index) => (
                   <tbody key={index}>
                     <tr>
                       <td>{index + 1}</td>
@@ -178,6 +174,7 @@ const Workers = () => {
                       <td>{item.email}</td>
                       <td>{item.phoneNumber}</td>
                       <td>{item.age}</td>
+
                       <td>
                         <ButtonGroup>
                           <Button
@@ -195,7 +192,7 @@ const Workers = () => {
                           </Button>
                           <Link
                             to={{
-                              pathname: `/workers/profile/${item._id}/`,
+                              pathname: `/admins/profile/${item._id}/`,
                             }}
                           >
                             <Button
@@ -219,4 +216,4 @@ const Workers = () => {
   );
 };
 
-export default Workers;
+export default Admins;

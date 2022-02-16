@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
+import { toast } from "react-toastify";
 const API = "http://localhost:5000";
 
 function Forgetmypass() {
@@ -10,10 +11,10 @@ function Forgetmypass() {
     await axios
       .patch(`${API}/forgetmypass`, user)
       .then((resp) => {
-        alert("Reset Password Email sent");
+        toast.success("Reset Password Email sent");
         document.getElementById("email1").value = "";
       })
-      .catch((err) => alert("Email not Found in Database"));
+      .catch((err) => toast.error("Email not Found in Database"));
   };
 
   const [email, setEmail] = useState("");

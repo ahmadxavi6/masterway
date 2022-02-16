@@ -37,6 +37,8 @@ def addWorker():
         'email': request.json['email'],
         'phoneNumber': request.json['phoneNumber'],
         'age': request.json['age'],
+        'ID':request.json['ID'],
+        'password':pbkdf2_sha256.hash(request.json['ID']),
         'requestShift':{'Sun':"", 'Mon':"", 'Tue':"",'Wed':"",'Thur':"",'Fri':""},
         "weekShifts":{'Sun':{'hours':"",'info':""},
         'Mon':{'hours':"",'info':""},
@@ -88,6 +90,7 @@ def getWorkers():
             'email': doc['email'],
             'phoneNumber': doc['phoneNumber'],
             'age': doc['age'],
+            "ID":doc['ID'],
             'requesteShift':doc['requestShift'],
             'weekShifts':doc['weekShifts']
         })
@@ -102,6 +105,7 @@ def getWorker(id):
             '_id': str(ObjectId(worker['_id'])),
             'fName': worker['fName'],
             'email': worker['email'],
+            "ID":worker['ID'],
             'phoneNumber': worker['phoneNumber'],
             'age': worker['age'],
             'requesteShift':worker['requestShift'],
@@ -115,8 +119,11 @@ def getWorkerProfile(id):
             '_id': str(ObjectId(worker['_id'])),
             'fName': worker['fName'],
             'email': worker['email'],
+            "ID":worker['ID'],
             'phoneNumber': worker['phoneNumber'],
             'age': worker['age'],
+            'requesteShift':worker['requestShift'],
+            'weekShifts':worker['weekShifts']
     })
 ##########################
 

@@ -6,6 +6,7 @@ import "./login.css";
 import Forgetmypass from "./Forgetmypass";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Passwordreset from "./Passwordreset";
+import { toast, ToastContainer } from "react-toastify";
 const API = "http://localhost:5000";
 
 export default function Login({ setToken }) {
@@ -23,9 +24,9 @@ export default function Login({ setToken }) {
     }
   }, [setToken]);
   const rest = () => {
+    toast.error("Wrong email or Wrong password");
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";
-    alert("Wrong email or Wrong password");
   };
 
   const handleSubmit = async (e) => {
@@ -33,16 +34,13 @@ export default function Login({ setToken }) {
     const user = { fName, email, password };
     // send the username and password to the server
     await axios
-      .post(`${API}/admins`, user)
+      .post(`${API}/login`, user)
       .then((resp) => {
         setUser(resp.data);
         setfName(resp.data.fName);
         setToken(resp.data.token);
         // store the user in localStorage
         sessionStorage.setItem("user", JSON.stringify(resp.data));
-        console.log(resp.data);
-        const loggedInUser = sessionStorage.getItem("user");
-        console.log(loggedInUser);
       })
       .catch((err) => rest());
   };
@@ -54,6 +52,7 @@ export default function Login({ setToken }) {
   return (
     <>
       <div>
+        <ToastContainer />
         <Router>
           <Switch>
             <Route path="/forgetmypass" component={Forgetmypass}></Route>
