@@ -47,7 +47,13 @@ def addWorker():
         'Fri':{'hours':"",'info':""},
         'Sat':{'hours':"",'info':""}}
     })
-    return jsonify({'id': f"{id.inserted_id}", 'msg': "User Added Successfully"})
+    email = request.json['email']
+    name = request.json['fName']
+    msg = Message('Master Way Welcome', sender =   'masterway.eliaatours@gmail.com', recipients = [email] )
+    msg.body = "Welcome" + " " + name  +" "+"to Master Way you can sign in on the app using your email and id as the password  "+"\r\n"+ "you can change the password after u sign in"
+    mail.send(msg)
+    return "Message sent!",200
+    
     
 ##########################
 @app.route('/trips/<id>', methods=['PUT'])
