@@ -7,7 +7,9 @@ import {
   Button,
   SafeAreaView,
 } from "react-native";
+
 import Navigation from "./Src/navigation";
+
 export default function App() {
   return (
     <SafeAreaView style={styles.root}>
