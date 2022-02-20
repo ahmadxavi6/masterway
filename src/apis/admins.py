@@ -7,8 +7,9 @@ from apis.database import mongo
 from flask_jwt_extended import create_access_token
 from apis.mails import mail
 from flask_mail import Message
+import random
 
-
+SSL_DISABLE=True
 api_admin = Blueprint('api_admin',__name__)
 ##########################
 @api_admin.route("/forgetmypass",methods=["PATCH"])
@@ -148,4 +149,60 @@ def reset(id):
  
 ########################## 
 
+@api_admin.route("/mobapp",methods=["PATCH"])
+def sent():
+  dbW = mongo.db.workers
+  admin ={
+        'email': request.json['email'],
+    }
+  user = dbW.find_one({"email": admin['email']})
+  
+  if dbW.find_one({"email": admin['email']}):
+    email = user['email']
+    name = user['fName']
+    value = random.randint(1000,9999)
+    dbW.update_one({'email': admin['email']}, {'$set': {
+        'code': pbkdf2_sha256.hash(str(value)),
+    }})
+    msg = Message('Master Way Password Reset Request', sender =   'masterway.eliaatours@gmail.com', recipients = [email] )
+    msg.body = "Hey" + " " + name  +",to reset your password, use this code in the app "+"\r\n"+ str(value)
+    mail.send(msg)
+    return "Message sent!",200
+  return "No Such email in the data base" ,401
+
+  ########################## 
+
+@api_admin.route("/mobapp/confirm",methods=["POST"])
+def confirm():
+  dbW = mongo.db.workers
+  worker ={
+        "email": request.json["email"],
+        "code":request.json["code"]
+    }
+  user = dbW.find_one({"email": worker['email']})
+  if user and pbkdf2_sha256.verify(worker["code"], user['code']):
+    return jsonify("corrcet"),200
+  return jsonify("wrong email or wrong password"),401
+####################################
+@api_admin.route("/mobapp/reset",methods=["POST"])
+def resetpass():
+  dbW = mongo.db.workers
+  worker ={
+        "email": request.json["email"],
+        "password":request.json["password"]
+    }
+  user = dbW.find_one({"email": worker['email']})
+  if user:  
+    dbW.update_one({'email': worker['email']}, {'$set': {
+        "password": pbkdf2_sha256.hash(worker["password"])
+         
+    }})
+    return jsonify("password has changed"),200
+  return jsonify("there is a problem"),401
+  
+ 
+
+
+
+  
  
