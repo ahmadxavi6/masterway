@@ -3,33 +3,62 @@ import React, { useState } from "react";
 import Custombutton from "../../Components/Custombutton";
 import Custominput from "../../Components/Custominput";
 import { useNavigation } from "@react-navigation/native";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
-const NewPassword = () => {
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
-  const navigation = useNavigation();
+const NewPassword = ({ route, navigation }) => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const email = route.params;
 
-  const onChangePasswordPressed = () => {
-    console.warn("hi");
-    navigation.navigate("Home");
+  const onChangePasswordPressed = async (data) => {
+    console.log(data);
+    console.log(data);
+    console.log(email);
+    if (String(data.password1) !== String(data.password2)) {
+      alert("The password dont match");
+      return;
+    }
+    const user = {
+      email: "",
+      password: "",
+    };
+    user.email = email.email;
+    user.password = data.password1;
+    console.log(user);
+    await axios
+      .post(`http://192.168.56.1:5000/mobapp/reset`, user)
+      .then((resp) => {
+        navigation.navigate("Home", {
+          email: email.email,
+        });
+      })
+      .catch((err) => alert("The code is not correct"));
   };
   return (
     <View style={Styles.root}>
       <Text style={Styles.title}>Change your password</Text>
       <Custominput
         placeholder={"Chosse new password"}
-        value={password}
-        setValue={setPassword}
+        control={control}
+        name="password1"
+        secureTextEntry={true}
+        rules={{ required: "Password is Required" }}
       />
       <Custominput
         placeholder={"Confirm your password"}
-        value={password2}
-        setValue={setPassword2}
+        control={control}
+        secureTextEntry={true}
+        rules={{ required: "Confirm password is Required" }}
+        name="password2"
       />
 
       <Custombutton
         text="Change Password"
-        onPress={onChangePasswordPressed}
+        onPress={handleSubmit(onChangePasswordPressed)}
         type="SECONDARY"
       ></Custombutton>
     </View>
