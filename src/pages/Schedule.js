@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { loadProfile } from "../redux/workers/actions";
 import axios from "axios";
 import { toast } from "react-toastify";
-const API = "http://localhost:5000";
+const API = "http://192.168.56.1:5000";
 
 const Schedule = () => {
   const { workers } = useSelector((state) => state.dataw);
@@ -27,7 +27,7 @@ const Schedule = () => {
       .then((resp) => {
         toast.success("Shifts has been removed");
         setTimeout(() => {
-          window.location.assign("http://localhost:3000/schedule");
+          window.location.assign("http://192.168.56.1:3000/schedule");
         }, 1500);
       })
       .catch((err) => toast.error("There is a proplem"));

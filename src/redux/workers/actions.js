@@ -1,16 +1,16 @@
 import * as types from "./actionTypes";
 import axios from "axios";
 
-const API = "http://localhost:5000";
+const API = "http://192.168.56.1:5000";
 
 const getWorkers = (workers) => ({
   type: types.GET_WORKERS,
   payload: workers,
 });
-const getProfile = (worker) =>({
-  type : types.LOAD_PROFILE,
-  payload : worker
-})
+const getProfile = (worker) => ({
+  type: types.LOAD_PROFILE,
+  payload: worker,
+});
 export const getWorker = (workers) => ({
   type: types.GET_SINGLE_WORKER,
   payload: workers,
@@ -49,7 +49,6 @@ export const loadProfile = (id) => {
   };
 };
 
-
 export const addWorker = (worker) => {
   return function (dispatch) {
     axios
@@ -61,7 +60,6 @@ export const addWorker = (worker) => {
       .catch((err) => console.log(err));
   };
 };
-
 
 export const deleteWorker = (id) => {
   return function (dispatch) {

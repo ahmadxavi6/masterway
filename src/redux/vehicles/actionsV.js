@@ -1,7 +1,7 @@
 import * as types from "./actionTypesV";
 import axios from "axios";
 
-const API = "http://localhost:5000";
+const API = "http://192.168.56.1:5000";
 
 const getVehicles = (vehicles) => ({
   type: types.GET_VEHICLES,
@@ -37,7 +37,6 @@ export const loadVehicles = () => {
   };
 };
 
-
 export const addVehicle = (vehicle) => {
   return function (dispatch) {
     axios
@@ -49,7 +48,6 @@ export const addVehicle = (vehicle) => {
       .catch((err) => console.log(err));
   };
 };
-
 
 export const deleteVehicle = (id) => {
   return function (dispatch) {

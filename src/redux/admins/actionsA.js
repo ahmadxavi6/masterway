@@ -1,7 +1,7 @@
 import * as types from "./actionTypesA";
 import axios from "axios";
 
-const API = "http://localhost:5000";
+const API = "http://192.168.56.1:5000";
 
 const getAdmins = (admins) => ({
   type: types.GET_ADMINS,
