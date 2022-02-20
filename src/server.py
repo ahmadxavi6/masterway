@@ -9,7 +9,6 @@ from apis.admins import api_admin
 from flask_mail import Mail ,Message
 from apis.mails import mail
 
-
 app = Flask(__name__)
 app.register_blueprint(api_admin)
 app.secret_key="oS\xf8\xf4\xe2\xc8\xda\xe3\x7f\xc75*\x83\xb1\x06\x8c\x85\xa4\xa7piE\xd6I"
@@ -190,8 +189,27 @@ def updateVehicle(id):
          'year': request.json['year']
     }})
     return jsonify({'msg': "Vehicle Update Successfully"})
+######################################
+@app.route('/mobapp', methods=['POST'])
+def login():
+    worker = {
+        "email":request.json['email'],
+        "password":request.json['password']
+    }
+ 
+    user =  dbW.find_one({"email":worker['email']}) 
+    if user and pbkdf2_sha256.verify(worker["password"], user['password']):
+        access_token = create_access_token(identity=user['email'])
+        access = {
+        "email":user['email'],
+        "token":access_token,
+        "fName":user['fName']
+        }
+        return jsonify(access),200
+        
+    return jsonify("wrong email or wrong password"),401    
 
     
     
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="192.168.56.1", port=5000,debug=True)
