@@ -24,7 +24,7 @@ To run the Mobile App u have to:
 ### `3)write this command on the terminal :npm install`
 ### `4)write this command on the terminal :npm start`
    
-      <hr>
+   <hr>
 
 ### `npm start`
 
