@@ -1,6 +1,6 @@
 
 from string import ascii_letters
-from flask import  request, jsonify,Blueprint ,url_for
+from flask import  flash, render_template, request, jsonify,Blueprint ,url_for
 from flask_pymongo import ObjectId
 from passlib.hash import pbkdf2_sha256
 from apis.database import mongo
@@ -8,10 +8,13 @@ from flask_jwt_extended import create_access_token
 from apis.mails import mail
 from flask_mail import Message
 import random
+from werkzeug.utils import secure_filename
+import base64
+
 
 SSL_DISABLE=True
 api_admin = Blueprint('api_admin',__name__)
-##########################
+#####################################
 @api_admin.route("/forgetmypass",methods=["PATCH"])
 def index():
   dbA = mongo.db.admins
@@ -33,6 +36,10 @@ def index():
 
 @api_admin.route('/admins', methods=['POST'])
 def addAdmin():
+    with open('profile.txt', 'r') as f: 
+     text=f.read()
+    
+    
     dbA = mongo.db.admins
     admin ={
         'fName': request.json['fName'],
@@ -41,6 +48,8 @@ def addAdmin():
         'ID':request.json['ID'],
         'phoneNumber': request.json['phoneNumber'],
         'age': request.json['age'],
+        'profilepic':text
+        
     }
     if dbA.find_one({"email":request.json['email']}):
         return jsonify({"Msg":"Email address already in use"}),401
@@ -56,6 +65,7 @@ def addAdmin():
 ##########################
 @api_admin.route('/admins', methods=['GET'])
 def getAdmins():
+    
     dbA = mongo.db.admins
     admins = []
     for doc in dbA.find():
@@ -66,7 +76,7 @@ def getAdmins():
             'ID': doc['ID'],
             'phoneNumber': doc['phoneNumber'],
             'age':doc['age'],
-            
+            'profilepic':doc['profilepic']
         })
     return jsonify(admins)
 ##########################
@@ -83,6 +93,8 @@ def getAdmin(id):
             'ID': admin['ID'],
             'phoneNumber': admin['phoneNumber'],
              'age': admin['age'],
+            'profilepic':admin['profilepic']
+             
     })
 ##########################
 @api_admin.route('/admins/profile/<id>', methods=['GET'])
@@ -96,6 +108,8 @@ def getAdminProfile(id):
             'ID': admin['ID'],
             'phoneNumber': admin['phoneNumber'],
             'age': admin['age'],
+            'profilepic':admin['profilepic']
+            
     })
 #####################
 @api_admin.route('/admins/<id>', methods=['DELETE'])
@@ -148,7 +162,6 @@ def reset(id):
     return jsonify({'msg': "Password Updated Successfully"})
  
 ########################## 
-
 @api_admin.route("/mobapp",methods=["PATCH"])
 def sent():
   dbW = mongo.db.workers
