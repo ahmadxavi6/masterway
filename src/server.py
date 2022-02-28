@@ -1,6 +1,8 @@
+from re import A
 from apis.database import mongo
-from flask import Flask, json, request, jsonify , Response,session
+from flask import Flask, json, request, jsonify , Response, send_file,session ,url_for
 from flask_pymongo import PyMongo, ObjectId
+from pymongo import MongoClient
 from flask_cors import CORS
 from passlib.hash import pbkdf2_sha256
 from flask_jwt_extended import JWTManager
@@ -8,6 +10,8 @@ from flask_jwt_extended import create_access_token
 from apis.admins import api_admin
 from flask_mail import Mail ,Message
 from apis.mails import mail
+from werkzeug.utils import secure_filename
+import base64
 
 app = Flask(__name__)
 app.register_blueprint(api_admin)
@@ -27,10 +31,42 @@ jwt = JWTManager(app)
 CORS(app)
 dbW = mongo.db.workers
 dbV = mongo.db.vehicles
+dbA = mongo.db.admins
 
 ##########################
+@app.route('/admins/profilepic/<id>', methods=['POST'])
+def uploadImg(id):
+    image = request.files['profilepic']  
+    image_string = base64.b64encode(image.read())
+    image_string = image_string.decode('ascii')
+    # profilepic = request.files['profilepic']
+    # profilepicname =  secure_filename(profilepic.filename)
+    # mongo.save_file(profilepicname , profilepic)  
+    dbA.update_one({'_id': ObjectId(id)}, {'$set': {
+        "profilepic" :  image_string
+        
+    }})
+    return jsonify({'msg': "Admin Update Successfully"})
+ #####################################
+@app.route('/workers/profilepic/<id>', methods=['POST'])
+def uploadImge(id):
+    image = request.files['profilepic']  
+    image_string = base64.b64encode(image.read())
+    image_string = image_string.decode('ascii')
+    # profilepic = request.files['profilepic']
+    # profilepicname =  secure_filename(profilepic.filename)
+    # mongo.save_file(profilepicname , profilepic)  
+    dbW.update_one({'_id': ObjectId(id)}, {'$set': {
+        "profilepic" :  image_string
+        
+    }})
+    return jsonify({'msg': "Admin Update Successfully"})
+#####################################
 @app.route('/workers', methods=['POST'])
 def addWorker():
+    with open('profile.txt', 'r') as f: 
+     text=f.read()
+     
     id = dbW.insert_one({
         'fName': request.json['fName'],
         'email': request.json['email'],
@@ -38,6 +74,7 @@ def addWorker():
         'age': request.json['age'],
         'ID':request.json['ID'],
         'password':pbkdf2_sha256.hash(request.json['ID']),
+        'profilepic':text,
         'requestShift':{'Sun':"", 'Mon':"", 'Tue':"",'Wed':"",'Thur':"",'Fri':""},
         "weekShifts":{'Sun':{'hours':"",'info':""},
         'Mon':{'hours':"",'info':""},
@@ -97,7 +134,8 @@ def getWorkers():
             'age': doc['age'],
             "ID":doc['ID'],
             'requesteShift':doc['requestShift'],
-            'weekShifts':doc['weekShifts']
+            'weekShifts':doc['weekShifts'],
+            "profilepic":doc['profilepic']
         })
     return jsonify(workers)
 
@@ -114,7 +152,8 @@ def getWorker(id):
             'phoneNumber': worker['phoneNumber'],
             'age': worker['age'],
             'requesteShift':worker['requestShift'],
-            'weekShifts':worker['weekShifts']
+            'weekShifts':worker['weekShifts'],
+            "profilepic":worker['profilepic']
     })
 ##########################
 @app.route('/workers/profile/<id>', methods=['GET'])
@@ -128,7 +167,8 @@ def getWorkerProfile(id):
             'phoneNumber': worker['phoneNumber'],
             'age': worker['age'],
             'requesteShift':worker['requestShift'],
-            'weekShifts':worker['weekShifts']
+            'weekShifts':worker['weekShifts'],
+            "profilepic":worker['profilepic']
     })
 ##########################
 
@@ -207,15 +247,23 @@ def login():
     if user and pbkdf2_sha256.verify(worker["password"], user['password']):
         access_token = create_access_token(identity=user['email'])
         access = {
-        "email":user['email'],
+        
         "token":access_token,
-        "fName":user['fName']
+        '_id': str(ObjectId(user['_id'])),
+        'fName': user['fName'],
+        'email': user['email'],
+        "ID":user['ID'],
+        'phoneNumber': user['phoneNumber'],
+        'age': user['age'],
+        'requesteShift':user['requestShift'],
+        'weekShifts':user['weekShifts']
         }
         return jsonify(access),200
         
     return jsonify("wrong email or wrong password"),401    
+########################################################
 
-    
+
     
 if __name__ == '__main__':
     app.run(host="192.168.56.1", port=5000,debug=True)

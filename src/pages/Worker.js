@@ -1,24 +1,59 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import profile from "../components/profile.png";
 import Spacer from "react-add-space";
 import "./Worker.css";
+import axios from "axios";
+import { toast } from "react-toastify";
+const API = "http://192.168.56.1:5000";
 
 const Worker = () => {
   const worker = useSelector((state) => state.dataw.worker);
+  const handleChange = (e) => {
+    console.log(e.target.files[0]);
+    const fd = new FormData();
+    fd.append("profilepic", e.target.files[0], e.target.files[0].name);
+    axios
+      .post(`${API}/workers/profilepic/${worker._id}`, fd, {
+        headers: {
+          enctype: "multipart/form-data",
+        },
+      })
+      .then((resp) => {
+        toast.success("Profile Picture Changed");
+      })
+      .catch((err) => toast.error("There is problem to upload pic"));
+  };
   return (
     <>
       <div className="container-picture">
-        <img src={profile} className="rounded" alt="Pic"></img>
+        <div className="picture">
+          <img
+            src={"data:image/gif;base64," + worker.profilepic}
+            id="profile"
+            width="270"
+            height="270"
+            alt=""
+          ></img>
+        </div>
       </div>
       <div className="change-bu">
-        <Button
-          style={{ marginLeft: "360px", marginTop: "25px" }}
-          variant="info"
+        <label
+          style={{
+            display: "block",
+
+            margin: ".4rem ",
+          }}
         >
-          Change Profile Pitcure
-        </Button>
+          Choose a profile picture
+        </label>
+
+        <input
+          type="file"
+          id="avatar"
+          name="avatar"
+          accept="image/*"
+          onChange={handleChange}
+        />
       </div>
 
       <div className="infoo" style={{ marginTop: "35px" }} elevation={2}>

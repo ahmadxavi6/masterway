@@ -9,8 +9,8 @@
   box-shadow: 10cm;
 }
 .container-picture {
-  border: 3px solid rgb(221, 217, 217);
-  width: 300px;
+  border: 3px solid #212529;
+  width: 290;
   margin-left: 300px;
   margin-top: 30px;
   padding-left: 20px;
@@ -20,5 +20,11 @@
 }
 .change-bu {
   position: fixed;
-  margin-top: 300px;
+  margin-top: 320px;
+  margin-left: 350px;
+}
+.picture {
+  padding-right: 10px;
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
