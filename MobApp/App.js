@@ -7,6 +7,7 @@ import {
   Button,
   SafeAreaView,
 } from "react-native";
+import Home from "./Src/Screens/Home";
 
 import Navigation from "./Src/navigation";
 

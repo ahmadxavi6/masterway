@@ -1,8 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import Custombutton from "../../Components/Custombutton";
 import Custominput from "../../Components/Custominput";
-import { useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
@@ -15,9 +14,6 @@ const NewPassword = ({ route, navigation }) => {
   const email = route.params;
 
   const onChangePasswordPressed = async (data) => {
-    console.log(data);
-    console.log(data);
-    console.log(email);
     if (String(data.password1) !== String(data.password2)) {
       alert("The password dont match");
       return;
@@ -33,7 +29,7 @@ const NewPassword = ({ route, navigation }) => {
       .post(`http://192.168.56.1:5000/mobapp/reset`, user)
       .then((resp) => {
         navigation.navigate("Home", {
-          email: email.email,
+          worker: resp.data,
         });
       })
       .catch((err) => alert("The code is not correct"));

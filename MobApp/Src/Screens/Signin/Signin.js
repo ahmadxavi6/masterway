@@ -28,7 +28,7 @@ const Signin = () => {
     await axios
       .post(`http://192.168.56.1:5000/mobapp`, data)
       .then((resp) => {
-        navigation.navigate("Home");
+        navigation.navigate("Home", { worker: resp.data });
       })
       .catch((err) => alert("Wrong Email or Password"));
   };
