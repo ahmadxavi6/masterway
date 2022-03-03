@@ -1,9 +1,9 @@
 from re import A
 from apis.database import mongo
-from flask import Flask, json, request, jsonify , Response, send_file,session ,url_for
+from flask import Flask, json, request, jsonify , Response, send_file, send_from_directory,session ,url_for
 from flask_pymongo import PyMongo, ObjectId
 from pymongo import MongoClient
-from flask_cors import CORS
+from flask_cors import CORS , cross_origin
 from passlib.hash import pbkdf2_sha256
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import create_access_token
@@ -13,7 +13,7 @@ from apis.mails import mail
 from werkzeug.utils import secure_filename
 import base64
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder="masterway/build" , static_url_path='')
 app.register_blueprint(api_admin)
 app.secret_key="oS\xf8\xf4\xe2\xc8\xda\xe3\x7f\xc75*\x83\xb1\x06\x8c\x85\xa4\xa7piE\xd6I"
 app.config['MONGO_URI']='mongodb://localhost/masterway'
@@ -34,6 +34,17 @@ dbV = mongo.db.vehicles
 dbA = mongo.db.admins
 
 ##########################
+@app.route("/api",methods=['GET'])
+@cross_origin()
+def index():
+    return{
+        "Msg":"Hello"
+    }
+@app.route('/')
+@cross_origin()  
+def serve():
+    return send_from_directory(app.static_folder,'index.html')
+#####################################
 @app.route('/admins/profilepic/<id>', methods=['POST'])
 def uploadImg(id):
     image = request.files['profilepic']  
