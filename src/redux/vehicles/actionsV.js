@@ -1,7 +1,7 @@
 import * as types from "./actionTypesV";
 import axios from "axios";
 
-const API = "http://192.168.56.1:5000";
+const API = "https://masterway.herokuapp.com";
 
 const getVehicles = (vehicles) => ({
   type: types.GET_VEHICLES,
