@@ -4,7 +4,7 @@ import Spacer from "react-add-space";
 import "./Worker.css";
 import axios from "axios";
 import { toast } from "react-toastify";
-const API = "http://192.168.56.1:5000";
+const API = "https://masterway.herokuapp.com/";
 
 const Admin = () => {
   const admin = useSelector((state) => state.dataa.admin);
