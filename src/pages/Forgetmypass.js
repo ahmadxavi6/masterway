@@ -2,8 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
-const API = "http://192.168.56.1:5000";
-
+const API = "https://masterway.herokuapp.com/";
 function Forgetmypass() {
   const handleSubmit = async (e) => {
     e.preventDefault();
