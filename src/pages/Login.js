@@ -7,7 +7,7 @@ import Forgetmypass from "./Forgetmypass";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Passwordreset from "./Passwordreset";
 import { toast, ToastContainer } from "react-toastify";
-const API = "http://192.168.56.1:5000";
+const API = "https://masterway.herokuapp.com/";
 
 export default function Login({ setToken }) {
   const [email, setEmail] = useState("");
