@@ -65,8 +65,8 @@ const Trips = () => {
       .then((resp) => {
         toast.success("Shifts added successfully");
         setTimeout(() => {
-         window.location.assign(
-            "https://eloquent-khorana-b3e278.netlify.app/schedule"
+          window.location.assign(
+            "https://vigorous-meninsky-e72496.netlify.app/schedule"
           );
         }, 1500);
       })
