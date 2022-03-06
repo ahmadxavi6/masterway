@@ -12,15 +12,20 @@ function Passwordreset() {
     e.preventDefault();
     setLoading(true);
     const user = { password };
-    // send the username and password to the server
-    await axios
-      .post(`${API}${id}`, user)
-      .then((resp) => {
-        toast.success("Password has changed");
-        document.getElementById("password1").value = "";
-      })
-      .catch((err) => console.log("Email not Found in Database"));
-    setLoading(false);
+    if (user.password !== "") {
+      // send the username and password to the server
+      await axios
+        .post(`${API}${id}`, user)
+        .then((resp) => {
+          toast.success("Password has changed");
+          document.getElementById("password1").value = "";
+        })
+        .catch((err) => console.log("Email not Found in Database"));
+      setLoading(false);
+    } else {
+      toast.error("Please enter password");
+      setLoading(false);
+    }
   };
 
   const [password, setPassword] = useState("");
