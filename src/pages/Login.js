@@ -3,6 +3,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import logo from "../components/logo 2.png";
 import "./login.css";
+import { Spinner } from "react-bootstrap";
 import Forgetmypass from "./Forgetmypass";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Passwordreset from "./Passwordreset";
@@ -14,6 +15,7 @@ export default function Login({ setToken }) {
   const [password, setPassword] = useState("");
   const [fName, setfName] = useState("");
   const [user, setUser] = useState();
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const loggedInUser = sessionStorage.getItem("user");
     if (loggedInUser) {
@@ -24,6 +26,7 @@ export default function Login({ setToken }) {
     }
   }, [setToken]);
   const rest = () => {
+    setLoading(false);
     toast.error("Wrong email or Wrong password");
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";
@@ -31,6 +34,7 @@ export default function Login({ setToken }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const user = { fName, email, password };
     // send the username and password to the server
     await axios
@@ -96,12 +100,25 @@ export default function Login({ setToken }) {
                   />
                 </div>
                 <div className="text-center">
-                  <button
-                    type="submit"
-                    className="btn btn-color px-5 mb-5 w-100"
-                  >
-                    Login
-                  </button>
+                  {!loading && (
+                    <button
+                      type="submit"
+                      className="btn btn-color px-5 mb-5 w-100"
+                    >
+                      Login
+                    </button>
+                  )}
+                  {loading && (
+                    <button
+                      type="submit"
+                      className="btn btn-color px-5 mb-5 w-100"
+                      disabled
+                    >
+                      <Spinner animation="border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                      </Spinner>
+                    </button>
+                  )}
                 </div>
 
                 <a href="/forgetmypass" className="text-dark fw-bold">

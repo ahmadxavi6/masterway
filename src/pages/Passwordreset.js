@@ -2,12 +2,15 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { Spinner } from "react-bootstrap";
 const API = "https://masterway.herokuapp.com/";
 
 function Passwordreset() {
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     const id = window.location.pathname;
     e.preventDefault();
+    setLoading(true);
     const user = { password };
     // send the username and password to the server
     await axios
@@ -17,6 +20,7 @@ function Passwordreset() {
         document.getElementById("password1").value = "";
       })
       .catch((err) => console.log("Email not Found in Database"));
+    setLoading(false);
   };
 
   const [password, setPassword] = useState("");
@@ -40,9 +44,22 @@ function Passwordreset() {
             </div>
 
             <div className="text-center">
-              <button type="submit" className="btn btn-color px-5 mb-5 w-100">
-                Change password
-              </button>
+              {!loading && (
+                <button type="submit" className="btn btn-color px-5 mb-5 w-100">
+                  Change Password
+                </button>
+              )}
+              {loading && (
+                <button
+                  type="submit"
+                  className="btn btn-color px-5 mb-5 w-100"
+                  disabled
+                >
+                  <Spinner animation="border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </Spinner>
+                </button>
+              )}
             </div>
           </form>
         </div>
