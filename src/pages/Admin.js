@@ -10,7 +10,6 @@ const Admin = () => {
   const admin = useSelector((state) => state.dataa.admin);
 
   const handleChange = (e) => {
-    console.log(e.target.files[0]);
     const fd = new FormData();
     fd.append("profilepic", e.target.files[0], e.target.files[0].name);
     axios
