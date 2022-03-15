@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Container, Row, Col, Button } from "react-bootstrap";
+import { Form, Container, Row, Col, Button, Table } from "react-bootstrap";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
@@ -25,6 +25,7 @@ const initialState = {
 
 const Trips = () => {
   const worker = useSelector((state) => state.dataw.worker);
+  console.log(worker);
   const [state, setState] = useState(initialState);
   const {
     Sun,
@@ -284,6 +285,47 @@ const Trips = () => {
                 </Link>
               </Form.Group>
             </Form>
+          </Col>
+
+          <Col md={6}>
+            <Table bordered hover style={{ marginTop: "32px" }}>
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>Requested</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Sunday</td>
+                  <td>{worker.requesteShift.Sun}</td>
+                </tr>
+                <tr>
+                  <td>Monday</td>
+                  <td>{worker.requesteShift.Mon}</td>
+                </tr>
+                <tr>
+                  <td>Tuesday</td>
+                  <td>{worker.requesteShift.Tue}</td>
+                </tr>
+                <tr>
+                  <td>Wednesday</td>
+                  <td>{worker.requesteShift.Wed}</td>
+                </tr>
+                <tr>
+                  <td>Thursday</td>
+                  <td>{worker.requesteShift.Thur}</td>
+                </tr>
+                <tr>
+                  <td>Friday</td>
+                  <td>{worker.requesteShift.Fri}</td>
+                </tr>
+                <tr>
+                  <td>Saturday</td>
+                  <td>{worker.requesteShift.Sat}</td>
+                </tr>
+              </tbody>
+            </Table>
           </Col>
         </Row>
       </Container>
