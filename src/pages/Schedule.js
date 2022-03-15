@@ -87,6 +87,7 @@ const Schedule = () => {
                   <Link
                     to={{
                       pathname: `/trips`,
+                      worker: item,
                     }}
                   >
                     <Button
