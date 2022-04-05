@@ -1,13 +1,34 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import Spacer from "react-add-space";
 import "./Worker.css";
+import { Button } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
 const API = "https://masterway.herokuapp.com";
 
 const Worker = () => {
-  const worker = useSelector((state) => state.dataw.worker);
+  const initialState = {
+    profilepic: "",
+    email: "",
+    fName: "",
+    phoneNumber: "",
+    age: "",
+  };
+  const pathname = window.location.pathname;
+  const use = pathname.slice(0, -1);
+  const [worker, setWorker] = useState(initialState);
+  useEffect(() => {
+    async function getProfile() {
+      await axios
+        .get(`${API}${use}`)
+        .then((resp) => {
+          setWorker(resp.data);
+        })
+        .catch((err) => toast.error("There is a problem"));
+    }
+    getProfile();
+  }, [use]);
+
   const handleChange = (e) => {
     console.log(e.target.files[0]);
     const fd = new FormData();
@@ -20,6 +41,9 @@ const Worker = () => {
       })
       .then((resp) => {
         toast.success("Profile Picture Changed");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       })
       .catch((err) => toast.error("There is problem to upload pic"));
   };
@@ -85,6 +109,9 @@ const Worker = () => {
           Age: <Spacer amount={31} /> {worker.age}
         </h6>
       </div>
+      <Button variant="info" style={{ marginLeft: "5px" }}>
+        More
+      </Button>
     </>
   );
 };
