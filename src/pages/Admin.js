@@ -1,5 +1,4 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import Spacer from "react-add-space";
 import "./Worker.css";
 import axios from "axios";
@@ -7,7 +6,27 @@ import { toast } from "react-toastify";
 const API = "https://masterway.herokuapp.com/";
 
 const Admin = () => {
-  const admin = useSelector((state) => state.dataa.admin);
+  const initialState = {
+    profilepic: "",
+    email: "",
+    fName: "",
+    phoneNumber: "",
+    age: "",
+  };
+  const pathname = window.location.pathname;
+  const use = pathname.slice(0, -1);
+  const [admin, setAdmin] = useState(initialState);
+  useEffect(() => {
+    async function getProfile() {
+      await axios
+        .get(`${API}${use}`)
+        .then((resp) => {
+          setAdmin(resp.data);
+        })
+        .catch((err) => toast.error("There is a problem"));
+    }
+    getProfile();
+  }, [use]);
 
   const handleChange = (e) => {
     const fd = new FormData();
@@ -20,6 +39,9 @@ const Admin = () => {
       })
       .then((resp) => {
         toast.success("Profile Picture Changed");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       })
       .catch((err) => toast.error("There is problem to upload pic"));
   };
