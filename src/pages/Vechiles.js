@@ -1,4 +1,4 @@
-import React, { useEffect, useState ,  } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   Container,
@@ -21,7 +21,7 @@ import {
 const initialStateV = {
   type: "",
   model: "",
-  year: ""
+  year: "",
 };
 
 const Vehicles = () => {
@@ -56,12 +56,12 @@ const Vehicles = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!type || !model || !year ) {
+    if (!type || !model || !year) {
       toast.error("Please fill all input field");
     } else {
       if (!editMode) {
         dispatch(addVehicle(state));
-        setState({ type: "", model: "", year: ""});
+        setState({ type: "", model: "", year: "" });
       } else {
         dispatch(updateVehicle(state, vehicleId));
         setState({ type: "", model: "", year: "" });
@@ -72,7 +72,9 @@ const Vehicles = () => {
   };
 
   const handleDelete = (id) => {
-    if (window.confirm("Are you sure that you wanted to delete that vehicle ?")) {
+    if (
+      window.confirm("Are you sure that you wanted to delete that vehicle ?")
+    ) {
       dispatch(deleteVehicle(id));
     }
   };
@@ -84,7 +86,7 @@ const Vehicles = () => {
   };
   return (
     <>
-      
+      <h1 style={{ textAlign: "center", marginTop: "10px" }}>Vehicles List</h1>
       <Container style={{ marginTop: "70px" }}>
         <Row>
           <Col md={4}>

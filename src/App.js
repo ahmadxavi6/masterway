@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Admins from "./pages/Admins";
 import Trips from "./pages/Trips";
 import Admin from "./pages/Admin";
+import WorkersHours from "./pages/WorkersHours";
 
 function App() {
   const [token, setToken] = useState();
@@ -36,6 +37,7 @@ function App() {
           <Route path="/workers/profile/" component={Worker}></Route>
           <Route path="/admins/profile/" component={Admin}></Route>
           <Route path="/incomeAndOutcome" component={IncomeAndOutcome}></Route>
+          <Route path="/workersHours/" component={WorkersHours}></Route>
           <Route path="/schedule" component={Schedule}></Route>
           <Route path="/map" component={MapGps}></Route>
         </Switch>
