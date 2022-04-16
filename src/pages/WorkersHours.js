@@ -8,7 +8,6 @@ const API = "https://masterway.herokuapp.com";
 function WorkersHours() {
   const init = [{ hour: "", day: "" }];
   const [hours, setHours] = useState(init);
-  console.log(hours);
   const pathname = window.location.pathname;
   const use = pathname.slice(0, -1);
 
@@ -52,17 +51,16 @@ function WorkersHours() {
   hour1 = temphour;
 
   useEffect(() => {
-    async function getHours() {
+    const getHours = async () => {
       let x = "/" + Mo + "/" + Ye;
       user.month = x;
       await axios
         .patch(`${API}${use}`, user)
         .then((resp) => {
           setHours(resp.data);
-          console.log(resp.data);
         })
         .catch((err) => toast.error("There is a problem in the server"));
-    }
+    };
 
     getHours();
   }, [Mo, Ye, use]);
