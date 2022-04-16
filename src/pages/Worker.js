@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Spacer from "react-add-space";
 import "./Worker.css";
 import { Button } from "react-bootstrap";
@@ -49,6 +50,7 @@ const Worker = () => {
   };
   return (
     <>
+      <h1 style={{ textAlign: "center", marginTop: "10px" }}>Worker Profile</h1>
       <div className="container-picture">
         <div className="picture">
           <img
@@ -108,10 +110,16 @@ const Worker = () => {
         <h6>
           Age: <Spacer amount={31} /> {worker.age}
         </h6>
+        <Link
+          to={{
+            pathname: `/workersHours/${worker._id}/`,
+          }}
+        >
+          <Button variant="info" style={{ marginLeft: "5px" }}>
+            Worker Hours
+          </Button>
+        </Link>
       </div>
-      <Button variant="info" style={{ marginLeft: "5px" }}>
-        More
-      </Button>
     </>
   );
 };

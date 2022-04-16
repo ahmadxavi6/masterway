@@ -47,6 +47,7 @@ const Admin = () => {
   };
   return (
     <>
+      <h1 style={{ textAlign: "center", marginTop: "10px" }}>Admin Profile</h1>
       <div className="container-picture">
         <div className="picture">
           <img

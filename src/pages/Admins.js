@@ -89,6 +89,7 @@ const Admins = () => {
   };
   return (
     <>
+      <h1 style={{ textAlign: "center", marginTop: "10px" }}>Admins List</h1>
       <Container style={{ marginTop: "70px" }}>
         <Row>
           <Col md={4}>
