@@ -1,36 +1,58 @@
 import { React, Component } from "react";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
+import axios from "axios";
+import { toast } from "react-toastify";
+const API = "https://masterway.herokuapp.com";
+
 const mapStyles = {
   width: "100%",
   height: "100%",
 };
+
 class MapGps extends Component {
+  componentDidMount() {
+    axios
+      .get(`${API}/map`)
+      .then((resp) => {
+        console.log(resp.data);
+        this.setState({ stores: resp.data });
+        console.log(this.state);
+      })
+      .catch((err) => toast.error("There is a problem in the server"));
+    this.interval = setInterval(
+      () => {
+        axios
+          .get(`${API}/map`)
+          .then((resp) => {
+            this.setState({ stores: resp.data });
+          })
+          .catch((err) => toast.error("There is a problem in the server"));
+      },
+
+      60000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
   constructor(props) {
     super(props);
 
-    this.state = {
-      stores: [
-        { lat: 31.896237855205005, lng: 34.83510240533413 },
-        { latitude: 32.0008390165097, longitude: 34.98354656899768 },
-        { latitude: 31.432220321956944, longitude: 34.85583054157546 },
-        { latitude: 31.714775219631207, longitude: 35.20739301564262 },
-        { latitude: 32.71092493703369, longitude: 35.039193161276465 },
-        { latitude: 32.23850366479179, longitude: 34.95486453995891 },
-      ],
-    };
+    this.state = { stores: [] };
   }
 
   displayMarkers = () => {
-    return this.state.stores.map((store, index) => {
+    return this.state.stores.map((item, index) => {
       return (
         <Marker
           key={index}
           id={index}
           position={{
-            lat: store.latitude,
-            lng: store.longitude,
+            lat: item.location.Lati,
+            lng: item.location.Long,
           }}
-          onClick={() => console.log("You clicked me!")}
+          onClick={() => toast.success(item.fName)}
         />
       );
     });
