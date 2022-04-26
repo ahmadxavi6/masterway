@@ -53,5 +53,5 @@ class MapGps extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyD1zH7rJMyq4QMtN2u0PEZKimQ - VTZyv4E",
+  apiKey: "AIzaSyB5KYAd3mdYB4GK9sM_ZthVSKIudYJBvTk",
 })(MapGps);
