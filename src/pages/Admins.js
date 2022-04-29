@@ -32,12 +32,24 @@ const Admins = () => {
   const [adminId, setAdminId] = useState(null);
   const dispatch = useDispatch();
   const { admins, msg, admin } = useSelector((state) => state.dataa);
+  let [search, setSearch] = useState("");
+  const [x, setWorkers] = useState();
 
   const { fName, email, ID, phoneNumber, age } = state;
 
   useEffect(() => {
     dispatch(loadAdmins());
-  }, [dispatch]);
+    const filteredRows = admins.filter((admin) => {
+      return (
+        admin.fName.toLowerCase().includes(search.toLowerCase()) ||
+        admin.email.toLowerCase().includes(search.toLowerCase()) ||
+        admin.age.toLowerCase().includes(search.toLowerCase()) ||
+        admin.ID.toLowerCase().includes(search.toLowerCase()) ||
+        admin.phoneNumber.toLowerCase().includes(search.toLowerCase())
+      );
+    });
+    setWorkers(filteredRows);
+  }, [dispatch, admins, search]);
 
   useEffect(() => {
     if (msg) {
@@ -87,6 +99,10 @@ const Admins = () => {
   const handleClick = (id) => {
     dispatch(loadProfile(id));
   };
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <>
       <h1 style={{ textAlign: "center", marginTop: "10px" }}>Admins List</h1>
@@ -162,11 +178,18 @@ const Admins = () => {
                   <th>Email</th>
                   <th>Phone Number</th>
                   <th>Age</th>
-                  <th>Action</th>
+                  <th>
+                    Action{" "}
+                    <input
+                      placeholder="search"
+                      type="text"
+                      onChange={handleSearch}
+                    ></input>
+                  </th>
                 </tr>
               </thead>
-              {admins &&
-                admins.map((item, index) => (
+              {x &&
+                x.map((item, index) => (
                   <tbody key={index}>
                     <tr>
                       <td>{index + 1}</td>

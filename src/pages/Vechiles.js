@@ -30,13 +30,22 @@ const Vehicles = () => {
   const [vehicleId, setVehicalId] = useState(null);
   const dispatch = useDispatch();
   const { vehicles, msg, vehicle } = useSelector((state) => state.datav);
+  const [x, setWorkers] = useState();
 
   const { type, model, year } = state;
+  let [search, setSearch] = useState("");
 
   useEffect(() => {
     dispatch(loadVehicles());
-  }, [dispatch]);
-
+    const filteredRows = vehicles.filter((vehicle) => {
+      return (
+        vehicle.type.toLowerCase().includes(search.toLowerCase()) ||
+        vehicle.model.toLowerCase().includes(search.toLowerCase()) ||
+        vehicle.year.toLowerCase().includes(search.toLowerCase())
+      );
+    });
+    setWorkers(filteredRows);
+  }, [dispatch, vehicles, search]);
   useEffect(() => {
     if (msg) {
       toast.success(msg);
@@ -83,6 +92,9 @@ const Vehicles = () => {
     dispatch(loadSingleVehicle(id));
     setVehicalId(id);
     setEditMode(true);
+  };
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
   };
   return (
     <>
@@ -136,11 +148,18 @@ const Vehicles = () => {
                   <th>Type</th>
                   <th>Model</th>
                   <th>Year</th>
-                  <th>Action</th>
+                  <th>
+                    Action {"    "}
+                    <input
+                      placeholder="search"
+                      type="text"
+                      onChange={handleSearch}
+                    ></input>
+                  </th>
                 </tr>
               </thead>
-              {vehicles &&
-                vehicles.map((item, index) => (
+              {x &&
+                x.map((item, index) => (
                   <tbody key={index}>
                     <tr>
                       <td>{index + 1}</td>
