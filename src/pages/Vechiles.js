@@ -8,6 +8,7 @@ import {
   ButtonGroup,
   Form,
 } from "react-bootstrap";
+import "./Workers.css";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
@@ -141,52 +142,54 @@ const Vehicles = () => {
             </Form>
           </Col>
           <Col md={5}>
-            <Table bordered hover>
-              <thead>
-                <tr>
-                  <th>No.</th>
-                  <th>Type</th>
-                  <th>Model</th>
-                  <th>Year</th>
-                  <th>
-                    Action {"    "}
-                    <input
-                      placeholder="search"
-                      type="text"
-                      onChange={handleSearch}
-                    ></input>
-                  </th>
-                </tr>
-              </thead>
-              {x &&
-                x.map((item, index) => (
-                  <tbody key={index}>
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>{item.type}</td>
-                      <td>{item.model}</td>
-                      <td>{item.year}</td>
-                      <td>
-                        <ButtonGroup>
-                          <Button
-                            style={{ marginRight: "5px" }}
-                            variant="danger"
-                            onClick={() => handleDelete(item._id)}
-                          >
-                            Delete
-                          </Button>
-                          <Button
-                            variant="success"
-                            onClick={() => handleUpdate(item._id)}
-                          >
-                            Update
-                          </Button>
-                        </ButtonGroup>
-                      </td>
-                    </tr>
-                  </tbody>
-                ))}
-            </Table>
+            <div className="ta">
+              <Table bordered hover>
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Type</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>
+                      Action {"    "}
+                      <input
+                        placeholder="search"
+                        type="text"
+                        onChange={handleSearch}
+                      ></input>
+                    </th>
+                  </tr>
+                </thead>
+                {x &&
+                  x.map((item, index) => (
+                    <tbody key={index}>
+                      <tr>
+                        <td>{index + 1}</td>
+                        <td>{item.type}</td>
+                        <td>{item.model}</td>
+                        <td>{item.year}</td>
+                        <td>
+                          <ButtonGroup>
+                            <Button
+                              style={{ marginRight: "5px" }}
+                              variant="danger"
+                              onClick={() => handleDelete(item._id)}
+                            >
+                              Delete
+                            </Button>
+                            <Button
+                              variant="success"
+                              onClick={() => handleUpdate(item._id)}
+                            >
+                              Update
+                            </Button>
+                          </ButtonGroup>
+                        </td>
+                      </tr>
+                    </tbody>
+                  ))}
+              </Table>
+            </div>
           </Col>
         </Row>
       </Container>

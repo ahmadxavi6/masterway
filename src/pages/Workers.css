@@ -1,0 +1,8 @@
+.ta{
+    height: 650px;
+    
+    font-size: 15px;
+    text-align: justify;
+    line-height: 19px;
+    overflow-y:auto;
+}

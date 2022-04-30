@@ -95,20 +95,21 @@ const Worker = () => {
           Phone Number: <Spacer amount={6} /> {worker.phoneNumber}
         </h6>
         <h6>
-          Gender: <Spacer amount={23} /> male
+          Gender: <Spacer amount={23} /> {worker.gender}
         </h6>
         <h6>
-          Driving License: <Spacer amount={5} /> Bus
+          Driving License: <Spacer amount={5} /> {worker.licen}
         </h6>
 
         <h6>
-          Adress: <Spacer amount={24} /> Beit-hanina
+          Adress: <Spacer amount={25} />
+          {worker.address}
         </h6>
         <h6>
-          Vehicle: <Spacer amount={23} /> Nissan
+          Vehicle: <Spacer amount={24} /> {worker.vehcile}
         </h6>
         <h6>
-          Age: <Spacer amount={31} /> {worker.age}
+          Age: <Spacer amount={32} /> {worker.age}
         </h6>
         <Link
           to={{
