@@ -18,6 +18,7 @@ import {
   loadProfile,
 } from "../redux/admins/actionsA";
 import { Link } from "react-router-dom";
+import "./Workers.css";
 
 const initialState = {
   fName: "",
@@ -169,70 +170,72 @@ const Admins = () => {
             </Form>
           </Col>
           <Col md={8}>
-            <Table bordered hover>
-              <thead>
-                <tr>
-                  <th>No.</th>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Phone Number</th>
-                  <th>Age</th>
-                  <th>
-                    Action{" "}
-                    <input
-                      placeholder="search"
-                      type="text"
-                      onChange={handleSearch}
-                    ></input>
-                  </th>
-                </tr>
-              </thead>
-              {x &&
-                x.map((item, index) => (
-                  <tbody key={index}>
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>{item.ID}</td>
-                      <td>{item.fName}</td>
-                      <td>{item.email}</td>
-                      <td>{item.phoneNumber}</td>
-                      <td>{item.age}</td>
+            <div className="ta">
+              <Table bordered hover>
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Age</th>
+                    <th>
+                      Action{" "}
+                      <input
+                        placeholder="search"
+                        type="text"
+                        onChange={handleSearch}
+                      ></input>
+                    </th>
+                  </tr>
+                </thead>
+                {x &&
+                  x.map((item, index) => (
+                    <tbody key={index}>
+                      <tr>
+                        <td>{index + 1}</td>
+                        <td>{item.ID}</td>
+                        <td>{item.fName}</td>
+                        <td>{item.email}</td>
+                        <td>{item.phoneNumber}</td>
+                        <td>{item.age}</td>
 
-                      <td>
-                        <ButtonGroup>
-                          <Button
-                            style={{ marginRight: "5px" }}
-                            variant="danger"
-                            onClick={() => handleDelete(item._id)}
-                          >
-                            Delete
-                          </Button>
-                          <Button
-                            variant="success"
-                            onClick={() => handleUpdate(item._id)}
-                          >
-                            Update
-                          </Button>
-                          <Link
-                            to={{
-                              pathname: `/admins/profile/${item._id}/`,
-                            }}
-                          >
+                        <td>
+                          <ButtonGroup>
                             <Button
-                              variant="info"
-                              onClick={() => handleClick(item._id)}
-                              style={{ marginLeft: "5px" }}
+                              style={{ marginRight: "5px" }}
+                              variant="danger"
+                              onClick={() => handleDelete(item._id)}
                             >
-                              More
+                              Delete
                             </Button>
-                          </Link>
-                        </ButtonGroup>
-                      </td>
-                    </tr>
-                  </tbody>
-                ))}
-            </Table>
+                            <Button
+                              variant="success"
+                              onClick={() => handleUpdate(item._id)}
+                            >
+                              Update
+                            </Button>
+                            <Link
+                              to={{
+                                pathname: `/admins/profile/${item._id}/`,
+                              }}
+                            >
+                              <Button
+                                variant="info"
+                                onClick={() => handleClick(item._id)}
+                                style={{ marginLeft: "5px" }}
+                              >
+                                More
+                              </Button>
+                            </Link>
+                          </ButtonGroup>
+                        </td>
+                      </tr>
+                    </tbody>
+                  ))}
+              </Table>
+            </div>
           </Col>
         </Row>
       </Container>
