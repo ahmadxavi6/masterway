@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Table,
   Container,
@@ -106,6 +107,9 @@ const Vehicles = () => {
     if (e === "1") {
       return <ImIcons.ImCheckmark />;
     } else return <ImIcons.ImCross />;
+  };
+  const handleClick = (id) => {
+    dispatch(loadSingleVehicle(id));
   };
   return (
     <>
@@ -219,6 +223,19 @@ const Vehicles = () => {
                             >
                               Update
                             </Button>
+                            <Link
+                              to={{
+                                pathname: `/vehicles/${item._id}/`,
+                              }}
+                            >
+                              <Button
+                                variant="info"
+                                onClick={() => handleClick(item._id)}
+                                style={{ marginLeft: "5px" }}
+                              >
+                                More
+                              </Button>
+                            </Link>
                           </ButtonGroup>
                         </td>
                       </tr>
