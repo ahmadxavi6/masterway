@@ -102,14 +102,10 @@ const Trips = () => {
                   onChange={handlesChange}
                 >
                   <option value="OFF">OFF</option>
-                  <option value="8am-5pm">8am-5pm</option>
-                  <option value="9am-6pm">9am-6pm</option>
-                  <option value="10am-7pm">10am-7pm</option>
-                  <option value="11am-8pm">11am-8pm</option>
-                  <option value="12pm-9pm">12pm-9pm</option>
-                  <option value="1pm-10pm">1pm-10pm</option>
-                  <option value="2pm-11pm">2pm-11pm</option>
-                  <option value="3pm-12am">3pm-12am</option>{" "}
+                  <option value="8:00-16:00">8:00-16:00</option>
+                  <option value="16:00-00:00">16:00-00:00</option>
+                  <option value="00:00-8:00">00:00-8:00</option>
+                  <option value="ALL Day">ALL Day</option>{" "}
                 </Form.Select>
               </Form.Group>
               <Form.Group>
@@ -128,14 +124,10 @@ const Trips = () => {
                   onChange={handlesChange}
                 >
                   <option value="OFF">OFF</option>
-                  <option value="8am-5pm">8am-5pm</option>
-                  <option value="9am-6pm">9am-6pm</option>
-                  <option value="10am-7pm">10am-7pm</option>
-                  <option value="11am-8pm">11am-8pm</option>
-                  <option value="12pm-9pm">12pm-9pm</option>
-                  <option value="1pm-10pm">1pm-10pm</option>
-                  <option value="2pm-11pm">2pm-11pm</option>
-                  <option value="3pm-12am">3pm-12am</option>{" "}
+                  <option value="8:00-16:00">8:00-16:00</option>
+                  <option value="16:00-00:00">16:00-00:00</option>
+                  <option value="00:00-8:00">00:00-8:00</option>
+                  <option value="ALL Day">ALL Day</option>{" "}
                 </Form.Select>
               </Form.Group>
               <Form.Group>
@@ -154,14 +146,10 @@ const Trips = () => {
                   onChange={handlesChange}
                 >
                   <option value="OFF">OFF</option>
-                  <option value="8am-5pm">8am-5pm</option>
-                  <option value="9am-6pm">9am-6pm</option>
-                  <option value="10am-7pm">10am-7pm</option>
-                  <option value="11am-8pm">11am-8pm</option>
-                  <option value="12pm-9pm">12pm-9pm</option>
-                  <option value="1pm-10pm">1pm-10pm</option>
-                  <option value="2pm-11pm">2pm-11pm</option>
-                  <option value="3pm-12am">3pm-12am</option>{" "}
+                  <option value="8:00-16:00">8:00-16:00</option>
+                  <option value="16:00-00:00">16:00-00:00</option>
+                  <option value="00:00-8:00">00:00-8:00</option>
+                  <option value="ALL Day">ALL Day</option>{" "}
                 </Form.Select>
               </Form.Group>
               <Form.Group>
@@ -180,14 +168,10 @@ const Trips = () => {
                   onChange={handlesChange}
                 >
                   <option value="OFF">OFF</option>
-                  <option value="8am-5pm">8am-5pm</option>
-                  <option value="9am-6pm">9am-6pm</option>
-                  <option value="10am-7pm">10am-7pm</option>
-                  <option value="11am-8pm">11am-8pm</option>
-                  <option value="12pm-9pm">12pm-9pm</option>
-                  <option value="1pm-10pm">1pm-10pm</option>
-                  <option value="2pm-11pm">2pm-11pm</option>
-                  <option value="3pm-12am">3pm-12am</option>{" "}
+                  <option value="8:00-16:00">8:00-16:00</option>
+                  <option value="16:00-00:00">16:00-00:00</option>
+                  <option value="00:00-8:00">00:00-8:00</option>
+                  <option value="ALL Day">ALL Day</option>{" "}
                 </Form.Select>
               </Form.Group>
               <Form.Group>
@@ -206,14 +190,10 @@ const Trips = () => {
                   onChange={handlesChange}
                 >
                   <option value="OFF">OFF</option>
-                  <option value="8am-5pm">8am-5pm</option>
-                  <option value="9am-6pm">9am-6pm</option>
-                  <option value="10am-7pm">10am-7pm</option>
-                  <option value="11am-8pm">11am-8pm</option>
-                  <option value="12pm-9pm">12pm-9pm</option>
-                  <option value="1pm-10pm">1pm-10pm</option>
-                  <option value="2pm-11pm">2pm-11pm</option>
-                  <option value="3pm-12am">3pm-12am</option>{" "}
+                  <option value="8:00-16:00">8:00-16:00</option>
+                  <option value="16:00-00:00">16:00-00:00</option>
+                  <option value="00:00-8:00">00:00-8:00</option>
+                  <option value="ALL Day">ALL Day</option>{" "}
                 </Form.Select>
               </Form.Group>
               <Form.Group>
@@ -232,14 +212,10 @@ const Trips = () => {
                   onChange={handlesChange}
                 >
                   <option value="OFF">OFF</option>
-                  <option value="8am-5pm">8am-5pm</option>
-                  <option value="9am-6pm">9am-6pm</option>
-                  <option value="10am-7pm">10am-7pm</option>
-                  <option value="11am-8pm">11am-8pm</option>
-                  <option value="12pm-9pm">12pm-9pm</option>
-                  <option value="1pm-10pm">1pm-10pm</option>
-                  <option value="2pm-11pm">2pm-11pm</option>
-                  <option value="3pm-12am">3pm-12am</option>{" "}
+                  <option value="8:00-16:00">8:00-16:00</option>
+                  <option value="16:00-00:00">16:00-00:00</option>
+                  <option value="00:00-8:00">00:00-8:00</option>
+                  <option value="ALL Day">ALL Day</option>{" "}
                 </Form.Select>
               </Form.Group>
               <Form.Group>
@@ -258,14 +234,10 @@ const Trips = () => {
                   onChange={handlesChange}
                 >
                   <option value="OFF">OFF</option>
-                  <option value="8am-5pm">8am-5pm</option>
-                  <option value="9am-6pm">9am-6pm</option>
-                  <option value="10am-7pm">10am-7pm</option>
-                  <option value="11am-8pm">11am-8pm</option>
-                  <option value="12pm-9pm">12pm-9pm</option>
-                  <option value="1pm-10pm">1pm-10pm</option>
-                  <option value="2pm-11pm">2pm-11pm</option>
-                  <option value="3pm-12am">3pm-12am</option>{" "}
+                  <option value="8:00-16:00">8:00-16:00</option>
+                  <option value="16:00-00:00">16:00-00:00</option>
+                  <option value="00:00-8:00">00:00-8:00</option>
+                  <option value="ALL Day">ALL Day</option>{" "}
                 </Form.Select>
               </Form.Group>
               <Form.Group>
