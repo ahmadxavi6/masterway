@@ -34,27 +34,34 @@ function FixUpdate() {
   };
   console.log(location.fix);
   const handleClick = async () => {
-    user.description = location.fix.description;
-    user.from = location.fix.from;
-    user.problem = location.fix.problem;
-    user.price = price;
-    user.to = to;
-    await axios
-      .patch(`${API}/fixupdate/${use}`, user)
-      .then((resp) => {
-        toast.success("Problem Closed successfully");
-        setTimeout(() => {
-          window.location.assign(
-            `https://vigorous-meninsky-e72496.netlify.app/fix/${use}/`
-          );
-        }, 1500);
-      })
-      .catch((err) => toast.error("There is a problem"));
+    if (!price || !to) {
+      toast.error("Please fill all input field");
+    } else {
+      user.description = location.fix.description;
+      user.from = location.fix.from;
+      user.problem = location.fix.problem;
+      user.price = price;
+      user.to = to;
+      await axios
+        .patch(`${API}/fixupdate/${use}`, user)
+        .then((resp) => {
+          toast.success("Problem Closed successfully");
+          setTimeout(() => {
+            window.location.assign(
+              `https://vigorous-meninsky-e72496.netlify.app/fix/${use}/`
+            );
+          }, 1500);
+        })
+        .catch((err) => toast.error("There is a problem"));
+    }
   };
 
   return (
     <>
       {" "}
+      <h1 style={{ textAlign: "center", marginTop: "10px" }}>
+        Update problem status
+      </h1>
       <Container style={{ marginTop: "70px" }}>
         <Row>
           <Col md={4}>
@@ -80,7 +87,7 @@ function FixUpdate() {
                 </Form.Label>
                 <Form.Control
                   type="date"
-                  placeholder="To"
+                  placeholder="Fixed date"
                   name="to"
                   value={to || ""}
                   onChange={handleChange}
@@ -92,7 +99,7 @@ function FixUpdate() {
                 </Form.Label>
                 <Form.Control
                   type="number"
-                  placeholder="From"
+                  placeholder="Price"
                   name="price"
                   value={price || ""}
                   onChange={handleChange}
