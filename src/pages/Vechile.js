@@ -106,6 +106,15 @@ const Vehcile = () => {
         <h6>
           Insurance: <Spacer amount={19} /> {vehcile.insu}
         </h6>
+        <Link
+          to={{
+            pathname: `/fix/${vehcile._id}/`,
+          }}
+        >
+          <Button variant="info" style={{ marginLeft: "5px" }}>
+            Fix History
+          </Button>
+        </Link>
       </div>
     </>
   );

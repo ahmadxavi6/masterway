@@ -18,6 +18,8 @@ import Trips from "./pages/Trips";
 import Admin from "./pages/Admin";
 import WorkersHours from "./pages/WorkersHours";
 import Vehcile from "./pages/Vechile";
+import Fix from "./pages/Fix";
+import FixUpdate from "./pages/FixUpdate";
 
 function App() {
   const [token, setToken] = useState();
@@ -40,6 +42,8 @@ function App() {
           <Route path="/incomeAndOutcome" component={IncomeAndOutcome}></Route>
           <Route path="/workersHours/" component={WorkersHours}></Route>
           <Route path="/schedule" component={Schedule}></Route>
+          <Route path="/fix/" component={Fix}></Route>
+          <Route path="/fixupdate/" component={FixUpdate}></Route>
 
           <Route path="/vehicles/" component={Vehcile}></Route>
           <Route path="/map" component={MapGps}></Route>
