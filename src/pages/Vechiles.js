@@ -104,7 +104,18 @@ const Vehicles = () => {
     setSearch(e.target.value);
   };
   const getIcon = (e) => {
-    if (e === "1") {
+    let h = 1;
+    if (e.repairs.length >= 1) {
+      for (let i = 0; i < e.repairs.length; i++) {
+        if (e.repairs[i].status === "0") {
+          h = 0;
+          break;
+        } else {
+          h = 1;
+        }
+      }
+    }
+    if (h === 1) {
       return <ImIcons.ImCheckmark />;
     } else return <ImIcons.ImCross />;
   };
@@ -207,7 +218,7 @@ const Vehicles = () => {
                         <td>{item.year}</td>
                         <td>{item.lice}</td>
                         <td>{item.insu}</td>
-                        <td>{getIcon(item.status)}</td>
+                        <td>{getIcon(item)}</td>
                         <td>
                           <ButtonGroup>
                             <Button
