@@ -71,81 +71,83 @@ function WorkersHours() {
       <Container>
         <Row>
           <Col md={15}>
-            <Table bordered hover style={{ marginTop: "32px" }}>
-              <thead>
-                <tr>
-                  <th>
-                    Month:
-                    <Form.Select
-                      className="browser-default "
-                      name="Mo"
-                      style={{ position: "stick" }}
-                      onChange={handlesChange}
-                    >
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
-                      <option value="11">11</option>
-                      <option value="12">12</option>
-                    </Form.Select>
-                  </th>
+            <div className="ta">
+              <Table bordered hover style={{ marginTop: "32px" }}>
+                <thead>
+                  <tr>
+                    <th>
+                      Month:
+                      <Form.Select
+                        className="browser-default "
+                        name="Mo"
+                        style={{ position: "stick" }}
+                        onChange={handlesChange}
+                      >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                      </Form.Select>
+                    </th>
 
-                  <th>
-                    Year:
-                    <Form.Select
-                      className="browser-default "
-                      name="Ye"
-                      style={{ position: "stick" }}
-                      onChange={handlessChange}
-                    >
-                      <option value="2022">2022</option>
-                      <option value="2023">2023</option>
-                      <option value="2024">2024</option>
-                      <option value="2025">2025</option>
-                      <option value="2026">2026</option>
-                      <option value="2027">2027</option>
-                      <option value="2028">2028</option>
-                      <option value="2029">2029</option>
-                      <option value="2030">2030</option>{" "}
-                    </Form.Select>
-                  </th>
-                </tr>
-              </thead>
+                    <th>
+                      Year:
+                      <Form.Select
+                        className="browser-default "
+                        name="Ye"
+                        style={{ position: "stick" }}
+                        onChange={handlessChange}
+                      >
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                        <option value="2030">2030</option>{" "}
+                      </Form.Select>
+                    </th>
+                  </tr>
+                </thead>
 
-              {hours &&
-                hours.map((item, index) => (
-                  <tbody key={index}>
-                    <tr>
-                      <td>{item.day}</td>
-                      <td>
-                        {item.hour[0] +
-                          item.hour[1] +
-                          item.hour[2] +
-                          item.hour[3] +
-                          item.hour[4] +
-                          item.hour[5] +
-                          item.hour[6] +
-                          item.hour[7]}
-                      </td>
-                    </tr>
-                  </tbody>
-                ))}
-              <tfoot>
-                <tr>
-                  <h5>
-                    Total Hours in {Mo}/{Ye} : {hour1} hours {min} minutes {sec}{" "}
-                    seconds{" "}
-                  </h5>
-                </tr>
-              </tfoot>
-            </Table>
+                {hours &&
+                  hours.map((item, index) => (
+                    <tbody key={index}>
+                      <tr>
+                        <td>{item.day}</td>
+                        <td>
+                          {item.hour[0] +
+                            item.hour[1] +
+                            item.hour[2] +
+                            item.hour[3] +
+                            item.hour[4] +
+                            item.hour[5] +
+                            item.hour[6] +
+                            item.hour[7]}
+                        </td>
+                      </tr>
+                    </tbody>
+                  ))}
+                <tfoot>
+                  <tr>
+                    <h5>
+                      Total Hours in {Mo}/{Ye} : {hour1} hours {min} minutes{" "}
+                      {sec} seconds{" "}
+                    </h5>
+                  </tr>
+                </tfoot>
+              </Table>
+            </div>
           </Col>
         </Row>
       </Container>

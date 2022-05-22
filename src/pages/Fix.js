@@ -164,7 +164,7 @@ const Fix = () => {
             </Form>
           </Col>
           <Col md={8}>
-            <div className="tb">
+            <div className="ta">
               <Table bordered hover>
                 <thead>
                   <tr>

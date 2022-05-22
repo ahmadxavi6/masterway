@@ -2,7 +2,7 @@ import React from "react";
 import * as FaICons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io5";
-import * as BsIcons from "react-icons/bs";
+import * as RiIcons from "react-icons/ri";
 
 export const SideBarData = [
   {
@@ -24,9 +24,9 @@ export const SideBarData = [
     cName: "nav-text",
   },
   {
-    title: "IncomeAndOutcome",
+    title: "Budget",
     path: "/incomeAndOutcome",
-    icon: <BsIcons.BsCashCoin />,
+    icon: <FaICons.FaMoneyBillAlt />,
     cName: "nav-text",
   },
   {
@@ -38,11 +38,13 @@ export const SideBarData = [
   {
     title: "Admins",
     path: "/admins",
+    icon: <RiIcons.RiAdminFill />,
     cName: "nav-text",
   },
   {
     title: "Map",
     path: "/map",
+    icon: <FaICons.FaMap />,
     cName: "nav-text",
   },
 ];
