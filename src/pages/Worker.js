@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Spacer from "react-add-space";
 import "./Worker.css";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
 const API = "https://masterway.herokuapp.com";
@@ -15,9 +15,14 @@ const Worker = () => {
     phoneNumber: "",
     age: "",
   };
+
+  const [state, setState] = useState();
+
   const pathname = window.location.pathname;
   const use = pathname.slice(0, -1);
   const [worker, setWorker] = useState(initialState);
+  const [vehicles, setVehicles] = useState([]);
+
   useEffect(() => {
     async function getProfile() {
       await axios
@@ -27,11 +32,19 @@ const Worker = () => {
         })
         .catch((err) => toast.error("There is a problem"));
     }
+    async function getVehicles() {
+      axios
+        .get(`${API}/vehicles`)
+        .then((resp) => {
+          setVehicles(resp.data);
+        })
+        .catch((err) => toast.error("There is a problem"));
+    }
     getProfile();
+    getVehicles();
   }, [use]);
 
   const handleChange = (e) => {
-    console.log(e.target.files[0]);
     const fd = new FormData();
     fd.append("profilepic", e.target.files[0], e.target.files[0].name);
     axios
@@ -47,6 +60,18 @@ const Worker = () => {
         }, 1500);
       })
       .catch((err) => toast.error("There is problem to upload pic"));
+  };
+  const handlesChange = (e) => {
+    let { name, value } = e.target;
+    setState({ ...state, [name]: value });
+  };
+  const handleClick = async () => {
+    await axios
+      .put(`${API}/workervehicle/${worker._id}`, state)
+      .then((resp) => {
+        setWorker({ ...worker, vehcile: state.vehcile });
+      })
+      .catch((err) => toast.error("There is a problem"));
   };
   return (
     <>
@@ -120,6 +145,32 @@ const Worker = () => {
             Worker Hours
           </Button>
         </Link>
+      </div>
+
+      <div className="infoo" style={{ marginTop: "35px" }} elevation={2}>
+        <h4>Link a vehicle to {worker.fName}</h4>
+        <Form.Select
+          className="browser-default "
+          name="vehcile"
+          style={{ position: "stick" }}
+          onChange={handlesChange}
+        >
+          <option>Choose vehilce to link it to {worker.fName}</option>
+          {vehicles.map((item) => {
+            return (
+              <option key={item.index} value={item.index}>
+                {item.man} {item.model} {item.year}
+              </option>
+            );
+          })}
+        </Form.Select>
+        <Button
+          variant="success"
+          style={{ marginLeft: "170px", marginTop: "5px", marginBottom: "5px" }}
+          onClick={handleClick}
+        >
+          Link Vechile
+        </Button>
       </div>
     </>
   );

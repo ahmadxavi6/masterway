@@ -52,7 +52,9 @@ class MapGps extends Component {
             lat: item.location.Lati,
             lng: item.location.Long,
           }}
-          onClick={() => toast.success(item.fName)}
+          onClick={() => {
+            toast.success(item.vehcile + " " + "(" + item.fName + ")");
+          }}
         />
       );
     });
