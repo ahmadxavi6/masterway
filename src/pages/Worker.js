@@ -47,6 +47,7 @@ const Worker = () => {
   const handleChange = (e) => {
     const fd = new FormData();
     fd.append("profilepic", e.target.files[0], e.target.files[0].name);
+
     axios
       .post(`${API}/workers/profilepic/${worker._id}`, fd, {
         headers: {
@@ -143,6 +144,15 @@ const Worker = () => {
         >
           <Button variant="info" style={{ marginLeft: "5px" }}>
             Worker Hours
+          </Button>
+        </Link>
+        <Link
+          to={{
+            pathname: `/hoursreport/${worker._id}/`,
+          }}
+        >
+          <Button variant="info" style={{ marginLeft: "5px" }}>
+            Hour Reports
           </Button>
         </Link>
       </div>
