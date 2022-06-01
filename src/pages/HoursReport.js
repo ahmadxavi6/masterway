@@ -71,7 +71,7 @@ function HoursReport() {
       .patch(`${API}${use}`, useer)
       .then((resp) => {
         setArr(resp.data);
-        toast.success("Hour report has been uploaded successfully");
+        toast.success("Salary report has been uploaded successfully");
       })
       .catch((err) => toast.error("There is a problem in the server"));
     setLo(false);
@@ -118,7 +118,7 @@ function HoursReport() {
   return (
     <>
       <h1 style={{ textAlign: "center", marginTop: "10px" }}>
-        Worker Hours Reports
+        Worker Salary Reports
       </h1>
       <Container>
         <Row>
