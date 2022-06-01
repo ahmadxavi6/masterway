@@ -152,7 +152,7 @@ const Worker = () => {
           }}
         >
           <Button variant="info" style={{ marginLeft: "5px" }}>
-            Hour Reports
+            Salary Reports
           </Button>
         </Link>
       </div>
