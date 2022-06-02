@@ -147,7 +147,7 @@ function HoursReport() {
                         <option value="2030">2030</option>
                       </Form.Select>
                     </th>
-                    <th>Upload reports</th>
+                    <th>Upload reports (Accepted Fomrats : PNG or JPEG)</th>
                     <th>View Report</th>
                   </tr>
                 </thead>
@@ -158,6 +158,7 @@ function HoursReport() {
                       <input
                         type="file"
                         name="jan"
+                        accept="image/png, image/gif, image/jpeg"
                         onChange={handleClick}
                       ></input>
 
@@ -183,6 +184,7 @@ function HoursReport() {
                       <input
                         type="file"
                         name="feb"
+                        accept="image/png, image/gif, image/jpeg"
                         onChange={handleClick}
                       ></input>
 
@@ -208,6 +210,7 @@ function HoursReport() {
                       <input
                         type="file"
                         name="mar"
+                        accept="image/png, image/gif, image/jpeg"
                         onChange={handleClick}
                       ></input>
 
@@ -233,6 +236,7 @@ function HoursReport() {
                       <input
                         type="file"
                         name="apr"
+                        accept="image/png, image/gif, image/jpeg"
                         onChange={handleClick}
                       ></input>
 
@@ -258,6 +262,7 @@ function HoursReport() {
                       <input
                         type="file"
                         name="may"
+                        accept="image/png, image/gif, image/jpeg"
                         onChange={handleClick}
                       ></input>
 
@@ -283,6 +288,7 @@ function HoursReport() {
                       <input
                         type="file"
                         name="jun"
+                        accept="image/png, image/gif, image/jpeg"
                         onChange={handleClick}
                       ></input>
 
@@ -308,6 +314,7 @@ function HoursReport() {
                       <input
                         type="file"
                         name="jul"
+                        accept="image/png, image/gif, image/jpeg"
                         onChange={handleClick}
                       ></input>
 
@@ -333,6 +340,7 @@ function HoursReport() {
                       <input
                         type="file"
                         name="aug"
+                        accept="image/png, image/gif, image/jpeg"
                         onChange={handleClick}
                       ></input>
 
@@ -358,6 +366,7 @@ function HoursReport() {
                       <input
                         type="file"
                         name="sep"
+                        accept="image/png, image/gif, image/jpeg"
                         onChange={handleClick}
                       ></input>
 
@@ -383,6 +392,7 @@ function HoursReport() {
                       <input
                         type="file"
                         name="oct"
+                        accept="image/png, image/gif, image/jpeg"
                         onChange={handleClick}
                       ></input>
 
@@ -408,6 +418,7 @@ function HoursReport() {
                       <input
                         type="file"
                         name="nov"
+                        accept="image/png, image/gif, image/jpeg"
                         onChange={handleClick}
                       ></input>
 
@@ -433,6 +444,7 @@ function HoursReport() {
                       <input
                         type="file"
                         name="dec"
+                        accept="image/png, image/gif, image/jpeg"
                         onChange={handleClick}
                       ></input>
 
