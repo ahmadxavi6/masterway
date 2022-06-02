@@ -11,6 +11,10 @@
   font-size: 2rem;
   background-color: none;
 }
+.buttoninnav{
+  float: right;
+  margin-left:95%;
+}
 .nav-menu {
   background-color: #060b26;
   width: 250px;

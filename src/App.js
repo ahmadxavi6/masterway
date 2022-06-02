@@ -21,6 +21,7 @@ import Vehcile from "./pages/Vechile";
 import Fix from "./pages/Fix";
 import FixUpdate from "./pages/FixUpdate";
 import HoursReport from "./pages/HoursReport";
+import PasswordRe from "./pages/PasswordRe";
 /// if thers no token it will go to login page if there is atoken it will go the webapp
 function App() {
   const [token, setToken] = useState();
@@ -42,6 +43,7 @@ function App() {
           <Route path="/admins/profile/" component={Admin}></Route>
 
           <Route path="/workersHours/" component={WorkersHours}></Route>
+          <Route path="/passwordre/" component={PasswordRe}></Route>
           <Route path="/hoursreport/" component={HoursReport}></Route>
           <Route path="/schedule" component={Schedule}></Route>
           <Route path="/fix/" component={Fix}></Route>
