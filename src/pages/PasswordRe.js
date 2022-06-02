@@ -5,20 +5,21 @@ import { toast } from "react-toastify";
 import { Spinner } from "react-bootstrap";
 const API = "https://masterway.herokuapp.com/";
 /// reset password page
-function Passwordreset() {
+function PasswordRe() {
+  var x = sessionStorage["user"];
+  const id = x.slice("8", "32");
+
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
-    const id = window.location.pathname;
     e.preventDefault();
     setLoading(true);
     const user = { password };
     if (user.password !== "") {
       // send the username and password to the server
       await axios
-        .post(`${API}${id}`, user)
+        .post(`${API}/resetpassword/${id}`, user)
         .then((resp) => {
           toast.success("Password has changed");
-          window.location.assign("/");
           document.getElementById("password1").value = "";
         })
         .catch((err) => console.log("Email not Found in Database"));
@@ -74,4 +75,4 @@ function Passwordreset() {
   );
 }
 
-export default Passwordreset;
+export default PasswordRe;
