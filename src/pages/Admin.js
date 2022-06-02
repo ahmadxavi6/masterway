@@ -4,7 +4,7 @@ import "./Worker.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 const API = "https://masterway.herokuapp.com/";
-
+/// admin page that shows info and other stuff
 const Admin = () => {
   const initialState = {
     profilepic: "",
@@ -16,6 +16,7 @@ const Admin = () => {
   const pathname = window.location.pathname;
   const use = pathname.slice(0, -1);
   const [admin, setAdmin] = useState(initialState);
+  /// get the admin info from the database
   useEffect(() => {
     async function getProfile() {
       await axios
@@ -27,7 +28,7 @@ const Admin = () => {
     }
     getProfile();
   }, [use]);
-
+  /// upload image of the admin to database
   const handleChange = (e) => {
     const fd = new FormData();
     fd.append("profilepic", e.target.files[0], e.target.files[0].name);

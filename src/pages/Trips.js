@@ -22,7 +22,7 @@ const initialState = {
   Fri: "",
   Sat: "",
 };
-
+/// add worker shift and the info of the shifts
 const Trips = () => {
   const { worker } = useLocation();
 

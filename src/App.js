@@ -2,7 +2,7 @@ import "./App.css";
 import SideBar from "./components/SideBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import IncomeAndOutcome from "./pages/IncomeAndOutcome";
+
 import Vechiles from "./pages/Vechiles";
 import Workers from "./pages/Workers";
 import Worker from "./pages/Worker";
@@ -21,7 +21,7 @@ import Vehcile from "./pages/Vechile";
 import Fix from "./pages/Fix";
 import FixUpdate from "./pages/FixUpdate";
 import HoursReport from "./pages/HoursReport";
-
+/// if thers no token it will go to login page if there is atoken it will go the webapp
 function App() {
   const [token, setToken] = useState();
   if (!token) {
@@ -40,7 +40,7 @@ function App() {
           <Route exact path="/workers" component={Workers}></Route>
           <Route path="/workers/profile/" component={Worker}></Route>
           <Route path="/admins/profile/" component={Admin}></Route>
-          <Route path="/incomeAndOutcome" component={IncomeAndOutcome}></Route>
+
           <Route path="/workersHours/" component={WorkersHours}></Route>
           <Route path="/hoursreport/" component={HoursReport}></Route>
           <Route path="/schedule" component={Schedule}></Route>

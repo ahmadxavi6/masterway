@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Passwordreset from "./Passwordreset";
 import { toast, ToastContainer } from "react-toastify";
 const API = "https://masterway.herokuapp.com/";
-
+/// login page
 export default function Login({ setToken }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,6 +25,7 @@ export default function Login({ setToken }) {
       setToken(foundUser.token);
     }
   }, [setToken]);
+  /// empty the inpust after putting wrong pass
   const rest = () => {
     setLoading(false);
     toast.error("Wrong email or Wrong password");

@@ -2,7 +2,7 @@ import * as types from "./actionTypes";
 import axios from "axios";
 
 const API = "https://masterway.herokuapp.com";
-
+/// workers fucntion
 const getWorkers = (workers) => ({
   type: types.GET_WORKERS,
   payload: workers,
@@ -30,7 +30,7 @@ const workerUpdate = (msg) => ({
   type: types.UPDATE_WORKER,
   payload: msg,
 });
-
+/// get all workers
 export const loadWorkers = () => {
   return function (dispatch) {
     axios
@@ -39,7 +39,7 @@ export const loadWorkers = () => {
       .catch((err) => console.log(err));
   };
 };
-
+/// get worker profile
 export const loadProfile = (id) => {
   return function (dispatch) {
     axios
@@ -48,7 +48,7 @@ export const loadProfile = (id) => {
       .catch((err) => console.log(err));
   };
 };
-
+/// add worker
 export const addWorker = (worker) => {
   return function (dispatch) {
     axios
@@ -60,7 +60,7 @@ export const addWorker = (worker) => {
       .catch((err) => console.log(err));
   };
 };
-
+/// remove worker
 export const deleteWorker = (id) => {
   return function (dispatch) {
     axios
@@ -72,7 +72,7 @@ export const deleteWorker = (id) => {
       .catch((err) => console.log(err));
   };
 };
-
+//// get single worker
 export const loadSingleWorker = (id) => {
   return function (dispatch) {
     axios
@@ -83,7 +83,7 @@ export const loadSingleWorker = (id) => {
       .catch((err) => console.log(err));
   };
 };
-
+/// update worker
 export const updateWorker = (user, id) => {
   return function (dispatch) {
     axios

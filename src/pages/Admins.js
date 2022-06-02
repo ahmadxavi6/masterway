@@ -27,6 +27,7 @@ const initialState = {
   phoneNumber: "",
   age: "",
 };
+//// page contains the admins
 const Admins = () => {
   const [state, setState] = useState(initialState);
   const [editMode, setEditMode] = useState(false);
@@ -37,7 +38,7 @@ const Admins = () => {
   const [x, setWorkers] = useState();
 
   const { fName, email, ID, phoneNumber, age } = state;
-
+  /// get the admins and put them in table
   useEffect(() => {
     dispatch(loadAdmins());
     const filteredRows = admins.filter((admin) => {
@@ -68,7 +69,7 @@ const Admins = () => {
     let { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
-
+  /// submit the form to add or update admin
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!fName || !email || !ID || !phoneNumber || !age) {
@@ -85,13 +86,13 @@ const Admins = () => {
       }
     }
   };
-
+  /// delete admin
   const handleDelete = (id) => {
     if (window.confirm("Are you sure that you wanted to delete that admin ?")) {
       dispatch(deleteAdmin(id));
     }
   };
-
+  /// update admin
   const handleUpdate = (id) => {
     dispatch(loadProfile(id));
     setAdminId(id);

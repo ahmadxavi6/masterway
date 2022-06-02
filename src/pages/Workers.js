@@ -30,6 +30,7 @@ const initialState = {
   gender: "",
   licen: "",
 };
+/// workers page
 const Workers = () => {
   const [state, setState] = useState(initialState);
   const [editMode, setEditMode] = useState(false);
@@ -40,7 +41,7 @@ const Workers = () => {
 
   const { fName, email, phoneNumber, age, ID, address, gender, licen } = state;
   let [search, setSearch] = useState("");
-
+  /// get workers and put them on the table
   useEffect(() => {
     dispatch(loadWorkers());
     const filteredRows = workers.filter((worker) => {
@@ -72,7 +73,7 @@ const Workers = () => {
     setState({ ...state, [name]: value });
     console.log(state);
   };
-
+  ///handle add or update worker
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -114,7 +115,7 @@ const Workers = () => {
       }
     }
   };
-
+  ///handle detele worker
   const handleDelete = (id) => {
     if (
       window.confirm("Are you sure that you wanted to delete that worker ?")
@@ -122,7 +123,7 @@ const Workers = () => {
       dispatch(deleteWorker(id));
     }
   };
-
+  /// update worker
   const handleUpdate = (id) => {
     dispatch(loadProfile(id));
     setWorkerId(id);

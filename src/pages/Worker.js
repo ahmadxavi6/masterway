@@ -6,7 +6,7 @@ import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
 const API = "https://masterway.herokuapp.com";
-
+/// worker profile page
 const Worker = () => {
   const initialState = {
     profilepic: "",
@@ -22,7 +22,7 @@ const Worker = () => {
   const use = pathname.slice(0, -1);
   const [worker, setWorker] = useState(initialState);
   const [vehicles, setVehicles] = useState([]);
-
+  /// get worker info and profile picture
   useEffect(() => {
     async function getProfile() {
       await axios
@@ -43,7 +43,7 @@ const Worker = () => {
     getProfile();
     getVehicles();
   }, [use]);
-
+  /// upload profile picture to the wokrer
   const handleChange = (e) => {
     const fd = new FormData();
     fd.append("profilepic", e.target.files[0], e.target.files[0].name);
@@ -66,6 +66,7 @@ const Worker = () => {
     let { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
+  /// link vehicle to the worker
   const handleClick = async () => {
     await axios
       .put(`${API}/workervehicle/${worker._id}`, state)

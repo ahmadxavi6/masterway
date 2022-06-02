@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { Container, Table, Row, Col, Form } from "react-bootstrap";
 const API = "https://masterway.herokuapp.com";
-
+/// worker hours that he did in selected year and month
 function WorkersHours() {
   const init = [{ hour: "", day: "" }];
   const [hours, setHours] = useState(init);
@@ -29,7 +29,7 @@ function WorkersHours() {
   let tempsec = 0;
   let tempmin = 0;
   let temphour = 0;
-
+  /// change the hours from string to int and additon them to all hours did in the month
   for (let i = 0; i < hours.length; i++) {
     tempsec =
       tempsec + parseInt(hours[i].hour[6]) * 10 + parseInt(hours[i].hour[7]);
@@ -49,7 +49,7 @@ function WorkersHours() {
   }
   min = tempmin;
   hour1 = temphour;
-
+  /// get hours of the worker did in selected month and year
   useEffect(() => {
     const getHours = async () => {
       let x = "/" + Mo + "/" + Ye;

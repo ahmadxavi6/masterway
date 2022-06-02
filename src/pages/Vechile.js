@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
 const API = "https://masterway.herokuapp.com";
-
+/// vehcile page the contain picture and info fo the car and more stuff
 const Vehcile = () => {
   const initialState = {
     man: "",
@@ -18,6 +18,7 @@ const Vehcile = () => {
   const pathname = window.location.pathname;
   const use = pathname.slice(0, -1);
   const [vehcile, setVehcile] = useState(initialState);
+  /// get the vehilce info
   useEffect(() => {
     async function getProfile() {
       await axios
@@ -33,7 +34,7 @@ const Vehcile = () => {
     }
     getProfile();
   }, [use]);
-
+  /// upload vehicle picture
   const handleChange = (e) => {
     console.log(e.target.files[0]);
     const fd = new FormData();
