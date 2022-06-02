@@ -1,5 +1,5 @@
 import React from "react";
-
+/// home page
 function Home() {
   const current = new Date();
   const date = `${current.getDate()}/${

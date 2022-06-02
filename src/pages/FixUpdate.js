@@ -14,6 +14,7 @@ const initialStateV = {
   from: "",
   problem: "",
 };
+/// update vehicle fix report
 function FixUpdate() {
   const location = useLocation();
   const pathname = window.location.pathname;
@@ -33,6 +34,7 @@ function FixUpdate() {
     setState({ ...state, [name]: value });
   };
   console.log(location.fix);
+  /// handle submit of updating the fix report
   const handleClick = async () => {
     if (!price || !to) {
       toast.error("Please fill all input field");

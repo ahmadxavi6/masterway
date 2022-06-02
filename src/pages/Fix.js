@@ -21,6 +21,7 @@ const initialStateV = {
   from: "",
   description: "",
 };
+/// page that contains all problem of vehicle
 const Fix = () => {
   const { vehicle } = useSelector((state) => state.datav);
   const [state, setState] = useState(initialStateV);
@@ -37,7 +38,7 @@ const Fix = () => {
   const pathname = window.location.pathname;
   const use = pathname.slice(5, -1);
   const { problem, from, description } = state;
-
+  /// get the fix reports from the database
   useEffect(() => {
     async function getFix() {
       await axios
@@ -75,6 +76,7 @@ const Fix = () => {
     let { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
+  /// handle add or update fix
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!problem || !from || !description) {
@@ -94,6 +96,7 @@ const Fix = () => {
       setState({ problem: "", from: "", description: "" });
     }
   };
+  /// delete fix
   const handleDelete = async (id) => {
     if (
       window.confirm("Are you sure that you wanted to delete that problem ?")

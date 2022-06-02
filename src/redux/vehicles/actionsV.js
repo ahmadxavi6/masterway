@@ -2,7 +2,7 @@ import * as types from "./actionTypesV";
 import axios from "axios";
 
 const API = "https://masterway.herokuapp.com";
-
+/// vehicles fucntions
 const getVehicles = (vehicles) => ({
   type: types.GET_VEHICLES,
   payloadV: vehicles,
@@ -27,7 +27,7 @@ const vehicleUpdate = (msg) => ({
   type: types.UPDATE_VEHICLE,
   payloadV: msg,
 });
-
+/// get all vehicles
 export const loadVehicles = () => {
   return function (dispatch) {
     axios
@@ -36,7 +36,7 @@ export const loadVehicles = () => {
       .catch((err) => console.log(err));
   };
 };
-
+///add vehilce
 export const addVehicle = (vehicle) => {
   return function (dispatch) {
     axios
@@ -48,7 +48,7 @@ export const addVehicle = (vehicle) => {
       .catch((err) => console.log(err));
   };
 };
-
+/// delete vehicle
 export const deleteVehicle = (id) => {
   return function (dispatch) {
     axios
@@ -60,7 +60,7 @@ export const deleteVehicle = (id) => {
       .catch((err) => console.log(err));
   };
 };
-
+//// get vehicle
 export const loadSingleVehicle = (id) => {
   return function (dispatch) {
     axios
@@ -71,7 +71,7 @@ export const loadSingleVehicle = (id) => {
       .catch((err) => console.log(err));
   };
 };
-
+/// update vehicle
 export const updateVehicle = (user, id) => {
   return function (dispatch) {
     axios

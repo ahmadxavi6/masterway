@@ -8,7 +8,7 @@ const mapStyles = {
   width: "100%",
   height: "100%",
 };
-
+/// map page that showing vehilces locations
 class MapGps extends Component {
   componentDidMount() {
     axios
@@ -41,7 +41,7 @@ class MapGps extends Component {
 
     this.state = { stores: [] };
   }
-
+  /// dispaly markers of the vehicles location
   displayMarkers = () => {
     return this.state.stores.map((item, index) => {
       return (

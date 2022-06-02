@@ -13,7 +13,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const API = "https://masterway.herokuapp.com";
-
+/// salary reports that worker did in selected month and year
 function HoursReport() {
   const [Ye, setYe] = useState("None");
   const [Mo, setMo] = useState("1");
@@ -28,7 +28,7 @@ function HoursReport() {
   let useer = {
     date: "",
   };
-
+  /// handle  salary report
   const handlessChange = (e) => {
     setYe(e.target.value);
   };
@@ -54,6 +54,7 @@ function HoursReport() {
     setReport(base64);
     setMo(e.target.name);
   };
+  /// upload ssalary report
   const handlesClick = async () => {
     setLo(true);
     user.file = report;
@@ -76,7 +77,7 @@ function HoursReport() {
       .catch((err) => toast.error("There is a problem in the server"));
     setLo(false);
   };
-
+  /// downlaod the uploaded salary reports
   const getFile = (e) => {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].date[5] + arr[i].date[6] + arr[i].date[7] === e) {
@@ -90,6 +91,7 @@ function HoursReport() {
       }
     }
   };
+  /// get the reports based on the year seleceted
   useEffect(() => {
     const getReports = async () => {
       useer.date = Ye;

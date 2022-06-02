@@ -28,7 +28,7 @@ const initialStateV = {
   lice: "",
   insu: "",
 };
-
+/// vehicles page
 const Vehicles = () => {
   const [state, setState] = useState(initialStateV);
   const [editMode, setEditMode] = useState(false);
@@ -39,7 +39,7 @@ const Vehicles = () => {
 
   const { man, model, year, lice, insu } = state;
   let [search, setSearch] = useState("");
-
+  /// get the vehicles and put them in the table
   useEffect(() => {
     dispatch(loadVehicles());
     const filteredRows = vehicles.filter((vehicle) => {
@@ -69,7 +69,7 @@ const Vehicles = () => {
     let { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
-
+  /// handle add or update vehicle
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!man || !model || !year || !lice || !insu) {
@@ -86,7 +86,7 @@ const Vehicles = () => {
       }
     }
   };
-
+  /// delete vehicle
   const handleDelete = (id) => {
     if (
       window.confirm("Are you sure that you wanted to delete that vehicle ?")
@@ -94,7 +94,7 @@ const Vehicles = () => {
       dispatch(deleteVehicle(id));
     }
   };
-
+  /// update vehicle
   const handleUpdate = (id) => {
     dispatch(loadSingleVehicle(id));
     setVehicalId(id);
@@ -103,6 +103,7 @@ const Vehicles = () => {
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
+  /// get the icon check or cross based on the fix reports
   const getIcon = (e) => {
     let h = 1;
     if (e.repairs.length >= 1) {

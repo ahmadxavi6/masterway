@@ -4,8 +4,10 @@ import { Spinner } from "react-bootstrap";
 import { useState } from "react";
 import { toast } from "react-toastify";
 const API = "https://masterway.herokuapp.com/";
+/// forget password page
 function Forgetmypass() {
   const [loading, setLoading] = useState(false);
+  /// send reset paswword email
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

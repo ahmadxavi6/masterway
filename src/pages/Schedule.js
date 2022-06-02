@@ -11,11 +11,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "./Workers.css";
 const API = "https://masterway.herokuapp.com/";
+/// page of the schedule making and send shift
 const Schedule = () => {
   const { workers } = useSelector((state) => state.dataw);
   const dispatch = useDispatch();
   const [x, setWorkers] = useState();
   let [search, setSearch] = useState("");
+  /// get the workers
   useEffect(() => {
     dispatch(loadWorkers());
     const filteredRows = workers.filter((worker) => {
@@ -27,6 +29,7 @@ const Schedule = () => {
   const handlesClick = (id) => {
     dispatch(loadProfile(id));
   };
+  ///add worker shift
   const handleCClick = async (id) => {
     dispatch(loadProfile(id));
     await axios

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { SideBarData } from "./SideBarData";
 import "./SideBar.css";
 import { IconContext } from "react-icons";
+/// side bar of the web
 function SideBar() {
   const [sidebar] = useState(true);
 

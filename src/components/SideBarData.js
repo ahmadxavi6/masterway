@@ -3,7 +3,7 @@ import * as FaICons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io5";
 import * as RiIcons from "react-icons/ri";
-
+/// the data in the sidebar
 export const SideBarData = [
   {
     title: "Home",
@@ -23,12 +23,7 @@ export const SideBarData = [
     icon: <FaICons.FaCarSide />,
     cName: "nav-text",
   },
-  {
-    title: "Budget",
-    path: "/incomeAndOutcome",
-    icon: <FaICons.FaMoneyBillAlt />,
-    cName: "nav-text",
-  },
+
   {
     title: "Schedule",
     path: "/schedule",

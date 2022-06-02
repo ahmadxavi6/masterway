@@ -1,16 +1,18 @@
 import * as types from "./actionTypesA";
 import axios from "axios";
-
+/// admins functions
 const API = "https://masterway.herokuapp.com";
 
 const getAdmins = (admins) => ({
   type: types.GET_ADMINS,
   payload: admins,
 });
+
 const getProfile = (admin) => ({
   type: types.LOAD_PROFILE,
   payload: admin,
 });
+
 export const getAdmin = (admin) => ({
   type: types.GET_SINGLE_ADMIN,
   payload: admin,
@@ -30,7 +32,7 @@ const adminUpdate = (msg) => ({
   type: types.UPDATE_ADMIN,
   payload: msg,
 });
-
+/// get all admins
 export const loadAdmins = () => {
   return function (dispatch) {
     axios
@@ -39,7 +41,7 @@ export const loadAdmins = () => {
       .catch((err) => console.log(err));
   };
 };
-
+/// get profile of admin
 export const loadProfile = (id) => {
   return function (dispatch) {
     axios
@@ -48,7 +50,7 @@ export const loadProfile = (id) => {
       .catch((err) => console.log(err));
   };
 };
-
+/// add admin
 export const addAdmin = (admin) => {
   return function (dispatch) {
     axios
@@ -60,7 +62,7 @@ export const addAdmin = (admin) => {
       .catch((err) => console.log(err));
   };
 };
-
+/// delete admin
 export const deleteAdmin = (id) => {
   return function (dispatch) {
     axios
@@ -72,7 +74,7 @@ export const deleteAdmin = (id) => {
       .catch((err) => console.log(err));
   };
 };
-
+/// get one admin
 export const loadSingleAdmin = (id) => {
   return function (dispatch) {
     axios
@@ -83,7 +85,7 @@ export const loadSingleAdmin = (id) => {
       .catch((err) => console.log(err));
   };
 };
-
+/// update admin
 export const updateAdmin = (user, id) => {
   return function (dispatch) {
     axios
