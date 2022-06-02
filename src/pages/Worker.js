@@ -71,6 +71,7 @@ const Worker = () => {
       .put(`${API}/workervehicle/${worker._id}`, state)
       .then((resp) => {
         setWorker({ ...worker, vehcile: state.vehcile });
+        toast.success("Vehicle has been linked successfully");
       })
       .catch((err) => toast.error("There is a problem"));
   };
