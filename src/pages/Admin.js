@@ -92,19 +92,7 @@ const Admin = () => {
         <h6>
           Phone Number: <Spacer amount={6} /> {admin.phoneNumber}
         </h6>
-        <h6>
-          Gender: <Spacer amount={23} /> male
-        </h6>
-        <h6>
-          Driving License: <Spacer amount={5} /> Bus
-        </h6>
 
-        <h6>
-          Adress: <Spacer amount={24} /> Beit-hanina
-        </h6>
-        <h6>
-          Vehicle: <Spacer amount={23} /> Nissan
-        </h6>
         <h6>
           Age: <Spacer amount={31} /> {admin.age}
         </h6>

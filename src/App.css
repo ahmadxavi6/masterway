@@ -16,6 +16,7 @@
   justify-content: center;
   font-size: 3rem;
 }
+
 .map {
   display: flex;
   height: 90vh;
@@ -24,4 +25,7 @@
   align-items: center;
   justify-content: center;
   font-size: 3rem;
+}
+.picture{
+ border-radius: "black";
 }
