@@ -44,8 +44,11 @@ export default function Login({ setToken }) {
         setUser(resp.data);
         setfName(resp.data.fName);
         setToken(resp.data.token);
+
         // store the user in localStorage
         sessionStorage.setItem("user", JSON.stringify(resp.data));
+        sessionStorage.setItem("picture", resp.data.profilepic);
+        sessionStorage.setItem("name", resp.data.fName);
       })
       .catch((err) => rest());
   };
@@ -72,6 +75,7 @@ export default function Login({ setToken }) {
               <form
                 className="card-body cardbody-color p-lg-5"
                 onSubmit={handleSubmit}
+                style={{ backgroundColor: "#3700b3" }}
               >
                 <div className="text-center">
                   <img
@@ -124,7 +128,7 @@ export default function Login({ setToken }) {
 
                 <a href="/forgetmypass" className="text-dark fw-bold">
                   {" "}
-                  Forget Password?
+                  <div style={{ color: "white" }}>Forget Password?</div>
                 </a>
               </form>
             </div>

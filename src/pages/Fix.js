@@ -209,15 +209,10 @@ const Fix = () => {
                                 fix: item,
                               }}
                             >
-                              <Button
-                                variant="success"
-                                style={{ marginLeft: "5px" }}
-                              >
-                                Update
-                              </Button>
+                              <Button variant="success">Update</Button>
                             </Link>
                             <Button
-                              style={{ marginRight: "5px" }}
+                              style={{ marginLeft: "5px" }}
                               variant="danger"
                               onClick={() => handleDelete(item)}
                             >

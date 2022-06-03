@@ -1,8 +1,11 @@
 .btn-color {
-  background-color: #0e1c36;
+  background-color: #03dac5;
   color: #fff;
 }
-
+.btn-color1 {
+  background-color: #198754;
+  color: #fff;
+}
 .profile-image-pic {
   height: 200px;
   width: 200px;
