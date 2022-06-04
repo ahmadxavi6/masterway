@@ -26,7 +26,7 @@ function Home() {
             width="400"
             height="480"
             border=" 5px solid rgb(255, 1, 1)"
-            style={{ borderRadius: 40 }}
+            style={{ borderRadius: 40, marginLeft: "20%" }}
             alt=""
           ></img>
           <div>
@@ -34,7 +34,8 @@ function Home() {
             Welcome Back {name} <br></br>
             {"\u00a0\u00a0"} {"\u00a0\u00a0"} {"\u00a0\u00a0"}
             {"\u00a0\u00a0"}
-            {"\u00a0"}
+            {"\u00a0"} {"\u00a0\u00a0"} {"\u00a0\u00a0"} {"\u00a0\u00a0"}{" "}
+            {"\u00a0\u00a0"} {"\u00a0"}
             {date}
           </div>
         </div>
