@@ -33,7 +33,7 @@ function FixUpdate() {
     let { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
-  console.log(location.fix);
+
   /// handle submit of updating the fix report
   const handleClick = async () => {
     if (!price || !to) {

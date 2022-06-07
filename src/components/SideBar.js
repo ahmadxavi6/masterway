@@ -5,6 +5,7 @@ import "./SideBar.css";
 import { IconContext } from "react-icons";
 import { Button } from "react-bootstrap";
 import App from "../App";
+import * as GrIcons from "react-icons/gr";
 /// side bar of the web
 function SideBar() {
   const [sidebar] = useState(true);
@@ -17,14 +18,6 @@ function SideBar() {
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
         <div className="navbar">
-          <div className="buttoninnav">
-            <Button variant="danger" onClick={signout}>
-              Sign out
-            </Button>
-          </div>
-        </div>
-
-        <nav className={sidebar ? "nav-menu active " : "nav-menu"}>
           <ul className="nav-menu-items">
             {SideBarData.map((item, index) => {
               return (
@@ -36,8 +29,18 @@ function SideBar() {
                 </li>
               );
             })}
+
+            <li>
+              {" "}
+              <a href="#" onClick={signout} className="btn btn-info btn-lg">
+                <span>
+                  <GrIcons.GrLogout />
+                </span>{" "}
+                Log out
+              </a>
+            </li>
           </ul>
-        </nav>
+        </div>
       </IconContext.Provider>
     </>
   );

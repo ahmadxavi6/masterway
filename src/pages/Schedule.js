@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import "./Schedule.css";
 import { useSelector, useDispatch } from "react-redux";
 import { loadWorkers } from "../redux/workers/actions";
-import { Table, ButtonGroup, Button } from "react-bootstrap";
+import { Table, ButtonGroup, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { loadProfile } from "../redux/workers/actions";
 import { useState } from "react";
@@ -50,93 +50,95 @@ const Schedule = () => {
 
   return (
     <>
-      <h1 style={{ textAlign: "center", marginTop: "10px" }}>
-        Workers Schedule
-      </h1>
-      <div className="tb">
-        <Table bordered hover>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Sun</th>
-              <th>Mon</th>
-              <th>Tue</th>
-              <th>Wed</th>
-              <th>Thur</th>
-              <th>Fri</th>
-              <th>Sat</th>
-              <th>
-                Action {""}
-                <input
-                  placeholder="search"
-                  type="text"
-                  onChange={handleSearch}
-                ></input>
-              </th>
-            </tr>
-          </thead>
-          {x &&
-            x.map((item, index) => (
-              <tbody key={index}>
-                <tr>
-                  <td>{item.fName}</td>
-                  <td>
-                    {item.weekShifts.Sun.hours}
-                    <p>{item.weekShifts.Sun.info}</p>
-                  </td>
-                  <td>
-                    {item.weekShifts.Mon.hours}
-                    <p>{item.weekShifts.Mon.info}</p>
-                  </td>
-                  <td>
-                    {item.weekShifts.Tue.hours}
-                    <p>{item.weekShifts.Tue.info}</p>
-                  </td>
-                  <td>
-                    {item.weekShifts.Wed.hours}
-                    <p>{item.weekShifts.Wed.info}</p>
-                  </td>
-                  <td>
-                    {item.weekShifts.Thur.hours}
-                    <p>{item.weekShifts.Thur.info}</p>
-                  </td>
-                  <td>
-                    {item.weekShifts.Fri.hours}
-                    <p>{item.weekShifts.Fri.info}</p>
-                  </td>
-                  <td>
-                    {item.weekShifts.Sat.hours}
-                    <p>{item.weekShifts.Sat.info}</p>
-                  </td>
-                  <td>
-                    <ButtonGroup>
-                      <Link
-                        to={{
-                          pathname: `/trips`,
-                          worker: item,
-                        }}
-                      >
-                        <Button
-                          variant="success"
-                          onClick={() => handlesClick(item._id)}
-                          style={{ marginLeft: "5px" }}
+      <Container>
+        <h1 style={{ textAlign: "center", marginTop: "10px" }}>
+          Workers Schedule
+        </h1>
+        <div className="tb">
+          <Table bordered hover>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thur</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                <th>
+                  Action {""}
+                  <input
+                    placeholder="search"
+                    type="text"
+                    onChange={handleSearch}
+                  ></input>
+                </th>
+              </tr>
+            </thead>
+            {x &&
+              x.map((item, index) => (
+                <tbody key={index}>
+                  <tr>
+                    <td>{item.fName}</td>
+                    <td>
+                      {item.weekShifts.Sun.hours}
+                      <p>{item.weekShifts.Sun.info}</p>
+                    </td>
+                    <td>
+                      {item.weekShifts.Mon.hours}
+                      <p>{item.weekShifts.Mon.info}</p>
+                    </td>
+                    <td>
+                      {item.weekShifts.Tue.hours}
+                      <p>{item.weekShifts.Tue.info}</p>
+                    </td>
+                    <td>
+                      {item.weekShifts.Wed.hours}
+                      <p>{item.weekShifts.Wed.info}</p>
+                    </td>
+                    <td>
+                      {item.weekShifts.Thur.hours}
+                      <p>{item.weekShifts.Thur.info}</p>
+                    </td>
+                    <td>
+                      {item.weekShifts.Fri.hours}
+                      <p>{item.weekShifts.Fri.info}</p>
+                    </td>
+                    <td>
+                      {item.weekShifts.Sat.hours}
+                      <p>{item.weekShifts.Sat.info}</p>
+                    </td>
+                    <td>
+                      <ButtonGroup>
+                        <Link
+                          to={{
+                            pathname: `/trips`,
+                            worker: item,
+                          }}
                         >
-                          Add Shifts
+                          <Button
+                            variant="success"
+                            onClick={() => handlesClick(item._id)}
+                            style={{ marginLeft: "5px" }}
+                          >
+                            Add Shifts
+                          </Button>
+                        </Link>
+                        <Button
+                          variant="danger"
+                          onClick={() => handleCClick(item._id)}
+                        >
+                          Clear Shifts
                         </Button>
-                      </Link>
-                      <Button
-                        variant="danger"
-                        onClick={() => handleCClick(item._id)}
-                      >
-                        Clear Shifts
-                      </Button>
-                    </ButtonGroup>
-                  </td>
-                </tr>
-              </tbody>
-            ))}
-        </Table>
-      </div>
+                      </ButtonGroup>
+                    </td>
+                  </tr>
+                </tbody>
+              ))}
+          </Table>
+        </div>
+      </Container>
     </>
   );
 };

@@ -1,5 +1,7 @@
+import { Container } from "@material-ui/core";
 import React from "react";
 import { useState, useEffect } from "react";
+
 /// home page
 function Home() {
   var x = sessionStorage["picture"];
@@ -18,28 +20,27 @@ function Home() {
 
   return (
     <>
-      <div className="workers">
-        <div className="w3-round">
-          <img
-            src={"data:image/gif;base64," + profile}
-            id="profile"
-            width="400"
-            height="480"
-            border=" 5px solid rgb(255, 1, 1)"
-            style={{ borderRadius: 40, marginLeft: "20%" }}
-            alt=""
-          ></img>
-          <div>
-            {" "}
-            Welcome Back {name} <br></br>
-            {"\u00a0\u00a0"} {"\u00a0\u00a0"} {"\u00a0\u00a0"}
-            {"\u00a0\u00a0"}
-            {"\u00a0"} {"\u00a0\u00a0"} {"\u00a0\u00a0"} {"\u00a0\u00a0"}{" "}
-            {"\u00a0\u00a0"} {"\u00a0"}
-            {date}
+      <Container>
+        <div className="workers">
+          <div className="w3-round">
+            <img
+              src={"data:image/gif;base64," + profile}
+              id="profile"
+              width="80%"
+              height="80%"
+              border=" 5px solid rgb(255, 1, 1)"
+              style={{ borderRadius: 40, marginLeft: "8%" }}
+              alt=""
+            ></img>
+            <div style={{ alignItems: "center" }}>
+              {" "}
+              {"\u00a0\u00a0"} Welcome Back {" \u00a0"}
+              {name} <br></br>
+              {"\u00a0\u00a0"} Date : {date}
+            </div>
           </div>
         </div>
-      </div>
+      </Container>
     </>
   );
 }

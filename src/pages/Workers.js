@@ -38,9 +38,10 @@ const Workers = () => {
   const dispatch = useDispatch();
   const { workers, msg, worker } = useSelector((state) => state.dataw);
   const [x, setWorkers] = useState();
-
+  const [user, setUser] = useState(false);
   const { fName, email, phoneNumber, age, ID, address, gender, licen } = state;
   let [search, setSearch] = useState("");
+
   /// get workers and put them on the table
   useEffect(() => {
     dispatch(loadWorkers());
@@ -71,7 +72,6 @@ const Workers = () => {
   const handleChange = (e) => {
     let { name, value } = e.target;
     setState({ ...state, [name]: value });
-    console.log(state);
   };
   ///handle add or update worker
   const handleSubmit = (e) => {

@@ -42,8 +42,9 @@ export const SideBarData = [
     icon: <FaICons.FaMap />,
     cName: "nav-text",
   },
+
   {
-    title: "Change Password",
+    title: "Password",
     path: "/passwordre",
 
     icon: <RiIcons.RiLockPasswordLine />,

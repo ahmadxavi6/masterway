@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Spacer from "react-add-space";
+import { Container, Col, Row } from "react-bootstrap";
 import "./Worker.css";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -48,55 +49,67 @@ const Admin = () => {
   };
   return (
     <>
-      <h1 style={{ textAlign: "center", marginTop: "10px" }}>Admin Profile</h1>
-      <div className="container-picture">
-        <div className="picture">
-          <img
-            src={"data:image/gif;base64," + admin.profilepic}
-            id="profile"
-            width="270"
-            height="270"
-            alt=""
-          ></img>
-        </div>
-      </div>
-      <div className="change-bu">
-        <label
-          style={{
-            display: "block",
+      <Container>
+        <Row>
+          <h1 style={{ textAlign: "center", marginTop: "10px" }}>
+            Admin Profile
+          </h1>
+          <Col>
+            <div className="container-picture">
+              <div className="picture">
+                <img
+                  src={"data:image/gif;base64," + admin.profilepic}
+                  id="profile"
+                  width="300"
+                  height="300"
+                  border=" 5px solid rgb(255, 1, 1)"
+                  style={{ borderRadius: 40 }}
+                  alt=""
+                ></img>
+              </div>
 
-            margin: ".4rem ",
-          }}
-        >
-          Choose a profile picture
-        </label>
+              <div className="change-bu">
+                <label
+                  style={{
+                    display: "block",
 
-        <input
-          type="file"
-          id="avatar"
-          name="avatar"
-          accept="image/*"
-          onChange={handleChange}
-        />
-      </div>
+                    margin: ".4rem ",
+                  }}
+                >
+                  Choose a profile picture
+                </label>
 
-      <div className="infoo" style={{ marginTop: "35px" }} elevation={2}>
-        <h4>Basic information</h4>
-        <h6>
-          Name: <Spacer amount={28} />
-          {admin.fName}
-        </h6>
-        <h6>
-          Email: <Spacer amount={28} /> {admin.email}
-        </h6>
-        <h6>
-          Phone Number: <Spacer amount={6} /> {admin.phoneNumber}
-        </h6>
+                <input
+                  type="file"
+                  id="avatar"
+                  name="avatar"
+                  accept="image/*"
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+          </Col>
+          <Col>
+            <div className="infoo" style={{ marginTop: "35px" }} elevation={2}>
+              <h4>Basic information</h4>
+              <h6>
+                Name: <Spacer amount={28} />
+                {admin.fName}
+              </h6>
+              <h6>
+                Email: <Spacer amount={28} /> {admin.email}
+              </h6>
+              <h6>
+                Phone Number: <Spacer amount={6} /> {admin.phoneNumber}
+              </h6>
 
-        <h6>
-          Age: <Spacer amount={31} /> {admin.age}
-        </h6>
-      </div>
+              <h6>
+                Age: <Spacer amount={31} /> {admin.age}
+              </h6>
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

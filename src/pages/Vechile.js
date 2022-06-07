@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Spacer from "react-add-space";
+import { Container, Col, Row } from "react-bootstrap";
 import "./Worker.css";
 import { Button } from "react-bootstrap";
 import axios from "axios";
@@ -55,68 +56,78 @@ const Vehcile = () => {
   };
   return (
     <>
-      <h1 style={{ textAlign: "center", marginTop: "10px" }}>
-        Vehcile Profile
-      </h1>
-      <div className="container-picture">
-        <div className="picture">
-          <img
-            src={"data:image/gif;base64," + vehcile.pic}
-            id="profile"
-            width="270"
-            height="270"
-            alt=""
-          ></img>
-        </div>
-      </div>
-      <div className="change-bu">
-        <label
-          style={{
-            display: "block",
+      <Container>
+        <Row>
+          <h1 style={{ textAlign: "center", marginTop: "10px" }}>
+            Vehcile Profile
+          </h1>
+          <Col>
+            <div className="container-picture">
+              <div className="picture">
+                <img
+                  src={"data:image/gif;base64," + vehcile.pic}
+                  id="profile"
+                  width="300"
+                  height="300"
+                  border=" 5px solid rgb(255, 1, 1)"
+                  style={{ borderRadius: 40 }}
+                  alt=""
+                ></img>
+              </div>
 
-            margin: ".4rem ",
-          }}
-        >
-          Choose vehcile picture
-        </label>
+              <div className="change-bu">
+                <label
+                  style={{
+                    display: "block",
 
-        <input
-          type="file"
-          id="avatar"
-          name="avatar"
-          accept="image/*"
-          onChange={handleChange}
-        />
-      </div>
+                    margin: ".4rem ",
+                  }}
+                >
+                  Choose vehcile picture
+                </label>
 
-      <div className="infoo" style={{ marginTop: "35px" }} elevation={2}>
-        <h4>Basic information</h4>
-        <h6>
-          Manufacturer: <Spacer amount={11} />
-          {vehcile.man}
-        </h6>
-        <h6>
-          Model: <Spacer amount={27} /> {vehcile.model}
-        </h6>
-        <h6>
-          Year: <Spacer amount={31} /> {vehcile.year}
-        </h6>
-        <h6>
-          License: <Spacer amount={24} /> {vehcile.lice}
-        </h6>
-        <h6>
-          Insurance: <Spacer amount={19} /> {vehcile.insu}
-        </h6>
-        <Link
-          to={{
-            pathname: `/fix/${vehcile._id}/`,
-          }}
-        >
-          <Button variant="info" style={{ marginLeft: "5px" }}>
-            Fix History
-          </Button>
-        </Link>
-      </div>
+                <input
+                  type="file"
+                  id="avatar"
+                  name="avatar"
+                  accept="image/*"
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+          </Col>
+          <Col>
+            <div className="infoo" style={{ marginTop: "35px" }} elevation={2}>
+              <h4>Basic information</h4>
+              <h6>
+                Manufacturer: <Spacer amount={11} />
+                {vehcile.man}
+              </h6>
+              <h6>
+                Model: <Spacer amount={27} /> {vehcile.model}
+              </h6>
+              <h6>
+                Year: <Spacer amount={31} /> {vehcile.year}
+              </h6>
+              <h6>
+                License: <Spacer amount={24} /> {vehcile.lice}
+              </h6>
+              <h6>
+                Insurance: <Spacer amount={19} /> {vehcile.insu}
+              </h6>
+              <Link
+                to={{
+                  pathname: `/fix/${vehcile._id}/`,
+                }}
+              >
+                <Button variant="info" style={{ marginLeft: "5px" }}>
+                  Fix History
+                </Button>
+              </Link>
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

@@ -110,7 +110,7 @@ function HoursReport() {
   if (lo) {
     return (
       <Spinner
-        style={{ padding: "150px", marginLeft: "880px", marginTop: "280px" }}
+        style={{ padding: "10%", marginLeft: "40%", marginTop: "280px" }}
         animation="border"
         variant="info"
       />
