@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Spacer from "react-add-space";
 import "./Worker.css";
-import { Button, Form } from "react-bootstrap";
+import { Button, Container, Form, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
 const API = "https://masterway.herokuapp.com";
@@ -78,112 +78,126 @@ const Worker = () => {
   };
   return (
     <>
-      <h1 style={{ textAlign: "center", marginTop: "10px" }}>Worker Profile</h1>
-      <div className="container-picture">
-        <div className="picture">
-          <img
-            src={"data:image/gif;base64," + worker.profilepic}
-            id="profile"
-            width="270"
-            height="270"
-            alt=""
-          ></img>
-        </div>
-      </div>
-      <div className="change-bu">
-        <label
-          style={{
-            display: "block",
+      <Container>
+        <Row>
+          <h1 style={{ textAlign: "center", marginTop: "10px" }}>
+            Worker Profile
+          </h1>
+          <Col>
+            <div className="container-picture">
+              <div className="picture">
+                <img
+                  src={"data:image/gif;base64," + worker.profilepic}
+                  id="profile"
+                  width="300"
+                  height="300"
+                  border=" 5px solid rgb(255, 1, 1)"
+                  style={{ borderRadius: 40 }}
+                  alt=""
+                ></img>
+              </div>
+              <div className="change-bu">
+                <label
+                  style={{
+                    display: "block",
 
-            margin: ".4rem ",
-          }}
-        >
-          Choose a profile picture
-        </label>
+                    margin: ".4rem ",
+                  }}
+                >
+                  Choose a profile picture
+                </label>
 
-        <input
-          type="file"
-          id="avatar"
-          name="avatar"
-          accept="image/*"
-          onChange={handleChange}
-        />
-      </div>
+                <input
+                  type="file"
+                  id="avatar"
+                  name="avatar"
+                  accept="image/*"
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+          </Col>
+          <Col>
+            <div className="infoo" style={{ marginTop: "35px" }} elevation={2}>
+              <h4>Basic information</h4>
+              <h6>
+                Name: <Spacer amount={28} />
+                {worker.fName}
+              </h6>
+              <h6>
+                Email: <Spacer amount={28} /> {worker.email}
+              </h6>
+              <h6>
+                Phone Number: <Spacer amount={6} /> {worker.phoneNumber}
+              </h6>
+              <h6>
+                Gender: <Spacer amount={23} /> {worker.gender}
+              </h6>
+              <h6>
+                Driving License: <Spacer amount={5} /> {worker.licen}
+              </h6>
 
-      <div className="infoo" style={{ marginTop: "35px" }} elevation={2}>
-        <h4>Basic information</h4>
-        <h6>
-          Name: <Spacer amount={28} />
-          {worker.fName}
-        </h6>
-        <h6>
-          Email: <Spacer amount={28} /> {worker.email}
-        </h6>
-        <h6>
-          Phone Number: <Spacer amount={6} /> {worker.phoneNumber}
-        </h6>
-        <h6>
-          Gender: <Spacer amount={23} /> {worker.gender}
-        </h6>
-        <h6>
-          Driving License: <Spacer amount={5} /> {worker.licen}
-        </h6>
+              <h6>
+                Adress: <Spacer amount={25} />
+                {worker.address}
+              </h6>
+              <h6>
+                Vehicle: <Spacer amount={24} /> {worker.vehcile}
+              </h6>
+              <h6>
+                Age: <Spacer amount={32} /> {worker.age}
+              </h6>
+              <Link
+                to={{
+                  pathname: `/workersHours/${worker._id}/`,
+                }}
+              >
+                <Button variant="info" style={{ marginLeft: "5px" }}>
+                  Worker Hours
+                </Button>
+              </Link>
+              <Link
+                to={{
+                  pathname: `/hoursreport/${worker._id}/`,
+                }}
+              >
+                <Button variant="info" style={{ marginLeft: "5px" }}>
+                  Salary Reports
+                </Button>
+              </Link>
+            </div>
 
-        <h6>
-          Adress: <Spacer amount={25} />
-          {worker.address}
-        </h6>
-        <h6>
-          Vehicle: <Spacer amount={24} /> {worker.vehcile}
-        </h6>
-        <h6>
-          Age: <Spacer amount={32} /> {worker.age}
-        </h6>
-        <Link
-          to={{
-            pathname: `/workersHours/${worker._id}/`,
-          }}
-        >
-          <Button variant="info" style={{ marginLeft: "5px" }}>
-            Worker Hours
-          </Button>
-        </Link>
-        <Link
-          to={{
-            pathname: `/hoursreport/${worker._id}/`,
-          }}
-        >
-          <Button variant="info" style={{ marginLeft: "5px" }}>
-            Salary Reports
-          </Button>
-        </Link>
-      </div>
-
-      <div className="infoo" style={{ marginTop: "35px" }} elevation={2}>
-        <h4>Link a vehicle to {worker.fName}</h4>
-        <Form.Select
-          className="browser-default "
-          name="vehcile"
-          style={{ position: "stick" }}
-          onChange={handlesChange}
-        >
-          <option>Choose vehilce to link it to {worker.fName}</option>
-          {vehicles.map((item) => {
-            return (
-              <option key={item.index} value={item.index}>
-                {item.man} {item.model} {item.year}
-              </option>
-            );
-          })}
-        </Form.Select>
-        <Button
-          variant="success"
-          style={{ marginLeft: "170px", marginTop: "5px", marginBottom: "5px" }}
-          onClick={handleClick}
-        >
-          Link Vechile
-        </Button>
-      </div>
+            <div className="infooo" style={{ marginTop: "35px" }} elevation={2}>
+              <h4>Link a vehicle to {worker.fName}</h4>
+              <Form.Select
+                className="browser-default "
+                name="vehcile"
+                style={{ position: "stick" }}
+                onChange={handlesChange}
+              >
+                <option>Choose vehilce to link it to {worker.fName}</option>
+                {vehicles.map((item) => {
+                  return (
+                    <option key={item.index} value={item.index}>
+                      {item.man} {item.model} {item.year}
+                    </option>
+                  );
+                })}
+              </Form.Select>
+              <Button
+                variant="success"
+                style={{
+                  marginTop: "5px",
+                  marginBottom: "5px",
+                }}
+                onClick={handleClick}
+              >
+                Link Vechile
+              </Button>
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

@@ -97,7 +97,8 @@ function WorkersHours() {
                         <option value="12">12</option>
                       </Form.Select>
                     </th>
-
+                  </tr>
+                  <tr>
                     <th>
                       Year:
                       <Form.Select
