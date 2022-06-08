@@ -19,6 +19,8 @@ import {
   loadVehicles,
   updateVehicle,
 } from "../redux/vehicles/actionsV";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
+
 import * as ImIcons from "react-icons/im";
 
 const initialStateV = {
@@ -35,24 +37,13 @@ const Vehicles = () => {
   const [vehicleId, setVehicalId] = useState(null);
   const dispatch = useDispatch();
   const { vehicles, msg, vehicle } = useSelector((state) => state.datav);
-  const [x, setWorkers] = useState();
 
   const { man, model, year, lice, insu } = state;
   let [search, setSearch] = useState("");
   /// get the vehicles and put them in the table
   useEffect(() => {
     dispatch(loadVehicles());
-    const filteredRows = vehicles.filter((vehicle) => {
-      return (
-        vehicle.man.toLowerCase().includes(search.toLowerCase()) ||
-        vehicle.model.toLowerCase().includes(search.toLowerCase()) ||
-        vehicle.year.toLowerCase().includes(search.toLowerCase()) ||
-        vehicle.lice.toLowerCase().includes(search.toLowerCase()) ||
-        vehicle.insu.toLowerCase().includes(search.toLowerCase())
-      );
-    });
-    setWorkers(filteredRows);
-  }, [dispatch, vehicles, search]);
+  }, [dispatch]);
   useEffect(() => {
     if (msg) {
       toast.success(msg);
@@ -126,6 +117,16 @@ const Vehicles = () => {
   return (
     <>
       <h1 style={{ textAlign: "center", marginTop: "10px" }}>Vehicles List</h1>
+      <div style={{ textAlign: "center" }}>
+        <ReactHTMLTableToExcel
+          id="test-table-xls-button"
+          className="download-table-xls-button"
+          table="table-to-xls"
+          filename="Vehicles"
+          sheet="tablexls"
+          buttonText="Download Vehicles Info"
+        />
+      </div>
       <Container style={{ marginTop: "70px" }}>
         <Row>
           <Col md={4}>
@@ -189,7 +190,7 @@ const Vehicles = () => {
           </Col>
           <Col md={8}>
             <div className="ta">
-              <Table bordered hover>
+              <Table bordered hover id="table-to-xls">
                 <thead>
                   <tr>
                     <th>No.</th>
@@ -209,50 +210,70 @@ const Vehicles = () => {
                     </th>
                   </tr>
                 </thead>
-                {x &&
-                  x.map((item, index) => (
-                    <tbody key={index}>
-                      <tr>
-                        <td>{index + 1}</td>
-                        <td>{item.man}</td>
-                        <td>{item.model}</td>
-                        <td>{item.year}</td>
-                        <td>{item.lice}</td>
-                        <td>{item.insu}</td>
-                        <td>{getIcon(item)}</td>
-                        <td>
-                          <ButtonGroup>
-                            <Button
-                              style={{ marginRight: "5px" }}
-                              variant="danger"
-                              onClick={() => handleDelete(item._id)}
-                            >
-                              Delete
-                            </Button>
-                            <Button
-                              variant="success"
-                              onClick={() => handleUpdate(item._id)}
-                            >
-                              Update
-                            </Button>
-                            <Link
-                              to={{
-                                pathname: `/vehicles/${item._id}/`,
-                              }}
-                            >
+                {vehicles &&
+                  vehicles
+                    .filter((vehicle) => {
+                      return (
+                        vehicle.man
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        vehicle.model
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        vehicle.year
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        vehicle.lice
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        vehicle.insu
+                          .toLowerCase()
+                          .includes(search.toLowerCase())
+                      );
+                    })
+                    .map((item, index) => (
+                      <tbody key={index}>
+                        <tr>
+                          <td>{index + 1}</td>
+                          <td>{item.man}</td>
+                          <td>{item.model}</td>
+                          <td>{item.year}</td>
+                          <td>{item.lice}</td>
+                          <td>{item.insu}</td>
+                          <td>{getIcon(item)}</td>
+                          <td>
+                            <ButtonGroup>
                               <Button
-                                variant="info"
-                                onClick={() => handleClick(item._id)}
-                                style={{ marginLeft: "5px" }}
+                                style={{ marginRight: "5px" }}
+                                variant="danger"
+                                onClick={() => handleDelete(item._id)}
                               >
-                                More
+                                Delete
                               </Button>
-                            </Link>
-                          </ButtonGroup>
-                        </td>
-                      </tr>
-                    </tbody>
-                  ))}
+                              <Button
+                                variant="success"
+                                onClick={() => handleUpdate(item._id)}
+                              >
+                                Update
+                              </Button>
+                              <Link
+                                to={{
+                                  pathname: `/vehicles/${item._id}/`,
+                                }}
+                              >
+                                <Button
+                                  variant="info"
+                                  onClick={() => handleClick(item._id)}
+                                  style={{ marginLeft: "5px" }}
+                                >
+                                  More
+                                </Button>
+                              </Link>
+                            </ButtonGroup>
+                          </td>
+                        </tr>
+                      </tbody>
+                    ))}
               </Table>
             </div>
           </Col>

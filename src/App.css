@@ -10,7 +10,7 @@
 .vechiles,
 .workers,
 .schedule,
-.incomeAndOutcome {
+.budget {
   display: flex;
   height: 90vh;
   align-items: center;

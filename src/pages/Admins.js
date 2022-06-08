@@ -19,6 +19,7 @@ import {
 } from "../redux/admins/actionsA";
 import { Link } from "react-router-dom";
 import "./Workers.css";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 const initialState = {
   fName: "",
@@ -35,23 +36,12 @@ const Admins = () => {
   const dispatch = useDispatch();
   const { admins, msg, admin } = useSelector((state) => state.dataa);
   let [search, setSearch] = useState("");
-  const [x, setWorkers] = useState();
 
   const { fName, email, ID, phoneNumber, age } = state;
   /// get the admins and put them in table
   useEffect(() => {
     dispatch(loadAdmins());
-    const filteredRows = admins.filter((admin) => {
-      return (
-        admin.fName.toLowerCase().includes(search.toLowerCase()) ||
-        admin.email.toLowerCase().includes(search.toLowerCase()) ||
-        admin.age.toLowerCase().includes(search.toLowerCase()) ||
-        admin.ID.toLowerCase().includes(search.toLowerCase()) ||
-        admin.phoneNumber.toLowerCase().includes(search.toLowerCase())
-      );
-    });
-    setWorkers(filteredRows);
-  }, [dispatch, admins, search]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (msg) {
@@ -108,6 +98,16 @@ const Admins = () => {
   return (
     <>
       <h1 style={{ textAlign: "center", marginTop: "10px" }}>Admins List</h1>
+      <div style={{ textAlign: "center" }}>
+        <ReactHTMLTableToExcel
+          id="test-table-xls-button"
+          className="download-table-xls-button"
+          table="table-to-xls"
+          filename="Admins"
+          sheet="tablexls"
+          buttonText="Download Admins Info"
+        />
+      </div>
       <Container style={{ marginTop: "70px" }}>
         <Row>
           <Col md={4}>
@@ -172,7 +172,7 @@ const Admins = () => {
           </Col>
           <Col md={8}>
             <div className="ta">
-              <Table bordered hover>
+              <Table bordered hover id="table-to-xls">
                 <thead>
                   <tr>
                     <th>No.</th>
@@ -191,50 +191,68 @@ const Admins = () => {
                     </th>
                   </tr>
                 </thead>
-                {x &&
-                  x.map((item, index) => (
-                    <tbody key={index}>
-                      <tr>
-                        <td>{index + 1}</td>
-                        <td>{item.ID}</td>
-                        <td>{item.fName}</td>
-                        <td>{item.email}</td>
-                        <td>{item.phoneNumber}</td>
-                        <td>{item.age}</td>
+                {admins &&
+                  admins
+                    .filter((admin) => {
+                      return (
+                        admin.fName
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        admin.email
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        admin.age
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        admin.ID.toLowerCase().includes(search.toLowerCase()) ||
+                        admin.phoneNumber
+                          .toLowerCase()
+                          .includes(search.toLowerCase())
+                      );
+                    })
+                    .map((item, index) => (
+                      <tbody key={index}>
+                        <tr>
+                          <td>{index + 1}</td>
+                          <td>{item.ID}</td>
+                          <td>{item.fName}</td>
+                          <td>{item.email}</td>
+                          <td>{item.phoneNumber}</td>
+                          <td>{item.age}</td>
 
-                        <td>
-                          <ButtonGroup>
-                            <Button
-                              style={{ marginRight: "5px" }}
-                              variant="danger"
-                              onClick={() => handleDelete(item._id)}
-                            >
-                              Delete
-                            </Button>
-                            <Button
-                              variant="success"
-                              onClick={() => handleUpdate(item._id)}
-                            >
-                              Update
-                            </Button>
-                            <Link
-                              to={{
-                                pathname: `/admins/profile/${item._id}/`,
-                              }}
-                            >
+                          <td>
+                            <ButtonGroup>
                               <Button
-                                variant="info"
-                                onClick={() => handleClick(item._id)}
-                                style={{ marginLeft: "5px" }}
+                                style={{ marginRight: "5px" }}
+                                variant="danger"
+                                onClick={() => handleDelete(item._id)}
                               >
-                                More
+                                Delete
                               </Button>
-                            </Link>
-                          </ButtonGroup>
-                        </td>
-                      </tr>
-                    </tbody>
-                  ))}
+                              <Button
+                                variant="success"
+                                onClick={() => handleUpdate(item._id)}
+                              >
+                                Update
+                              </Button>
+                              <Link
+                                to={{
+                                  pathname: `/admins/profile/${item._id}/`,
+                                }}
+                              >
+                                <Button
+                                  variant="info"
+                                  onClick={() => handleClick(item._id)}
+                                  style={{ marginLeft: "5px" }}
+                                >
+                                  More
+                                </Button>
+                              </Link>
+                            </ButtonGroup>
+                          </td>
+                        </tr>
+                      </tbody>
+                    ))}
               </Table>
             </div>
           </Col>

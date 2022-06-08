@@ -22,6 +22,7 @@ import Fix from "./pages/Fix";
 import FixUpdate from "./pages/FixUpdate";
 import HoursReport from "./pages/HoursReport";
 import PasswordRe from "./pages/PasswordRe";
+import Budget from "./pages/Budget";
 /// if thers no token it will go to login page if there is atoken it will go the webapp
 function App() {
   const [token, setToken] = useState();
@@ -51,6 +52,7 @@ function App() {
 
           <Route path="/vehicles/" component={Vehcile}></Route>
           <Route path="/map" component={MapGps}></Route>
+          <Route path="/budget" component={Budget}></Route>
         </Switch>
       </Router>
     </>
