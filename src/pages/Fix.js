@@ -13,7 +13,7 @@ import axios from "axios";
 import "./Workers.css";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import * as ImIcons from "react-icons/im";
 const API = "https://masterway.herokuapp.com";
 const initialStateV = {
@@ -32,7 +32,7 @@ const Fix = () => {
   };
 
   const [fix, setFix] = useState(vehicle.repairs);
-  const [x, setX] = useState();
+
   const [va, setVa] = useState();
   let [search, setSearch] = useState("");
   const pathname = window.location.pathname;
@@ -46,24 +46,12 @@ const Fix = () => {
         .then((resp) => {
           setFix(resp.data.repairs);
           setVa(resp.data._id);
-          setX(resp.data.repairs);
-          console.log(resp.data.repairs);
-          const filteredRows = fix.filter((vehicle) => {
-            return (
-              vehicle.problem.toLowerCase().includes(search.toLowerCase()) ||
-              vehicle.from.toLowerCase().includes(search.toLowerCase()) ||
-              vehicle.to.toLowerCase().includes(search.toLowerCase()) ||
-              vehicle.price.toLowerCase().includes(search.toLowerCase()) ||
-              vehicle.description.toLowerCase().includes(search.toLowerCase())
-            );
-          });
-          setX(filteredRows);
         })
         .catch((err) => console.log());
     }
 
     getFix();
-  }, [search, use]);
+  }, [use]);
   const getIcon = (e) => {
     if (e === "1") {
       return <ImIcons.ImCheckmark />;
@@ -124,6 +112,16 @@ const Fix = () => {
       <h1 style={{ textAlign: "center", marginTop: "10px" }}>
         Fix History List
       </h1>
+      <div style={{ textAlign: "center" }}>
+        <ReactHTMLTableToExcel
+          id="test-table-xls-button"
+          className="download-table-xls-button"
+          table="table-to-xls"
+          filename="FixHistory"
+          sheet="tablexls"
+          buttonText="Download Fix History"
+        />
+      </div>
       <Container style={{ marginTop: "70px" }}>
         <Row>
           <Col md={4}>
@@ -168,7 +166,7 @@ const Fix = () => {
           </Col>
           <Col md={8}>
             <div className="ta">
-              <Table bordered hover>
+              <Table bordered hover id="table-to-xls">
                 <thead>
                   <tr>
                     <th>No.</th>
@@ -189,40 +187,60 @@ const Fix = () => {
                     </th>
                   </tr>
                 </thead>
-                {x &&
-                  x.map((item, index) => (
-                    <tbody key={index}>
-                      <tr>
-                        <td>{index + 1}</td>
-                        <td>{item.problem}</td>
-                        <td>{item.from}</td>
-                        <td>{item.to}</td>
-                        <td>{item.price}</td>
-                        <td>{item.description}</td>
-                        <td>{getIcon(item.status)}</td>
-                        <td>
-                          {" "}
-                          <ButtonGroup>
-                            <Link
-                              to={{
-                                pathname: `/fixupdate/${va}/`,
-                                fix: item,
-                              }}
-                            >
-                              <Button variant="success">Update</Button>
-                            </Link>
-                            <Button
-                              style={{ marginLeft: "5px" }}
-                              variant="danger"
-                              onClick={() => handleDelete(item)}
-                            >
-                              Delete
-                            </Button>
-                          </ButtonGroup>
-                        </td>
-                      </tr>
-                    </tbody>
-                  ))}
+                {fix &&
+                  fix
+                    .filter((vehicle) => {
+                      return (
+                        vehicle.problem
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        vehicle.from
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        vehicle.to
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        vehicle.price
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        vehicle.description
+                          .toLowerCase()
+                          .includes(search.toLowerCase())
+                      );
+                    })
+                    .map((item, index) => (
+                      <tbody key={index}>
+                        <tr>
+                          <td>{index + 1}</td>
+                          <td>{item.problem}</td>
+                          <td>{item.from}</td>
+                          <td>{item.to}</td>
+                          <td>{item.price}</td>
+                          <td>{item.description}</td>
+                          <td>{getIcon(item.status)}</td>
+                          <td>
+                            {" "}
+                            <ButtonGroup>
+                              <Link
+                                to={{
+                                  pathname: `/fixupdate/${va}/`,
+                                  fix: item,
+                                }}
+                              >
+                                <Button variant="success">Update</Button>
+                              </Link>
+                              <Button
+                                style={{ marginLeft: "5px" }}
+                                variant="danger"
+                                onClick={() => handleDelete(item)}
+                              >
+                                Delete
+                              </Button>
+                            </ButtonGroup>
+                          </td>
+                        </tr>
+                      </tbody>
+                    ))}
               </Table>
             </div>
           </Col>

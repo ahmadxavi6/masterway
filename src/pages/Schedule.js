@@ -7,6 +7,8 @@ import { Table, ButtonGroup, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { loadProfile } from "../redux/workers/actions";
 import { useState } from "react";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
+
 import axios from "axios";
 import { toast } from "react-toastify";
 import "./Workers.css";
@@ -15,16 +17,12 @@ const API = "https://masterway.herokuapp.com/";
 const Schedule = () => {
   const { workers } = useSelector((state) => state.dataw);
   const dispatch = useDispatch();
-  const [x, setWorkers] = useState();
+
   let [search, setSearch] = useState("");
   /// get the workers
   useEffect(() => {
     dispatch(loadWorkers());
-    const filteredRows = workers.filter((worker) => {
-      return worker.fName.toLowerCase().includes(search.toLowerCase());
-    });
-    setWorkers(filteredRows);
-  }, [dispatch, workers, search]);
+  }, [dispatch]);
 
   const handlesClick = (id) => {
     dispatch(loadProfile(id));
@@ -51,11 +49,26 @@ const Schedule = () => {
   return (
     <>
       <Container>
-        <h1 style={{ textAlign: "center", marginTop: "10px" }}>
+        <h1
+          style={{
+            textAlign: "center",
+            marginTop: "10px",
+          }}
+        >
           Workers Schedule
         </h1>
+        <div style={{ textAlign: "center" }}>
+          <ReactHTMLTableToExcel
+            id="test-table-xls-button"
+            className="download-table-xls-button"
+            table="table-to-xls"
+            filename="Schedule"
+            sheet="Schedule"
+            buttonText="Download Work Schedule"
+          />
+        </div>
         <div className="tb">
-          <Table bordered hover>
+          <Table bordered hover id="table-to-xls" style={{ marginTop: "1%" }}>
             <thead>
               <tr>
                 <th>Name</th>
@@ -76,66 +89,72 @@ const Schedule = () => {
                 </th>
               </tr>
             </thead>
-            {x &&
-              x.map((item, index) => (
-                <tbody key={index}>
-                  <tr>
-                    <td>{item.fName}</td>
-                    <td>
-                      {item.weekShifts.Sun.hours}
-                      <p>{item.weekShifts.Sun.info}</p>
-                    </td>
-                    <td>
-                      {item.weekShifts.Mon.hours}
-                      <p>{item.weekShifts.Mon.info}</p>
-                    </td>
-                    <td>
-                      {item.weekShifts.Tue.hours}
-                      <p>{item.weekShifts.Tue.info}</p>
-                    </td>
-                    <td>
-                      {item.weekShifts.Wed.hours}
-                      <p>{item.weekShifts.Wed.info}</p>
-                    </td>
-                    <td>
-                      {item.weekShifts.Thur.hours}
-                      <p>{item.weekShifts.Thur.info}</p>
-                    </td>
-                    <td>
-                      {item.weekShifts.Fri.hours}
-                      <p>{item.weekShifts.Fri.info}</p>
-                    </td>
-                    <td>
-                      {item.weekShifts.Sat.hours}
-                      <p>{item.weekShifts.Sat.info}</p>
-                    </td>
-                    <td>
-                      <ButtonGroup>
-                        <Link
-                          to={{
-                            pathname: `/trips`,
-                            worker: item,
-                          }}
-                        >
-                          <Button
-                            variant="success"
-                            onClick={() => handlesClick(item._id)}
-                            style={{ marginLeft: "5px" }}
+            {workers &&
+              workers
+                .filter((worker) => {
+                  return worker.fName
+                    .toLowerCase()
+                    .includes(search.toLowerCase());
+                })
+                .map((item, index) => (
+                  <tbody key={index}>
+                    <tr>
+                      <td>{item.fName}</td>
+                      <td>
+                        {item.weekShifts.Sun.hours}
+                        <p>{item.weekShifts.Sun.info}</p>
+                      </td>
+                      <td>
+                        {item.weekShifts.Mon.hours}
+                        <p>{item.weekShifts.Mon.info}</p>
+                      </td>
+                      <td>
+                        {item.weekShifts.Tue.hours}
+                        <p>{item.weekShifts.Tue.info}</p>
+                      </td>
+                      <td>
+                        {item.weekShifts.Wed.hours}
+                        <p>{item.weekShifts.Wed.info}</p>
+                      </td>
+                      <td>
+                        {item.weekShifts.Thur.hours}
+                        <p>{item.weekShifts.Thur.info}</p>
+                      </td>
+                      <td>
+                        {item.weekShifts.Fri.hours}
+                        <p>{item.weekShifts.Fri.info}</p>
+                      </td>
+                      <td>
+                        {item.weekShifts.Sat.hours}
+                        <p>{item.weekShifts.Sat.info}</p>
+                      </td>
+                      <td>
+                        <ButtonGroup>
+                          <Link
+                            to={{
+                              pathname: `/trips`,
+                              worker: item,
+                            }}
                           >
-                            Add Shifts
+                            <Button
+                              variant="success"
+                              onClick={() => handlesClick(item._id)}
+                              style={{ marginLeft: "5px" }}
+                            >
+                              Add Shifts
+                            </Button>
+                          </Link>
+                          <Button
+                            variant="danger"
+                            onClick={() => handleCClick(item._id)}
+                          >
+                            Clear Shifts
                           </Button>
-                        </Link>
-                        <Button
-                          variant="danger"
-                          onClick={() => handleCClick(item._id)}
-                        >
-                          Clear Shifts
-                        </Button>
-                      </ButtonGroup>
-                    </td>
-                  </tr>
-                </tbody>
-              ))}
+                        </ButtonGroup>
+                      </td>
+                    </tr>
+                  </tbody>
+                ))}
           </Table>
         </div>
       </Container>

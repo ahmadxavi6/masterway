@@ -19,6 +19,7 @@ import {
 } from "../redux/workers/actions";
 import { Link } from "react-router-dom";
 import "./Workers.css";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 const initialState = {
   fName: "",
@@ -37,25 +38,14 @@ const Workers = () => {
   const [workerId, setWorkerId] = useState(null);
   const dispatch = useDispatch();
   const { workers, msg, worker } = useSelector((state) => state.dataw);
-  const [x, setWorkers] = useState();
-  const [user, setUser] = useState(false);
+
   const { fName, email, phoneNumber, age, ID, address, gender, licen } = state;
   let [search, setSearch] = useState("");
 
   /// get workers and put them on the table
   useEffect(() => {
     dispatch(loadWorkers());
-    const filteredRows = workers.filter((worker) => {
-      return (
-        worker.fName.toLowerCase().includes(search.toLowerCase()) ||
-        worker.email.toLowerCase().includes(search.toLowerCase()) ||
-        worker.age.toLowerCase().includes(search.toLowerCase()) ||
-        worker.ID.toLowerCase().includes(search.toLowerCase()) ||
-        worker.phoneNumber.toLowerCase().includes(search.toLowerCase())
-      );
-    });
-    setWorkers(filteredRows);
-  }, [dispatch, search, workers]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (msg) {
@@ -139,6 +129,17 @@ const Workers = () => {
   return (
     <>
       <h1 style={{ textAlign: "center", marginTop: "10px" }}>Workers List </h1>
+      <div style={{ textAlign: "center" }}>
+        <ReactHTMLTableToExcel
+          id="test-table-xls-button"
+          className="download-table-xls-button"
+          table="table-to-xls"
+          filename="Workers"
+          sheet="tablexls"
+          buttonText="Download Workres Info"
+        />
+      </div>
+
       <Container style={{ marginTop: "70px" }}>
         <Row>
           <Col md={4}>
@@ -256,7 +257,7 @@ const Workers = () => {
           </Col>
           <Col md={8}>
             <div className="ta">
-              <Table bordered hover>
+              <Table bordered hover id="table-to-xls">
                 <thead>
                   <tr>
                     <th>No.</th>
@@ -276,49 +277,69 @@ const Workers = () => {
                   </tr>
                 </thead>
 
-                {x &&
-                  x.map((item, index) => (
-                    <tbody key={index}>
-                      <tr>
-                        <td>{index + 1}</td>
-                        <td>{item.ID}</td>
-                        <td>{item.fName}</td>
-                        <td>{item.email}</td>
-                        <td>{item.phoneNumber}</td>
-                        <td>{item.age}</td>
-                        <td>
-                          <ButtonGroup>
-                            <Button
-                              style={{ marginRight: "5px" }}
-                              variant="danger"
-                              onClick={() => handleDelete(item._id)}
-                            >
-                              Delete
-                            </Button>
-                            <Button
-                              variant="success"
-                              onClick={() => handleUpdate(item._id)}
-                            >
-                              Update
-                            </Button>
-                            <Link
-                              to={{
-                                pathname: `/workers/profile/${item._id}/`,
-                              }}
-                            >
+                {workers &&
+                  workers
+                    .filter((worker) => {
+                      return (
+                        worker.fName
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        worker.email
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        worker.age
+                          .toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        worker.ID.toLowerCase().includes(
+                          search.toLowerCase()
+                        ) ||
+                        worker.phoneNumber
+                          .toLowerCase()
+                          .includes(search.toLowerCase())
+                      );
+                    })
+                    .map((item, index) => (
+                      <tbody key={index}>
+                        <tr>
+                          <td>{index + 1}</td>
+                          <td>{item.ID}</td>
+                          <td>{item.fName}</td>
+                          <td>{item.email}</td>
+                          <td>{item.phoneNumber}</td>
+                          <td>{item.age}</td>
+                          <td>
+                            <ButtonGroup>
                               <Button
-                                variant="info"
-                                onClick={() => handleClick(item._id)}
-                                style={{ marginLeft: "5px" }}
+                                style={{ marginRight: "5px" }}
+                                variant="danger"
+                                onClick={() => handleDelete(item._id)}
                               >
-                                More
+                                Delete
                               </Button>
-                            </Link>
-                          </ButtonGroup>
-                        </td>
-                      </tr>
-                    </tbody>
-                  ))}
+                              <Button
+                                variant="success"
+                                onClick={() => handleUpdate(item._id)}
+                              >
+                                Update
+                              </Button>
+                              <Link
+                                to={{
+                                  pathname: `/workers/profile/${item._id}/`,
+                                }}
+                              >
+                                <Button
+                                  variant="info"
+                                  onClick={() => handleClick(item._id)}
+                                  style={{ marginLeft: "5px" }}
+                                >
+                                  More
+                                </Button>
+                              </Link>
+                            </ButtonGroup>
+                          </td>
+                        </tr>
+                      </tbody>
+                    ))}
               </Table>
             </div>
           </Col>

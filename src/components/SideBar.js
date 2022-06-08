@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { SideBarData } from "./SideBarData";
 import "./SideBar.css";
 import { IconContext } from "react-icons";
-import { Button } from "react-bootstrap";
-import App from "../App";
+
 import * as GrIcons from "react-icons/gr";
 /// side bar of the web
 function SideBar() {
-  const [sidebar] = useState(true);
   /// sign out fucntion
   const signout = () => {
     sessionStorage.removeItem("user");
@@ -32,12 +30,12 @@ function SideBar() {
 
             <li>
               {" "}
-              <a href="#" onClick={signout} className="btn btn-info btn-lg">
+              <button onClick={signout} className="btn btn-info btn-lg">
                 <span>
                   <GrIcons.GrLogout />
                 </span>{" "}
                 Log out
-              </a>
+              </button>
             </li>
           </ul>
         </div>
