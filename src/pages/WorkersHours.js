@@ -71,7 +71,7 @@ function WorkersHours() {
       <Container>
         <Row>
           <Col md={15}>
-            <div className="ta">
+            <div className="taaaa">
               <Table bordered hover style={{ marginTop: "32px" }}>
                 <thead>
                   <tr>
@@ -143,16 +143,15 @@ function WorkersHours() {
                       </tr>
                     </tbody>
                   ))}
-                <tfoot>
-                  <tr>
-                    <h5>
-                      Total Hours in {Mo}/{Ye} : {hour1} hours {min} minutes{" "}
-                      {sec} seconds{" "}
-                    </h5>
-                  </tr>
-                </tfoot>
+                <tfoot></tfoot>
               </Table>
             </div>
+            <tr>
+              <h5 style={{ fontWeight: "bold" }}>
+                Total Hours in {Mo}/{Ye} : {hour1} hours {min} minutes {sec}{" "}
+                seconds{" "}
+              </h5>
+            </tr>
           </Col>
         </Row>
       </Container>
