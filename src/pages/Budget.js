@@ -21,8 +21,6 @@ import {
 } from "../redux/budgets/actionB";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
-import * as ImIcons from "react-icons/im";
-
 const initialStateB = {
   Name: "",
   date: "",
@@ -41,7 +39,6 @@ const Budgets = () => {
   let inc = 0;
   let out = 0;
   let sum = 0;
-  let x = 0;
 
   const { Name, date, type, cost, description } = state;
   let [search, setSearch] = useState("");

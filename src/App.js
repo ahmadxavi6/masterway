@@ -36,7 +36,7 @@ function App() {
         <SideBar />
         <Switch>
           <Route path="/admins" exact component={Admins}></Route>
-          <Route path="/trips" exact component={Trips}></Route>
+          <Route path="/trips/" component={Trips}></Route>
           <Route path="/" exact component={Home}></Route>
           <Route path="/vechiles" component={Vechiles}></Route>
           <Route exact path="/workers" component={Workers}></Route>

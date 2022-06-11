@@ -132,7 +132,7 @@ const Schedule = () => {
                         <ButtonGroup>
                           <Link
                             to={{
-                              pathname: `/trips`,
+                              pathname: `/trips/${item._id}/`,
                               worker: item,
                             }}
                           >
@@ -141,7 +141,7 @@ const Schedule = () => {
                               onClick={() => handlesClick(item._id)}
                               style={{ marginLeft: "5px" }}
                             >
-                              Add Shifts
+                              Edit Shifts
                             </Button>
                           </Link>
                           <Button
