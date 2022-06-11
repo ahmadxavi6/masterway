@@ -119,6 +119,10 @@ function WorkersHours() {
                       </Form.Select>
                     </th>
                   </tr>
+                  <tr>
+                    <th>Date</th>
+                    <th>Hours</th>
+                  </tr>
                 </thead>
 
                 {hours &&
