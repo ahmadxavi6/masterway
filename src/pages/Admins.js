@@ -115,7 +115,7 @@ const Admins = () => {
               <Form.Group>
                 <Form.Label>ID</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="number"
                   placeholder="ID"
                   name="ID"
                   value={ID || ""}
