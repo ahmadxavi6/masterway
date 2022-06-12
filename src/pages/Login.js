@@ -35,6 +35,13 @@ export default function Login({ setToken }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      document.getElementById("email").value === "" ||
+      document.getElementById("password").value === ""
+    ) {
+      toast.error("Please Fill Login Info");
+      return;
+    }
     setLoading(true);
     const user = { fName, email, password };
     // send the username and password to the server
