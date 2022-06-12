@@ -147,7 +147,7 @@ const Workers = () => {
               <Form.Group>
                 <Form.Label>ID</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="number"
                   placeholder="ID"
                   name="ID"
                   value={ID || ""}
@@ -197,7 +197,7 @@ const Workers = () => {
               <Form.Group>
                 <Form.Label>Age</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="number"
                   placeholder="Age"
                   name="age"
                   value={age || ""}

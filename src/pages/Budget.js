@@ -42,15 +42,7 @@ const Budgets = () => {
 
   const { Name, date, type, cost, description } = state;
   let [search, setSearch] = useState("");
-  // for (let i = 0; i < budgets.length; i++) {
-  //   if (budgets[i].type === "income") {
-  //     inc = inc + parseInt(budgets[i].cost);
-  //   } else {
-  //     out = out + parseInt(budgets[i].cost);
-  //   }
-  // }
-  // sum = inc - out;
-  /// get the budgets and put them in the table
+
   useEffect(() => {
     dispatch(loadBudgets());
   }, [dispatch]);
