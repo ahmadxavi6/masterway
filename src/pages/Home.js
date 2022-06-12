@@ -26,8 +26,8 @@ function Home() {
             <img
               src={"data:image/gif;base64," + profile}
               id="profile"
-              width="80%"
-              height="80%"
+              width="614.4px"
+              height="614.4px"
               border=" 5px solid rgb(255, 1, 1)"
               style={{ borderRadius: 40, marginLeft: "8%" }}
               alt=""
